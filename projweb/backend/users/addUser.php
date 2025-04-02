@@ -21,7 +21,7 @@ $rp->bindParam(":d",$donnees['description']);
 $rp->bindParam(":s",$donnees['state']);
 $r=$rp->execute();
 if ($r){
-    $resultat["message"]="succes";
+    $resultat["message"]="success";
 }else {
     $resultat["message"]="echec";
 }

@@ -9,7 +9,7 @@ $rp->bindParam(":t",$x);
 $r=$rp->execute();
 $r=$rp->fetchAll(PDO::FETCH_ASSOC);
 if ($r){
-    $resultat["message"]="succes";
+    $resultat["message"]="success";
     $resultat["data"]=$r;
 }else {
     $resultat["message"]="echec";
