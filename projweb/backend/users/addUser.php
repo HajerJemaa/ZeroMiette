@@ -1,6 +1,6 @@
 <?php
 header("content-type:application/json");
-require_once("connexion.php");
+require_once("../connexion.php");
 $resultat=["message"=>"","data"=>null];
 //récupère le body
 $body =file_get_contents("php://input");
@@ -23,7 +23,7 @@ $r=$rp->execute();
 if ($r){
     $resultat["message"]="success";
 }else {
-    $resultat["message"]="echec";
+    $resultat["message"]="failure";
 }
 echo json_encode($resultat);
 ?>

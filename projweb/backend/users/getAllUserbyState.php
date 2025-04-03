@@ -12,7 +12,7 @@ if ($r){
     $resultat["message"]="success";
     $resultat["data"]=$r;
 }else {
-    $resultat["message"]="echec";
+    $resultat["message"]="failure";
 }
 
 echo json_encode($resultat);
