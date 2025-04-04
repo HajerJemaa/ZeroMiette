@@ -32,7 +32,7 @@ if ($r){
         $resultat["message"]="failure";    
     }
 }else {
-    $resultat["message"]="failure";
+    $resultat["message"]="does not exist";
 }
 echo json_encode($resultat);
 ?>
