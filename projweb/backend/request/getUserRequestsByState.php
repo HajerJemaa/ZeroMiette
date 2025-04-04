@@ -23,10 +23,10 @@ $rp = $connexion->prepare($reqsql);
 $rp->bindParam(":userId", $userId);
 $rp->bindParam(":state", $state);
 $rp->execute();
-$r=$rp->fetchAll(PDO::FETCH_ASSOC);
-if ($r){
+$res=$rp->fetchAll(PDO::FETCH_ASSOC);
+if ($res){
     $resultat["message"]="success";
-    $resultat["data"]=$r;
+    $resultat["data"]=$res;
 }else {
     $resultat["message"]="failure";
 }
