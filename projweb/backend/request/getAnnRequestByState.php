@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 require_once("../connexion.php");
 $resultat=["message"=>"" , "data"=>null];
-if(!isset($_GET['annCode']) || !isset($_GET['annCode'])){
+if(!isset($_GET['annCode']) || !isset($_GET['state'])){
     $resultat["message"] = "Paramètres 'annCode' ou 'state' manquants";
     echo json_encode($resultat);
     exit();
