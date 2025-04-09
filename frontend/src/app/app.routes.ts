@@ -11,10 +11,10 @@ import { AdministratorComponent } from './administrator/administrator.component'
 export const routes: Routes = [
     {path:'', component:AccueilComponent},
     {path:'User/CreateAccount', component:CreateAccountComponent},
-    {path:'User/CreateAccount/addUser', component:AddUserComponent}
+    {path:'User/CreateAccount/addUser', component:AddUserComponent},
     {path:'User/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent},
     {path:'User/ProcessAccount/getUser/:id', component:GetUserComponent},
     {path:'User/ProcessAccount/deleteUser',  component:DeleteUserComponent},
-    {path:'User', component:UserComponent}
+    {path:'User', component:UserComponent},
     {path:'Administrator', component:AdministratorComponent}
 ];
