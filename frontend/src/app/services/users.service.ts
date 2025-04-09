@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,7 @@ export class UsersService {
     return this.httpclient.delete<any>(this.api+"?id="+id);
   }
   
-  
+  addUser(us:User){
+    return this.httpclient.post<any>(this.api,us);
+  }
 }
