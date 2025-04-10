@@ -25,7 +25,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case 'PUT':
-        require("updateRequestState.php"); 
+        require("updateRequest.php"); 
         break;
 
     case 'DELETE':
