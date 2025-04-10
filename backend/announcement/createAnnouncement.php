@@ -3,12 +3,11 @@ require_once("../connexion.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($data["annCode"], $data["donId"], $data["content"], $data["deadline"])) {
-    $sql = "INSERT INTO announcement (annCode, donId, content, img, deadline) VALUES (:annCode, :donId, :content, :img, :deadline)";
+if (isset($data["donId"], $data["content"], $data["deadline"])) {
+    $sql = "INSERT INTO announcement (donId, content, img, deadline) VALUES (:donId, :content, :img, :deadline)";
     $stmt = $connexion->prepare($sql);
     
     $stmt->execute([
-        ":annCode" => $data["annCode"],
         ":donId" => $data["donId"],
         ":content" => $data["content"],
         ":img" => isset($data["img"]) ? $data["img"] : null,
