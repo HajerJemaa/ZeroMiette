@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { ProductComponent } from "./product/product.component";
+import { RouterOutlet,RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, ProductComponent],
+  imports: [RouterOutlet,RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 
 
 export class AppComponent {
-  title = 'tp1';
+  title = 'ZeroMiette';
 }

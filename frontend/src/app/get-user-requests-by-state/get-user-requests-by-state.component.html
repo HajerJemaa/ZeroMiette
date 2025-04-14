@@ -1,0 +1,27 @@
+<div class="container mt-4">
+
+<h2>Mes Demandes</h2>
+
+<div>
+  <button (click)="getUserRequestsByState('pending')">Pending</button>
+  <button (click)="getUserRequestsByState('accepted')">Accepted</button>
+  <button (click)="getUserRequestsByState('refused')">Refused</button>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-warning">{{ errorMessage }}</div>
+
+  <div *ngIf="requests.length > 0; else noRequests">
+    <div *ngFor="let req of requests" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Annonce: {{ req.annCode }}</h5>
+        <p class="card-text"><strong>Description:</strong> {{ req.description }}</p>
+        <p class="card-text"><strong>Date:</strong> {{ req.dateC }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noRequests>
+    <p>Aucune demande pour cet état.</p>
+  </ng-template>
+</div>
+
