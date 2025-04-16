@@ -25,4 +25,8 @@ export class UsersService {
   addUser(us:User){
     return this.httpclient.post<any>(this.api,us);
   }
+  
+  changeState(state:String){
+    return this.httpclient.put<any>(this.api,state);
+  }
 }
