@@ -1,0 +1,52 @@
+<div class="container mt-4 text-center">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary"(click)="GetAnnByState('available')">les annonces</button>
+
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" routerLink="/get-user-requests-by-state">Mes demandes</button>
+        </div>
+    </div>
+    @if (errorMessage) {
+        <div class="alert alert-warning text-center">{{ errorMessage }}</div>
+      } 
+      @else if (announcement.length > 0) {
+        <div class="row">
+          @for (ann of announcement; track ann.annCode) {
+            
+              <div class="card shadow-sm h-100 border-start border-4 border-info">
+                <div class="card header"><div class="row">
+                        <div class="col-9">
+                            <h5 class="card-title text-info fw-bold">Annonce #{{ ann.donId }}</h5>
+                        </div>
+                        <div class="col-3">
+                            <strong>Delai :</strong> 
+                            <span class="btn-danger">{{ ann.deadline}}</span>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="card-body">
+                  <p class="card-text">
+                    <strong>Description :</strong> {{ ann.content }}
+                  </p>
+                  <p class="card-text">
+                    <strong>DateC :</strong> 
+                    <span class="badge bg-secondary">{{ ann.dateC}}</span>
+                  </p>
+                </div>
+              </div>
+            
+          }
+        </div>
+      } 
+      @else {
+        <div class="alert alert-warning text-center">🛈 no available announcement</div>
+      }
+
+  </div>
+  
+  <router-outlet></router-outlet>
+  
+
