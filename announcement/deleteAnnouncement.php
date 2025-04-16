@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: application/json");
 require_once("../connexion.php");
 
 if (isset($_GET["annCode"])) {
