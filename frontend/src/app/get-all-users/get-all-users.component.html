@@ -1,4 +1,4 @@
-@if (users!=undefined){
+@if (users!=undefined && users!=null){
     <div class="row mt-4">
         <div class="col">
             <table class="table table-bordered">
@@ -21,6 +21,21 @@
                     </tr>
                 }
             </table>
+        </div>
+    </div>
+}@else {
+    <div class="row">
+        <div class="col">
+            
+            <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                @if (state=="pending"){
+                    <strong>there are no {{state}} Users!</strong>
+                }@else {
+                    <strong>there are no Users!</strong>
+                }
+            </div>
+            
         </div>
     </div>
 }

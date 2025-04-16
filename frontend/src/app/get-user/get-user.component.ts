@@ -10,14 +10,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './get-user.component.css'
 })
 export class GetUserComponent implements OnInit{
-user:User|undefined;
+user:User|undefined|null;
 
 constructor (public us:UsersService,private route:ActivatedRoute){}
 
 ngOnInit(): void {
     const id=+this.route.snapshot.paramMap.get('id')!;
     this.us.getOneUser(id).subscribe({
-      next: (data)=>this.user=data,
+      next: (res)=>this.user=res.data,
       error: (error)=>{alert("Api Error")}
     })
 }

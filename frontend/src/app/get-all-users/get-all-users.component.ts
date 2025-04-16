@@ -11,12 +11,13 @@ import { RouterOutlet,RouterLink } from '@angular/router';
   styleUrl: './get-all-users.component.css'
 })
 export class GetAllUsersComponent implements OnInit{
-  users:User[]|undefined;
+  users:User[]|undefined|null;
+  state!:String;
   constructor(public us:UsersService,private route:ActivatedRoute){}
   ngOnInit(): void {
-    const state=this.route.snapshot.paramMap.get('state')!;
-    this.us.getAllUsers(state).subscribe({
-      next: (data)=>this.users=data,
+    this.state=this.route.snapshot.paramMap.get('state')!;
+    this.us.getAllUsers(this.state).subscribe({
+      next: (res)=>this.users=res.data,
       error: (error)=>{alert("Api Error")}
     })
   }
