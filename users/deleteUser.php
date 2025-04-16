@@ -18,7 +18,7 @@ $rp->bindParam(":i",$i);
 //executing the request
 $r=$rp->execute();
 //fetching the result of the request to check if it's null or not
-$r=$rp->fetchAll(PDO::FETCH_ASSOC);
+$r=$rp->fetch(PDO::FETCH_ASSOC);
 //if it's not null then delete if not error
 if ($r){
     $reqsql2="delete from users where userid = :i";
