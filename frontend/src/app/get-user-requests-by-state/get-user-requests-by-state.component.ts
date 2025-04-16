@@ -23,8 +23,6 @@ export class GetUserRequestsByStateComponent {
         } else {
           this.requests = [];
           this.errorMessage = "Aucune demande trouvée.";
-      
-
         }
       },
       error: (err) => {

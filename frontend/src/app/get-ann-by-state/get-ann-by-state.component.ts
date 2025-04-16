@@ -10,9 +10,7 @@ import {Announcement} from'../model/announcement'
 })
 export class GetAnnByStateComponent {
    announcement: Announcement[] = [];
-    selectedState: string = '';
-    userId: number = 3;
-    errorMessage: string = '';
+   errorMessage: string = '';
   
     constructor(private announcementService: AnnouncementService) {}
   
@@ -25,15 +23,11 @@ export class GetAnnByStateComponent {
           } else {
             this.announcement = [];
             this.errorMessage = "Aucune demande trouvée.";
-        
-  
           }
         },
-        error: (err) => {
+        error: (err) => {console.log(err);
           this.errorMessage = "Erreur lors du chargement des annonces.";
           this.announcement = [];
-          
-  
         }
       
       });

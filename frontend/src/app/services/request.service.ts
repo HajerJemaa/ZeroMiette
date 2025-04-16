@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class RequestService {
 
-  private baseUrl = 'http://localhost/ZeroMiette/backend/request/getUserRequestsByState.php';
+  private baseUrl = 'http://localhost/backend/request/getUserRequestsByState.php';
 
   http = inject(HttpClient);
 
