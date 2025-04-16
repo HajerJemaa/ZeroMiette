@@ -16,5 +16,6 @@ switch($_SERVER["REQUEST_METHOD"]){
     case 'DELETE':
         if (isset ($_GET['id']) && $_GET['id']!=null)
             require("deleteUser.php");break;
+    case 'PUT':require("changeState.php");
 }
 ?>
