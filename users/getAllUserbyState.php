@@ -1,6 +1,6 @@
 <?php
 header("content-Type:application/json");
-$resultat=["message"=>"","data"=>null];
+$response=["message"=>"","data"=>null];
 require_once("../connexion.php");
 
 $reqsql="select * from users where state=:s";
@@ -23,11 +23,11 @@ if ($r){
             $user['mime'] = $mime;
         }
     }
-    $resultat["message"]="success";
-    $resultat["data"]=$r;
+    $response["message"]="success";
+    $response["data"]=$r;
 }else {
-    $resultat["message"]="failure";
+    $response["message"]="failure";
 }
 
-echo json_encode($r);
+echo json_encode($response);
 ?>

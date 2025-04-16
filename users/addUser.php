@@ -1,7 +1,7 @@
 <?php
 header("content-type:application/json");
 require_once("../connexion.php");
-$resultat=["message"=>"","data"=>null];
+$response=["message"=>"","data"=>null];
 
 //get the data
 $last_Name = $_POST['ln'];
@@ -20,25 +20,25 @@ $reqsql="insert into users (last_name,first_name,user_name,email,pwd,region,addr
 
 $rp =$connexion->prepare($reqsql); 
 
-$rp->bindParam(":ln",$donnees['last_name']);
-$rp->bindParam(":fn",$donnees['first_name']);
-$rp->bindParam(":un",$donnees['user_name']);
-$rp->bindParam(":em",$donnees['email']);
-$rp->bindParam(":pwd",$donnees['pwd']);
-$rp->bindParam(":reg",$donnees['region']);
-$rp->bindParam(":add",$donnees['address']);
-$rp->bindParam(":num",$donnees['number']);
-$rp->bindParam(":r",$donnees['role']);
-$rp->bindParam(":p",$donnees['proof']);
-$rp->bindParam(":d",$donnees['description']);
+$rp->bindParam(":ln",$last_Name);
+$rp->bindParam(":fn",$first_Name);
+$rp->bindParam(":un",$user_name);
+$rp->bindParam(":em",$email);
+$rp->bindParam(":pwd",$pwd);
+$rp->bindParam(":reg",$region);
+$rp->bindParam(":add",$address);
+$rp->bindParam(":num",$number);
+$rp->bindParam(":r",$role);
+$rp->bindParam(":p",$proof);
+$rp->bindParam(":d",$description);
 
 $r=$rp->execute();
 
 if ($r){
-    $resultat["message"]="success";
+    $response["message"]="success";
 }else {
-    $resultat["message"]="failure";
+    $response["message"]="failure";
 }
 
-echo json_encode($resultat);
+echo json_encode($response);
 ?>

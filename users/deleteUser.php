@@ -3,7 +3,7 @@ header("content-type:application/json");
 //calling the connexion file
 require_once("../connexion.php");
 
-$resultat=["message"=>"","data"=>null];
+$response=["message"=>"","data"=>null];
 
 //recupering the value of the id passed with the url
 $i=$_GET['id'];
@@ -31,13 +31,13 @@ if ($r){
     $r2=$rp2->execute();
     //checking if the req was executed or not if it was then it's a success else it's failure
     if($rp2){
-        $resultat["message"]="success";
+        $response["message"]="success";
     }else{
-        $resultat["message"]="failure";    
+        $response["message"]="failure";    
     }
 }else {
-    $resultat["message"]="does not exist";
+    $response["message"]="inexistent";
 }
 
-echo json_encode($resultat);
+echo json_encode($response);
 ?>
