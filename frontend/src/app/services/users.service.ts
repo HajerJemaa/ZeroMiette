@@ -6,16 +6,16 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UsersService {
-  api:string="http://localhost/backend/backend/users/user.php";
+  api:string="http://localhost/backend/users/user.php";
 
   httpclient = inject(HttpClient);
 
   getAllUsers(state:String){
-    return this.httpclient.get<any[]>(this.api+"?state="+state);
+    return this.httpclient.get<User[]>(this.api+"?state="+state);
   }
 
   getOneUser(id:number){
-    return this.httpclient.get<any>(this.api+"?id="+id);
+    return this.httpclient.get<User>(this.api+"?id="+id);
   }
 
   deleteUser(id:number){
@@ -24,5 +24,9 @@ export class UsersService {
   
   addUser(us:User){
     return this.httpclient.post<any>(this.api,us);
+  }
+  
+  changeState(state:String){
+    return this.httpclient.put<any>(this.api,state);
   }
 }

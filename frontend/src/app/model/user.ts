@@ -1,15 +1,18 @@
 export class User {
     constructor(
-      public lastName: string,
-      public firstName: string,
-      public username: string,
+      public userId: number,
+      public last_name: string,
+      public first_name: string,
+      public user_name: string,
       public email: string,
-      public password: string,
+      public pwd: string,
       public region: string,
       public address: string,
-      public phoneNumber: string,
+      public number: string,
       public role: string,
       public proof: File,
-      public description: string | null = null // description can null or a string
+      public description: string | null = null ,// description can null or a string
+      public state:String,
+      public mime:string
     ) {}
   }
