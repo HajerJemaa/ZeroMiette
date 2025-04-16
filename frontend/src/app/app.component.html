@@ -1,21 +1,16 @@
 <!-- app.component.html -->
-<div class="container">
-    <nav class="navbar navbar-expand bg-body-secondary">
+<div class="row">
+    <nav class="navbar bg-primary navbar-expand" data-bs-theme="dark">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/">Acceuil</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/Administrator">Administrator page</a>
-              </li>
-              </ul>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/Administrator">Administrator page</a>
+                </li>
+            </ul>
         </div>
-      </nav>
-    <router-outlet></router-outlet> 
+    </nav>
 </div>
+<router-outlet></router-outlet> 
