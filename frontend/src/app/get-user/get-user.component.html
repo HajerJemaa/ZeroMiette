@@ -1,1 +1,76 @@
-<p>get-user works!</p>
+@if (user!=undefined) {
+    <div class="row mt-4">
+        <div class="col-auto">
+            <h2>Name: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.first_name}} {{user.last_name}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>User name: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.user_name}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Description: </h2>
+        </div>
+        <div class="col mt-2">
+            <p>{{user.description}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Email: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.email}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Region: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.region}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Address: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.address}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Number: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.number}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <h2>Role: </h2>
+        </div>
+        <div class="col mt-2">
+            <span>{{user.role}}</span>
+        </div>
+    </div> 
+    @if (user.proof!=null){
+    <div class="row">
+        <div class="col-auto">
+                <h2>Proof: </h2>   
+        </div>
+        <div class="col mt-2">
+            <a [href]="'data:' + user.mime + ';base64,' + user.proof" [download]="'proof-file.' + getExtension(user.mime)">Download Proof</a>
+        </div>
+    </div>
+    }
+}

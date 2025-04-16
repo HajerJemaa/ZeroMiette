@@ -10,8 +10,9 @@ export class User {
       public address: string,
       public number: string,
       public role: string,
-      public proof: File | null = null,
+      public proof: File,
       public description: string | null = null ,// description can null or a string
-      public state:String
+      public state:String,
+      public mime:string
     ) {}
   }
