@@ -28,14 +28,14 @@ if ($r && password_verify($data["password"],$r["pwd"])){
     $secretKey = bin2hex(random_bytes(32)); 
     $issued = time();
     $expire = $issued+3600;
-    $tokendata=["iss"=>$issued,"exp"=>$expire,"userId"=>$r["userId"],"email"=>$r["email"]];
+    $tokendata=["issAt"=>$issued,"exp"=>$expire,"userId"=>$r["userId"],"role"=>$r["role"],];
 
     $jwt = JWT::encode($tokendata, $secretKey, 'HS256');
 
     $response["token"]=$jwt;
     $response["user"]["userId"]=$r["userId"];
     $response["user"]["name"]=$r["first_name"]." ".$r["last_name"];
-    $response["user"]["email"]=$r["email"];
+    $response["user"]["role"]=$r["role"];
 
     echo json_encode($response);
 }else {
