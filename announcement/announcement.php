@@ -33,7 +33,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     default:
         http_response_code(405); // Method Not Allowed
-        echo json_encode(["message" => "Méthode non autorisée"]);
+        echo json_encode(["message" => "Method not authorised"]);
         break;
 }
 ?>

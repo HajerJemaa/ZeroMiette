@@ -1,14 +1,19 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 header("content-type:application/json");
 
 require_once("../connexion.php");
 
-$response=["token"=>"","user"=>["userId"=>"","name"=>"","email"=>""],"expires"=>3600];
+$response=["token"=>"","user"=>["userId"=>"","name"=>"","email"=>"","role"=>""],"expires"=>3600];
 
 require '../vendor/autoload.php';
 
 use Firebase\JWT\JWT;  //used to create tokens
-use Firebase\JWT\Key; //used to decode tokens and verify them 
+
 
 $body =file_get_contents("php://input");
 $data= json_decode($body, true);
@@ -28,7 +33,7 @@ if ($r && password_verify($data["password"],$r["pwd"])){
     $secretKey = bin2hex(random_bytes(32)); 
     $issued = time();
     $expire = $issued+3600;
-    $tokendata=["issAt"=>$issued,"exp"=>$expire,"userId"=>$r["userId"],"role"=>$r["role"],];
+    $tokendata=["issAt"=>$issued,"exp"=>$expire,"userId"=>$r["userId"],"email"=>$r["email"],"role"=>$r["role"],];
 
     $jwt = JWT::encode($tokendata, $secretKey, 'HS256');
 
