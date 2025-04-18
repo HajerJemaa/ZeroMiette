@@ -10,7 +10,13 @@ import { UserComponent } from './user/user.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
+<<<<<<< HEAD
 import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
+=======
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { RecieverComponent } from './reciever/reciever.component';
+import { DonorComponent } from './donor/donor.component';
+>>>>>>> 947efb898b833f3cae58a3c2b40602ac9ac454e7
 export const routes: Routes = [
     {path:'', component:AccueilComponent},
     {path:'User/CreateAccount', component:CreateAccountComponent},
@@ -20,6 +26,9 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/deleteUser',  component:DeleteUserComponent},
     {path:'User', component:UserComponent},
     {path:'Administrator', component:AdministratorComponent},
+    {path:'Authenticate/:action', component:AuthenticateComponent},
+    {path:'Reciever', component:RecieverComponent},
+    {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
     {path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent}

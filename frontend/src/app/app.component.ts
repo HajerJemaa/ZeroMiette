@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {RouterLink, RouterOutlet } from '@angular/router';
+import { AuthenticateService } from './services/authenticate.service';
+import { UsersService } from './services/users.service';
 
 
 
@@ -12,5 +14,16 @@ import {RouterLink, RouterOutlet } from '@angular/router';
 
 
 export class AppComponent {
+  state!:boolean;
+  role:string|undefined;
   title = 'ZeroMiette';
+  as = inject(AuthenticateService);
+  us = inject(UsersService);
+  ngOnInit(){
+    this.state=this.as.isSignedIn()
+    if (this.state){
+      this.role = this.us.getCurrentUserRole();
+    }
+  }
+  
 }
