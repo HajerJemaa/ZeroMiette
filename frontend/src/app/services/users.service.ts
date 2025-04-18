@@ -3,6 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { Result } from '../model/result';
 import { Results } from '../model/results';
+import { jwtDecode } from 'jwt-decode';
+import { Mytoken } from '../model/mytoken';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +33,25 @@ export class UsersService {
   
   changeUserState(userId:number){
     return this.httpclient.put<Result>(this.api,userId);
+  }
+
+  getCurrentUserRole(){
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = jwtDecode<Mytoken>(token);
+      return decoded.role
+    }else{
+      throw new Error("No user is signed in please try again after signing in!!")
+    }
+  }
+
+  getCurrentUserId(){
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = jwtDecode<Mytoken>(token);
+      return decoded.userId
+    }else{
+      throw new Error("No user is signed in please try again after signing in!!")
+    }
   }
 }
