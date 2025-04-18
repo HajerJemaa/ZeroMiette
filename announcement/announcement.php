@@ -16,6 +16,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             require("getOneAnnouncement.php");
         }else if (isset($_GET['state']) && $_GET['state'] != null){
             require("getAnnouncementByState.php");
+        } else if (isset($_GET['donId']) && $_GET['donId'] != null) {
+            require("getMyAnnouncements.php");
         }else{
             require("getAllAnnouncements.php");
         }
