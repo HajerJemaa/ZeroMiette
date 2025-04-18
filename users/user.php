@@ -17,5 +17,10 @@ switch($_SERVER["REQUEST_METHOD"]){
         if (isset ($_GET['id']) && $_GET['id']!=null)
             require("deleteUser.php");break;
     case 'PUT':require("changeState.php");
+    
+    default:
+        http_response_code(405);
+        echo json_encode(["message" => "Method not authorised"]);
+        break;
 }
 ?>

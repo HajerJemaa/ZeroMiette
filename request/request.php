@@ -1,9 +1,4 @@
 <?php
-// Autoriser l'accès depuis l'origine (ex: frontend sur localhost)
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 // Gestion des requêtes OPTIONS (préflight request)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
@@ -34,7 +29,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     default:
         http_response_code(405);
-        echo json_encode(["message" => "Méthode non autorisée"]);
+        echo json_encode(["message" => "Method not authorised"]);
         break;
 }
 ?>
