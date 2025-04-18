@@ -10,6 +10,7 @@ import { UserComponent } from './user/user.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
+import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
 export const routes: Routes = [
     {path:'', component:AccueilComponent},
     {path:'User/CreateAccount', component:CreateAccountComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path:'User', component:UserComponent},
     {path:'Administrator', component:AdministratorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
-    {path:'get-ann-by-state', component:GetAnnByStateComponent}
+    {path:'get-ann-by-state', component:GetAnnByStateComponent},
+    {path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent}
 
 ];
