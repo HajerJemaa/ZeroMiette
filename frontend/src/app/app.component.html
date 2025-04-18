@@ -6,9 +6,31 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/">Acceuil</a>
                 </li>
+                @if(!state){
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/Administrator">Administrator page</a>
+                    <a class="nav-link" routerLink="/Authenticate/SignIn">sign in</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">sign up</a>
+                </li>
+                }@else {
+                    @if (role=="administrator"){
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/Administrator">Account</a>
+                        </li>
+                    }@else if(role=="donor") {
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/Donor">Account</a>
+                        </li>
+                    }@else {
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/Reciver">Account</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/Authenticate/SignOut">sign out</a>
+                    </li>
+                }
             </ul>
         </div>
     </nav>
