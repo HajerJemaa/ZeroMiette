@@ -13,33 +13,53 @@ $region = $_POST['region'];
 $address = $_POST['add'];
 $number = $_POST['num'];
 $role = $_POST['rad'];
-$proof = file_get_contents($_FILES['proof']['tmp_name']);
-$description = $_POST['desc'];
+$tem_path = $_FILES['proof']['tmp_name'];
 
-$hashedpwd = password_hash($pwd, PASSWORD_DEFAULT);
+if (isset($_POST["desc"])){
+    $description = $_POST['desc'];
+}else{
+    $description=null;
+}
 
-$reqsql="insert into users (last_name,first_name,user_name,email,pwd,region,address,number,role,proof,description) values (:ln,:fn,:un,:em,:pwd,:reg,:add,:num,:r,:p,:d)";
+$pName=$_FILES['proof']['name'];
+$pSize=$_FILES['proof']['size'];
+$Type=$_FILES['proof']['type'];
+$pNameSplitExten=explode(".",$pName);
+$pExtention=strtolower(end($pNameSplitExten));
 
-$rp =$connexion->prepare($reqsql); 
+$newpName=uniqid().'.'.$pExtention;
+$destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
 
-$rp->bindParam(":ln",$last_Name);
-$rp->bindParam(":fn",$first_Name);
-$rp->bindParam(":un",$user_name);
-$rp->bindParam(":em",$email);
-$rp->bindParam(":pwd",$hashedpwd);
-$rp->bindParam(":reg",$region);
-$rp->bindParam(":add",$address);
-$rp->bindParam(":num",$number);
-$rp->bindParam(":r",$role);
-$rp->bindParam(":p",$proof);
-$rp->bindParam(":d",$description);
+$up=move_uploaded_file($tem_path,$destp_path);
 
-$r=$rp->execute();
+if ($up){
+    $hashedpwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-if ($r){
-    $response["message"]="success";
-}else {
-    $response["message"]="failure";
+    $reqsql="insert into users (last_name,first_name,user_name,email,pwd,region,address,number,role,proof,description) values (:ln,:fn,:un,:em,:pwd,:reg,:add,:num,:r,:p,:d)";
+
+    $rp =$connexion->prepare($reqsql); 
+
+    $rp->bindParam(":ln",$last_Name);
+    $rp->bindParam(":fn",$first_Name);
+    $rp->bindParam(":un",$user_name);
+    $rp->bindParam(":em",$email);
+    $rp->bindParam(":pwd",$hashedpwd);
+    $rp->bindParam(":reg",$region);
+    $rp->bindParam(":add",$address);
+    $rp->bindParam(":num",$number);
+    $rp->bindParam(":r",$role);
+    $rp->bindParam(":p",$destp_path);
+    $rp->bindParam(":d",$description);
+
+    $r=$rp->execute();
+
+    if ($r){
+        $response["message"]="success";
+    }else {
+        $response["message"]="failure to create account!!!";
+    }
+}else{
+    $response["message"]="Proof was not uploaded";
 }
 
 echo json_encode($response);
