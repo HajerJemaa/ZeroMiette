@@ -22,9 +22,10 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/deleteUser',  component:DeleteUserComponent},
     {path:'User', component:UserComponent},
     {path:'Administrator', component:AdministratorComponent},
-    {path:'Authenticate/:action', component:AuthenticateComponent},
+    {path:'User/Authenticate/:action', component:AuthenticateComponent},
     {path:'Reciever', component:RecieverComponent},
     {path:'Donor', component:DonorComponent},
+    {path:'User/SignUp',component:AddUserComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent}
 
