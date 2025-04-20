@@ -27,12 +27,12 @@ export class UsersService {
     return this.httpclient.delete<Result>(this.api+"?id="+id);
   }
   
-  addUser(us:User){
+  addUser(us:any){
     return this.httpclient.post<Result>(this.api,us);
   }
   
-  changeUserState(userId:number){
-    return this.httpclient.put<Result>(this.api,userId);
+  changeUserState(req:{ userId :number }){
+    return this.httpclient.put<Result>(this.api,req);
   }
 
   getCurrentUserRole(){

@@ -1,6 +1,6 @@
 export class User {
     constructor(
-      public userId: number,
+      public userId: number | null = null,
       public last_name: string,
       public first_name: string,
       public user_name: string,
@@ -10,9 +10,9 @@ export class User {
       public address: string,
       public number: string,
       public role: string,
-      public proof: File,
+      public proof: string,
       public description: string | null = null ,// description can null or a string
-      public state:String,
-      public mime:string
+      public state:string,
+      public extention:string
     ) {}
   }

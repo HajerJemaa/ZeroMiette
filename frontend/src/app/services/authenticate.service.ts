@@ -15,8 +15,10 @@ export class AuthenticateService {
 
   signIn(creds :{email:string,password:string}){
     return this.httpclient.post<any>(this.api, creds).pipe(
-      tap((response)=>{
-        localStorage.setItem("token", response.token);
+      tap((res)=>{
+        if (res.token){
+          localStorage.setItem("token", res.token);
+        }
       })
     );
   }
