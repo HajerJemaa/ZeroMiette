@@ -10,13 +10,17 @@ export class AnnouncementService {
     httpclient = inject(HttpClient);
 
 
-    GetAnnByState(state:String){
+    getAnnByState(state:String){
       return this.httpclient.get<any[]>(this.api+"?state="+state);
     }
 
-    GetAnnByDonorId(donId: string) {
+    getAnnByDonorId(donId: string) {
       return this.httpclient.get<any[]>(`${this.api}?donId=${donId}`);
     }
+
+    
+   
+    
     
 
 

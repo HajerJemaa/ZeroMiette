@@ -13,7 +13,7 @@ export class GetDonorAnnouncementsComponent implements OnInit {
   announcements : Announcement[]| undefined;
   constructor(private announcementService: AnnouncementService,private userService:UsersService){}
   ngOnInit(): void {
-    this.announcementService.GetAnnByDonorId(this.userService.getCurrentUserId()).subscribe(
+    this.announcementService.getAnnByDonorId(this.userService.getCurrentUserId()).subscribe(
       {
         next: (data)=>this.announcements=data,
       error: (error)=> {alert("Erreur in loading annouuncements");}     }

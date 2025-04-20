@@ -8,12 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class RequestService {
 
-  private baseUrl = 'http://localhost/backend/request/getUserRequestsByState.php';
+  private baseUrl = 'http://localhost/backend/request/request.php';
 
   http = inject(HttpClient);
 
   getUserRequestsByState(userId: number, state: string): Observable<Request[]> {
     const url = `${this.baseUrl}?userId=${userId}&state=${state}`;
     return this.http.get<Request[]>(url);
+  }
+  public getAnnReqByState (annCod: string , state: string) {
+    return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 }
