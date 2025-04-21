@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 require_once("../connexion.php");
 $resultat=["message"=>"" , "data"=>null];
 if(!isset($_GET['state'])){
-    $resultat["message"] = "Paramètres'state' manquants";
+    $resultat["message"] = "missing state parameter";
     echo json_encode($resultat);
     exit();    
 }
