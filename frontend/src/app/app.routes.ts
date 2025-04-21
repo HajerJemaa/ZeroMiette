@@ -12,7 +12,7 @@ import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/ge
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
 <<<<<<< HEAD
 
-import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
+import { GetDonorAnnouncementsComponent } from './features/donor/get-donor-announcements/get-donor-announcements.component';
 
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';

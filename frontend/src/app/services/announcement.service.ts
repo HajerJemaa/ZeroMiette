@@ -14,7 +14,7 @@ export class AnnouncementService {
       return this.httpclient.get<any[]>(this.api+"?state="+state);
     }
 
-    getAnnByDonorId(donId: string) {
+    getAnnByDonorIdAndState(donId:number, state:String) {
       return this.httpclient.get<any[]>(`${this.api}?donId=${donId}`);
     }
 
