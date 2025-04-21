@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 require_once("../connexion.php");
 
 if (isset($_GET["annCode"])) {
-    $sql = "SELECT annCode, donId, content, img, dateC, deadline FROM announcement WHERE annCode = :annCode";
+    $sql = "SELECT annCode,title, donId, content, img, dateC, deadline FROM announcement WHERE annCode = :annCode";
     $stmt = $connexion->prepare($sql);
     $stmt->execute([":annCode" => $_GET["annCode"]]);
     $announcement = $stmt->fetch(PDO::FETCH_ASSOC);
