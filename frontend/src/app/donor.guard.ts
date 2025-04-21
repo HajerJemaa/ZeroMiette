@@ -5,22 +5,22 @@ import { jwtDecode } from 'jwt-decode';
 
 export const donorGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-    const token = localStorage.getItem('token');
-  
-    if (token){
-      try{
-        const decoded:Mytoken=jwtDecode(token);
-        const now = Math.floor(Date.now()/1000);
-  
-        if(decoded.exp>now && decoded.role=="donor"){
-          return true;
-        }else{
-          localStorage.removeItem('token');
-        }
-      }catch (e){
-        console.error('Invalid token', e)
+  const token = localStorage.getItem('token');
+
+  if (token){
+    try{
+      const decoded:Mytoken=jwtDecode(token);
+      const now = Math.floor(Date.now()/1000);
+
+      if(decoded.exp>now && decoded.role=="donor"){
+        return true;
+      }else{
+        localStorage.removeItem('token');
       }
-    }  
-    router.navigate(['Authentificate/SignIn']);
-    return false;
+    }catch (e){
+      console.error('Invalid token', e)
+    }
+  }  
+  router.navigate(['Authentificate/SignIn']);
+  return false;
 };
