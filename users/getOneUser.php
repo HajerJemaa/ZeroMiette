@@ -14,12 +14,13 @@ $rp->bindParam(":t",$x);
 $r=$rp->execute();
 $r=$rp->fetch(PDO::FETCH_ASSOC);
 
+$p=$r['proof'];
+
 if ($r){
     if (!is_null($r['proof'])){
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $mime = $finfo->buffer($r['proof']);
-        $r['mime'] = $mime;
-        $r['proof'] = base64_encode($r['proof']);
+        $pname=explode(".",$p);
+        $extention=end($pname);
+        $r["extention"] = $extention;
     }
     $response["message"]="success";
     $response["data"]=$r;
