@@ -24,10 +24,10 @@ export class RequestService {
   public getAnnReqByState (annCod: string , state: string) {
     return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
-}
-public getAnnReqByState (annCod: string , state: string) {
+
+  public getAnnReqByState (annCod: string , state: string) {
   return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
-}
+  }
  
 
 }  
