@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input,OnInit} from '@angular/core';
 import { RouterOutlet,RouterLink } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
@@ -10,17 +10,23 @@ import { UsersService } from '../services/users.service';
   styleUrl: './get-ann-by-state.component.css'
 })
 export class GetAnnByStateComponent {
+  @Input()  id:number=0; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
+   selectedAnnCode: number | null = null;
 
    errorMessage: string = '';
   
     constructor(private announcementService: AnnouncementService,
       private userService:UsersService
     ) {}
+    ngOnInit(): void {
+      this.getAnnByState('available'); // Appel automatique au chargement
+    }
   
-    GetAnnByState(state: string): void {
+    getAnnByState(state: string): void {
       this.errorMessage='';
+      
       this.announcementService.GetAnnByState(state).subscribe({
         next: (response : any) => {
           if (response.message === 'success'&& response.data.length > 0) {
@@ -48,6 +54,5 @@ export class GetAnnByStateComponent {
       
       });
     }
-  
-
+    
 }

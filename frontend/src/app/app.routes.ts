@@ -20,6 +20,6 @@ export const routes: Routes = [
     {path:'User', component:UserComponent},
     {path:'Administrator', component:AdministratorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
-    {path:'get-ann-by-state', component:GetAnnByStateComponent}
+    {path:'get-ann-by-state', component:GetAnnByStateComponent},
 
 ];

@@ -1,19 +1,26 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Request } from '../model/request';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
 
-  private baseUrl = 'http://localhost/backend/request/getUserRequestsByState.php';
+  baseUrl:string ="http://localhost/backend/request/request.php";
 
-  http = inject(HttpClient);
 
-  getUserRequestsByState(userId: number, state: string): Observable<Request[]> {
-    const url = `${this.baseUrl}?userId=${userId}&state=${state}`;
-    return this.http.get<Request[]>(url);
+  httpclient = inject(HttpClient);
+
+  getUserRequestsByState(userId: number, state: string) {
+    return this.httpclient.get(this.baseUrl + "?userId=" + userId + "&state=" + state);
   }
-}
+  
+  checkIfRequestExists(userId: number, annCode: number) {
+    return this.httpclient.get(this.baseUrl + "?userId=" + userId + "&annCode=" + annCode);
+  }
+  addRequest(req: Request) {
+    return this.httpclient.post(this.baseUrl, req);
+  }
+
+}  
