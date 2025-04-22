@@ -26,15 +26,15 @@ export class GetAnnByStateComponent {
   
     getAnnByState(state: string): void {
       this.errorMessage='';
-      this.announcementService.getAnnByState(state).subscribe({
+      this.announcementService.GetAnnByState(state).subscribe({
         next: (response : any) => {
           if (response.message === 'success'&& response.data.length > 0) {
             this.announcement = response.data;
             // pour chaque annonce, on récupère le user_name
             this.announcement.forEach(ann => {
               this.userService.getOneUser(ann.donId).subscribe({
-                next: (user) => {
-                  this.usernames[ann.donId] = user.user_name;
+                next: (res) => {
+                  this.usernames[ann.donId] = res.data!.user_name!;
                },
                error: () => {
                 this.usernames[ann.donId] = 'Utilisateur inconnu';
