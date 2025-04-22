@@ -1,1 +1,158 @@
-<p>add-user works!</p>
+@if (error==undefined){
+<form class="was-validated" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <div class="row justify-content-center mt-5">
+        <div class="col-5">
+            <div class="row">
+                <div class="col shadow rounded bg-light">
+                    <div class="row">
+                        <div class="col p-3 bg-primary text-white">
+                            <h1 class="text-center">Create an Account</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-5">
+                            <div class="form-floating">					
+                                <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required> 
+                                <label for="ln" class="form-label">Last name</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                        <div class="col mt-5">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" required>
+                                <label for="fn" class="form-label">First name</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="un" formControlName="un" placeholder="" required>
+                                <label for="un" class="form-label">User name</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="mai" placeholder="" formControlName="mai" required>
+                                <label for="mai" class="form-label">Email</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="pwd" formControlName="pwd" placeholder="" required>
+                                <label for="pwd" class="form-label">Password</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <div class="form-floating">
+                                <select formControlName="region" id="region" class="form-select" required>
+                                    <option value="Tunis">Tunis</option>
+                                    <option value="Ariana">Ariana</option>
+                                    <option value="Ben Arous">Ben Arous</option>
+                                    <option value="Manouba">Manouba</option>
+                                    <option value="Nabeul">Nabeul</option>
+                                    <option value="Zaghouan">Zaghouan</option>
+                                    <option value="Bizerte">Bizerte</option>
+                                    <option value="Beja">Beja</option>
+                                    <option value="Jendouba">Jendouba</option>
+                                    <option value="Kef">Le Kef</option>
+                                    <option value="Siliana">Siliana</option>
+                                    <option value="Kairouan">Kairouan</option>
+                                    <option value="Kasserine">Kasserine</option>
+                                    <option value="Sidi_Bouzid">Sidi Bouzid</option>
+                                    <option value="Sfax">Sfax</option>
+                                    <option value="Mahdia">Mahdia</option>
+                                    <option value="Monastir">Monastir</option>
+                                    <option value="Sousse">Sousse</option>
+                                    <option value="Gafsa">Gafsa</option>
+                                    <option value="Tozeur">Tozeur</option>
+                                    <option value="Kebili">Kebili</option>
+                                    <option value="Medenine">Medenine</option>
+                                    <option value="Tataouine">Tataouine</option>
+                                    <option value="Gabes">Gabès</option>
+                                </select>
+                                <label for="region">Choose a region</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="add" formControlName="add" placeholder="" required>
+                                <label for="add" class="form-label">Address</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                        <div class="col-auto mt-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="num" formControlName="num" placeholder="" pattern="[1-9]{1}[0-9]{7}" required>
+                                <label for="num" class="form-label">Phone number</label>
+                                <span class="invalid-feedback">required field</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <label for="">Role : </label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input"  type="radio" formControlName="rad" value="donor" id="don" required>
+                                <label class="form-check-label" for="don">
+                                    donor
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" formControlName="rad" value="reciever" id="res">
+                                <label class="form-check-label" for="res">
+                                    reciever
+                                </label>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <label for="proof"></label>
+                            <input type="file" class="form-control" (change)="getFile($event)" id="proof" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <textarea class="form-control" placeholder="Write something about you ..." formControlName="desc"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4 ">
+                            <input type="submit" name="myBtn" class="btn btn-primary w-100" style="font-size:  32px;font-weight: 600;" value="sign up">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+}@else if(error=="Would you please wait till your account creation get accepted by the admin") {
+<div class="row justify-content-center mt-5">
+    <div class="col-5">
+        <div class="alert alert-info">
+            <strong>{{error}}</strong>
+        </div>
+    </div>
+</div>
+}@else {
+    <div class="row justify-content-center mt-5">
+        <div class="col-5">
+            <div class="alert alert-danger">
+                <strong>{{error}}</strong> would you like to try again??
+                <button class="btn btn-success" (click)="signUpAgain()">Yes</button>
+                <button class="btn btn-secondary" (click)="redir()">No</button>
+            </div>
+        </div>
+    </div>
+}

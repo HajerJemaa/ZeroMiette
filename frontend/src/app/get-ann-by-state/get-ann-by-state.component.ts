@@ -26,8 +26,7 @@ export class GetAnnByStateComponent {
   
     getAnnByState(state: string): void {
       this.errorMessage='';
-      
-      this.announcementService.GetAnnByState(state).subscribe({
+      this.announcementService.getAnnByState(state).subscribe({
         next: (response : any) => {
           if (response.message === 'success'&& response.data.length > 0) {
             this.announcement = response.data;
