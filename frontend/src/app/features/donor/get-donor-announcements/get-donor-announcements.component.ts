@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AnnouncementService } from '../services/announcement.service';
-import { Announcement } from '../model/announcement';
-import { UsersService } from '../services/users.service';
+import { AnnouncementService } from '../../../services/announcement.service';
+import { Announcement } from '../../../model/announcement';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-get-donor-announcements',

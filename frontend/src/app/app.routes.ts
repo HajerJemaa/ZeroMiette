@@ -8,6 +8,18 @@ import { UserComponent } from './user/user.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+import { GetDonorAnnouncementsComponent } from './features/donor/get-donor-announcements/get-donor-announcements.component';
+
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { RecieverComponent } from './reciever/reciever.component';
+import { DonorComponent } from './donor/donor.component';
+
+=======
+=======
+>>>>>>> d835e6d7e3dc18cf458ccd404e9943c367ea6d96
 import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';

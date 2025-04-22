@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../services/request.service';
-import { AnnouncementService } from '../services/announcement.service';
+import { RequestService } from '../../../services/request.service';
+import { AnnouncementService } from '../../../services/announcement.service';
 
 @Component({
   selector: 'app-get-announcement-requests',
