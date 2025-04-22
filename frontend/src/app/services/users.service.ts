@@ -52,6 +52,7 @@ export class UsersService {
       return decoded.userId
     }else{
       throw new Error("No user is signed in please try again after signing in!!")
+
     }
   }
 }

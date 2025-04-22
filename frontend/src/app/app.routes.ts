@@ -21,7 +21,7 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
     {path:'User', component:UserComponent},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
-    {path:'User/Authenticate/:action', component:AuthenticateComponent},
+{path:'User/Authenticate/:action', component:AuthenticateComponent},
     {path:'Reciever', component:RecieverComponent},
     {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
