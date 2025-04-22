@@ -15,19 +15,17 @@ export class RequestService {
 
   getUserRequestsByState(userId: number, state: string): Observable<Request[]> {
     const url = `${this.baseUrl}?userId=${userId}&state=${state}`;
-    return this.http.get<Request[]>(url);
+    return this.httpclient.get<Request[]>(url);
   }
   
   checkIfRequestExists(userId: number, annCode: number) {
     return this.httpclient.get(this.baseUrl + "?userId=" + userId + "&annCode=" + annCode);
   }
   public getAnnReqByState (annCod: string , state: string) {
-    return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
+    return this.httpclient.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
-  public getAnnReqByState (annCod: string , state: string) {
-  return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
-  }
+  
  
 
 }  
