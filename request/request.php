@@ -21,6 +21,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             require("getUserRequestsByState.php"); 
         } elseif (isset($_GET['annCode'])&& isset($_GET['state'])) {
             require("getAnnRequestByState.php");
+        }elseif (isset($_GET['annCode']) && isset($_GET['userId'])) {
+            require("checkIfRequestExists.php");
         } 
         break;
 
