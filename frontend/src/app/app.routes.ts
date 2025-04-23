@@ -8,8 +8,7 @@ import { UserComponent } from './user/user.component';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
-<<<<<<< HEAD
-<<<<<<< HEAD
+import { DashbordDemandeurComponent} from'./dashbord-demandeur/dashbord-demandeur.component'
 
 import { GetDonorAnnouncementsComponent } from './features/donor/get-donor-announcements/get-donor-announcements.component';
 
@@ -17,13 +16,10 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
 
-=======
-=======
->>>>>>> d835e6d7e3dc18cf458ccd404e9943c367ea6d96
-import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
+/*import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
-import { DonorComponent } from './donor/donor.component';
+import { DonorComponent } from './donor/donor.component';*/
 
 
 export const routes: Routes = [
@@ -38,6 +34,7 @@ export const routes: Routes = [
     {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
-    {path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent}
+    {path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent},
+    {path: 'dashbord-demandeur', component:DashbordDemandeurComponent}
 
 ];
