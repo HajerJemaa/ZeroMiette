@@ -14,8 +14,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         if (isset($_GET['annCode']) && $_GET['annCode'] != null) {
             require("getOneAnnouncement.php");
+        }else if (isset($_GET['state']) && isset($_GET['donId']) && $_GET['state'] != null && $_GET['donId'] != null) {
+            require("getAnnByDonorIdAndState.php");
         }else if (isset($_GET['state']) && $_GET['state'] != null){
             require("getAnnouncementByState.php");
+        } else if (isset($_GET['donId']) && $_GET['donId'] != null) {
+            require("getMyAnnouncements.php");
         }else{
             require("getAllAnnouncements.php");
         }
@@ -32,8 +36,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     default:
-        http_response_code(405); // Method Not Allowed
-        echo json_encode(["message" => "Méthode non autorisée"]);
+        http_response_code(405);
+        echo json_encode(["message" => "Method not authorised"]);
         break;
 }
 ?>

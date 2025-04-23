@@ -1,5 +1,4 @@
 <?php
-header("content-type:application/json");
 // Gestion des requêtes OPTIONS (préflight request)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
@@ -33,7 +32,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     default:
         http_response_code(405);
-        echo json_encode(["message" => "Méthode non autorisée"]);
+        echo json_encode(["message" => "Method not authorised"]);
         break;
 }
 ?>

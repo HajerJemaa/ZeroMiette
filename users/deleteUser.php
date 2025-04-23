@@ -3,7 +3,7 @@ header("content-type:application/json");
 //calling the connexion file
 require_once("../connexion.php");
 
-$resultat=["message"=>"","data"=>null];
+$response=["message"=>"","data"=>null];
 
 //recupering the value of the id passed with the url
 $i=$_GET['id'];
@@ -25,19 +25,21 @@ $r=$rp->fetch(PDO::FETCH_ASSOC);
 
 //if it's not null then delete if not error
 if ($r){
+    $response["data"]=$r;
     $reqsql2="delete from users where userid = :i";
     $rp2 =$connexion->prepare($reqsql2); 
     $rp2->bindParam(":i",$i);
     $r2=$rp2->execute();
+    
     //checking if the req was executed or not if it was then it's a success else it's failure
     if($rp2){
-        $resultat["message"]="success";
+        $response["message"]="success";
     }else{
-        $resultat["message"]="failure";    
+        $response["message"]="failure";    
     }
 }else {
-    $resultat["message"]="does not exist";
+    $response["message"]="inexistent";
 }
 
-echo json_encode($resultat);
+echo json_encode($response);
 ?>
