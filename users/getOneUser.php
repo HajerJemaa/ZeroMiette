@@ -22,10 +22,11 @@ if ($r){
         $extention=end($pname);
         $r["extention"] = $extention;
     }
-    $response["message"]="success";
-    $response["data"]=$r;
+    $resultat["message"]="success";
+    $resultat["data"]=$r;
+    echo json_encode($r);
 }else {
-    $response["message"]="failure";
+    http_response_code(400);
 }
 
 echo json_encode($response);

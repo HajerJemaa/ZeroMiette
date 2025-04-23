@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: application/json");
 require_once("../connexion.php");
 
 $resultat = ["message" => "", "data" => null];

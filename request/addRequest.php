@@ -14,6 +14,20 @@ if (!isset($donnees['annCode']) || !isset($donnees['userId']) || !isset($donnees
     echo json_encode($resultat);
     exit();
 }
+// Vérification d'existence
+$check = $connexion->prepare("SELECT COUNT(*) FROM request WHERE annCode = :annCode AND userId = :userId");
+$check->execute([
+    ":annCode" => $donnees['annCode'],
+    ":userId" => $donnees['userId'] 
+]);
+
+$exists = $check->fetchColumn();
+
+if ($exists > 0) {
+    $resultat["message"] = "Demande déjà existante";
+    echo json_encode($resultat);
+    exit();
+}
 
 // Requête SQL pour insérer une nouvelle demande
 $reqsql = "INSERT INTO request (annCode, userId, description) VALUES (:annCode, :userId, :description)";
