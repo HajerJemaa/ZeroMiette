@@ -3,6 +3,7 @@ import { RouterOutlet,RouterLink } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
 import { UsersService } from '../services/users.service';
+import { User } from '../model/user';
 @Component({
   selector: 'app-get-ann-by-state',
   imports: [RouterOutlet,RouterLink],
@@ -27,14 +28,14 @@ export class GetAnnByStateComponent {
     getAnnByState(state: string): void {
       this.errorMessage='';
       this.announcementService.GetAnnByState(state).subscribe({
-        next: (response : any) => {
-          if (response.message === 'success'&& response.data.length > 0) {
-            this.announcement = response.data;
+        next: (response) => {
+          if (response.message === 'success'&& (response.data as Announcement[]).length > 0) {
+            this.announcement = response.data as Announcement[];
             // pour chaque annonce, on récupère le user_name
             this.announcement.forEach(ann => {
               this.userService.getOneUser(ann.donId).subscribe({
                 next: (res) => {
-                  this.usernames[ann.donId] = res.data!.user_name!;
+                  this.usernames[ann.donId] = (res.data! as User).user_name! ;
                },
                error: () => {
                 this.usernames[ann.donId] = 'Utilisateur inconnu';

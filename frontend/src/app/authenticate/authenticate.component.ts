@@ -27,7 +27,7 @@ export class AuthenticateComponent {
     this.action=this.r.snapshot.paramMap.get("action")!;
     if (this.action=="SignOut"){
       this.us.getOneUser(this.us.getCurrentUserId()).subscribe({
-        next: (res)=>this.user=res.data!,
+        next: (res)=>this.user=res.data as User,
         error: (err)=>this.error=err
       });
     }
@@ -46,7 +46,7 @@ export class AuthenticateComponent {
             }else if (res.user.role=="reciever"){
               this.router.navigate(['/Reciever']);
             }else if (res.user.role=="administrator"){
-              this.router.navigate(['/Administrator']);
+              this.router.navigate(['/Administrator/ProcessAccount/getAllUsers/accepted']);
             }
           }
         },
@@ -55,16 +55,18 @@ export class AuthenticateComponent {
     }else if(this.signInForm.value.password==this.signInForm.value.password1){
       this.as.signIn({email:this.signInForm.value.email!,password:this.signInForm.value.password!}).subscribe({
         next: (res)=>{
-          if (res.error){
+          if (res.error!=undefined){
+            console.log("err");
             this.error=res.error;
             this.signInForm.reset;
           }else{
+            console.log("role")
             if(res.user.role=="donor"){
               this.router.navigate(['/Donor']);
             }else if (res.user.role=="reciever"){
               this.router.navigate(['/Reciever']);
             }else if (res.user.role=="administrator"){
-              this.router.navigate(['/Administrator']);
+              this.router.navigate(['/Administrator/ProcessAccount/getAllUsers/accepted']);
             }
           }
         },

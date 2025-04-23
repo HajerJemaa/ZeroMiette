@@ -5,18 +5,17 @@ import { GetUserComponent } from './get-user/get-user.component';
 import { GetAllUsersComponent } from './get-all-users/get-all-users.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserComponent } from './user/user.component';
-import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
 //import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
+import { GetAnnComponent } from './get-ann/get-ann.component';
 
 
 export const routes: Routes = [
     {path:'', component:AccueilComponent},    
-    {path:'Administrator', component:AdministratorComponent},
     {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent},
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
     {path:'User', component:UserComponent},
@@ -26,6 +25,7 @@ export const routes: Routes = [
     {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
+    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent}
     //{path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent}
 
 ];

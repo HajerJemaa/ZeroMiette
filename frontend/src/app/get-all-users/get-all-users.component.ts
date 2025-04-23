@@ -20,7 +20,7 @@ export class GetAllUsersComponent implements OnInit{
   ngOnInit(): void {
     this.state=this.route.snapshot.paramMap.get('state')!;
     this.us.getAllUsers(this.state).subscribe({
-      next: (res)=>this.users=res.data,
+      next: (res)=>this.users=res.data as User[],
       error: (error)=>{alert("Api Error")}
     })
   }

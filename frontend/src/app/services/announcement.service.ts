@@ -1,6 +1,7 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Announcement } from '../model/announcement';
+import { Result } from '../model/result';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AnnouncementService {
 
     GetAnnByState(state:String){
       //if(id==undefined)
-      return this.httpclient.get<Announcement[]>(this.api+"?state="+state);
+      return this.httpclient.get<Result>(this.api+"?state="+state);
     //else
      //return this.httpclient.get<any[]>(this.api+"?state="+state+"&donId="+id);
     }
@@ -25,4 +26,7 @@ export class AnnouncementService {
       return this.httpclient.get<any[]>(`${this.api}?donId=${donId}`);
     }
 
+    deleteAnnouncement(code:string){
+      return this.httpclient.delete<any>(`${this.api}?annCode=${code}`);
+    }
 }
