@@ -4,8 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
-require_once("../connexion.php");
-
 // Vérifier le type de requête HTTP et rediriger vers le bon fichier
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'POST': 
