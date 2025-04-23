@@ -23,8 +23,9 @@ if ($r){
     }
     $resultat["message"]="success";
     $resultat["data"]=$r;
+    echo json_encode($r);
 }else {
-    $resultat["message"]="failure";
+    http_response_code(400);
 }
 
 echo json_encode($r);

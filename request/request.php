@@ -1,14 +1,11 @@
 <?php
-// Autoriser l'accès depuis l'origine (ex: frontend sur localhost)
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
+header("content-type:application/json");
 // Gestion des requêtes OPTIONS (préflight request)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
+require_once("../connexion.php");
 
 // Vérifier le type de requête HTTP et rediriger vers le bon fichier
 switch ($_SERVER["REQUEST_METHOD"]) {
@@ -19,9 +16,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         if (isset($_GET['userId']) && isset($_GET['state'])) {
             require("getUserRequestsByState.php"); 
-        } elseif (isset($_GET['annCode'])&& isset($_GET['state'])) {
+        } else if (isset($_GET['annCode'])&& isset($_GET['state'])) {
             require("getAnnRequestByState.php");
-        }elseif (isset($_GET['annCode']) && isset($_GET['userId'])) {
+        }else if (isset($_GET['annCode']) && isset($_GET['userId'])) {
             require("checkIfRequestExists.php");
         } 
         break;
