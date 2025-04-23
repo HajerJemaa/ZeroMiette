@@ -1,0 +1,39 @@
+<div class="dashboard">
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="assets/avatar.png" alt="Profil">
+        <h2>Demandeur</h2>
+        <p>demandeur</p>
+      </div>
+      <nav>
+        <button (click)="setTab('home')">🏠 Home</button>
+        <button (click)="setTab('requests')">📄 My Requests</button>
+        <button (click)="setTab('profile')">👤 Profile</button>
+        <button class="logout">🚪 Log Out</button>
+      </nav>
+    </aside>
+  
+    <main class="content">
+        @if(activeTab === 'home'){
+            <div>
+                <app-get-ann-by-state></app-get-ann-by-state>
+            </div>
+
+        }
+      
+        @if(activeTab === 'requests'){
+            <div>
+               <app-get-user-requests-by-state></app-get-user-requests-by-state>
+            </div>
+        }
+      
+       @if(activeTab === 'profile') {
+        <div>
+        <h2>Profil</h2>
+        <p>Nom: Demandeur</p>
+        <p>Email:/p>
+      </div>
+       }
+      
+    </main>
+  </div>
