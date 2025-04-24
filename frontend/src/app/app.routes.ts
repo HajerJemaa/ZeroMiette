@@ -30,7 +30,7 @@ export const routes: Routes = [
     {path:'User', component:UserComponent},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
-    {path:'Reciever', component:RecieverComponent},
+    {path:'Reciever', component:DashbordDemandeurComponent},
     {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
