@@ -32,6 +32,7 @@ export class GetAnnByStateComponent {
       this.id=this.userService.getCurrentUserId();
     }
     getAnnByState(state: string): void {
+      
       this.errorMessage='';
       this.announcementService.getAnnByState(state).subscribe({
         next: (response :any) => {
@@ -39,6 +40,7 @@ export class GetAnnByStateComponent {
             this.announcement = response.data;
             // pour chaque annonce, on récupère le user_name
             this.announcement.forEach(ann => {
+              this.isvisible[ann.annCode]=null;
               this.userService.getOneUser(ann.donId).subscribe({
                 next: (response2) => {
                   this.usernames[ann.donId] = (response2.data as User).user_name; 
