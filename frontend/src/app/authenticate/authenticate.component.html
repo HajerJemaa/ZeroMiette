@@ -100,8 +100,17 @@
                                     <div class="form-floating">
                                         <input type="password" formControlName="password1" id="password" class="form-control" placeholder="" required /> 
                                         <label class="form-label" for="password" style="font-size: 20px;">
-                                            <i class="bi bi-lock"></i> Renter password 
+                                            <i class="bi bi-lock"></i> Confirm password 
                                         </label> 
+                                        <span class="invalid-feedback">required field</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="un" formControlName="un" placeholder="" required>
+                                        <label for="un" class="form-label">User name</label>
                                         <span class="invalid-feedback">required field</span>
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ export class AuthenticateComponent {
     if (this.action=="SignOut"){
       this.us.getOneUser(this.us.getCurrentUserId()).subscribe({
         next: (res)=>this.user=res.data as User,
-        error: (err)=>this.error=err
+        error: (err)=>alert(err)
       });
     }
   }

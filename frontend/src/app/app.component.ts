@@ -1,29 +1,28 @@
 import { Component, inject } from '@angular/core';
-import {RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthenticateService } from './services/authenticate.service';
 import { UsersService } from './services/users.service';
 
-
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterLink],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-
-
 export class AppComponent {
-  state!:boolean;
-  role:string|undefined;
+  state: boolean = false;
+  role: string = '';
+  isSidebarOpen: boolean = false;
   title = 'ZeroMiette';
   as = inject(AuthenticateService);
   us = inject(UsersService);
-  ngOnInit(){
-    this.state=this.as.isSignedIn()
-    if (this.state){
-      this.role = this.us.getCurrentUserRole();
+
+  ngOnInit() {
+    this.state = this.as.isSignedIn();
+    if (this.state) {
+      this.role = this.us.getCurrentUserRole() || '';
     }
   }
-  
+
 }

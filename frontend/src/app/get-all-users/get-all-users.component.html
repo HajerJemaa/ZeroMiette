@@ -1,7 +1,15 @@
-@if (users!=undefined && users!=null){
-    <div class="row mt-4">
-        <div class="col">
-            <table class="table table-bordered">
+<div class="container-fluid py-4 d-flex justify-content-center align-items-center vh-100">
+    <div class="page">
+    @if (users!=undefined && users!=null){
+        
+        @if (state=="pending"){
+            <h2 class="mb-4">Pending Users</h2>
+        }@else {
+            <h2 class="mb-4">Users</h2>
+        }
+        <!-- Desktop: Table -->
+        <div class="table-responsive d-md-block ">
+          <table class="table table-striped table-bordered">
                 <tr>
                     <th>Name</th>
                     <th>User Name</th>
@@ -11,23 +19,22 @@
                     <th>Details</th>
                 </tr>
                 @for (i of users; track $index) {
-                    <tr>
+                    <tr class="zebra">
                         <td>{{i.first_name}} {{i.last_name}}</td>
                         <td>{{i.user_name}}</td>
                         <td>{{i.address}}</td>
                         <td>{{i.number}}</td>
                         <td>{{i.role}}</td>
-                        <td><a [routerLink]="['/Administrator/ProcessAccount/getUser',i.userId]" style="text-decoration: none;">...</a></td>
+                        <td><a [routerLink]="['/Administrator/ProcessAccount/getUser',i.userId]" style="text-decoration: none;background-color: transparent;">...</a></td>
                     </tr>
                 }
             </table>
         </div>
-    </div>
 }@else {
-    <div class="row">
+
         <div class="col">
             
-            <div class="alert alert-info">
+            <div class="alert alert-info text-center">
                 @if (state=="pending"){
                     <strong>there are no {{state}} Users!</strong>
                 }@else {
@@ -36,6 +43,8 @@
             </div>
             
         </div>
-    </div>
+
 }
+</div>
+</div>
 <router-outlet></router-outlet>

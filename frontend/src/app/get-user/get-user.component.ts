@@ -20,7 +20,7 @@ ngOnInit(): void {
     const id=+this.route.snapshot.paramMap.get('id')!;
     this.us.getOneUser(id).subscribe({
       next: (res)=>{
-        if(res.data!=null && res.message=="success"){
+        if(res.message=="success"){
           this.user=res.data as User;
           if (this.user.proof)
             this.fileUrl=this.getFileUrl();
@@ -41,22 +41,10 @@ getFileUrl(act?:string){
   }
 }
 
-getExtension(extention:string):string{
-  const map: { [key:string]: string}={
-  'image/jpeg': 'jpg',
-  'image/png': 'png',
-  'image/webp': 'webp',
-  'application/pdf': 'pdf',
-  'image/gif': 'gif',
-  'image/svg+xml': 'svg'
-  };
-  return map[extention];
-}
-
 acceptUser(id:number){
   this.us.changeUserState({userId:id}).subscribe({
     next: (res)=>{
-      if(res.message="failure"){
+      if(res.message=="failure"){
         alert("Failure to update user!!!");
       }
     },
@@ -72,14 +60,12 @@ deleteUser(id:number){
     next:(res)=>{
       if (res.message=="success"){
         alert("user "+this.user!.first_name+" "+this.user!.last_name+" was deleted successfully!!");
-      }else if(res.message="failure"){
+        this.redir();
+      }else if(res.message=="failure"){
         alert("failed to delete user "+this.user!.first_name+" "+this.user!.last_name+"!!");
       }
     },
-    error:(err)=>{
-      alert("Api ERROR!!");
-      this.r.navigate(["/Administrator/getAllUsers/accepted"]);
-    }
+    error:(err)=> alert("Api ERROR!!")
   })
 }
 

@@ -4,7 +4,6 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { GetUserComponent } from './get-user/get-user.component';
 import { GetAllUsersComponent } from './get-all-users/get-all-users.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { UserComponent } from './user/user.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
 //import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
@@ -12,13 +11,13 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
 import { GetAnnComponent } from './get-ann/get-ann.component';
+import { administratorGuard } from './administrator.guard';
 
 
 export const routes: Routes = [
     {path:'', component:AccueilComponent},    
-    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent},
+    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent,},
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
-    {path:'User', component:UserComponent},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
     {path:'Reciever', component:RecieverComponent},
