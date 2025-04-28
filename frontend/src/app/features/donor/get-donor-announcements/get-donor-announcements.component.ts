@@ -9,16 +9,16 @@ import { UsersService } from '../../../services/users.service';
   templateUrl: './get-donor-announcements.component.html',
   styleUrl: './get-donor-announcements.component.css'
 })
-export class GetDonorAnnouncementsComponent implements OnInit {
+export class GetDonorAnnouncementsComponent {
   announcements : Announcement[]| undefined;
   constructor(private announcementService: AnnouncementService,private userService:UsersService){}
-  ngOnInit(): void {
+ /* ngOnInit(): void {
     this.announcementService.getAnnByDonorId(this.userService.getCurrentUserId()).subscribe(
       {
         next: (data)=>this.announcements=data,
       error: (error)=> {alert("Erreur in loading annouuncements");}     }
     );
-  }
+  }*/
 
   
 

@@ -42,8 +42,8 @@ export class GetAnnByStateComponent {
             this.announcement.forEach(ann => {
               this.isvisible[ann.annCode]=null;
               this.userService.getOneUser(ann.donId).subscribe({
-                next: (response2) => {
-                  this.usernames[ann.donId] = (response2.data as User).user_name; 
+                next: (resp : any) => {
+                  this.usernames[ann.donId] = resp.user_name; 
                  },
                 error: (err) => {
                   this.usernames[ann.donId] = 'Utilisateur inconnu';

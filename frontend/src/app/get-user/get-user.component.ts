@@ -21,7 +21,7 @@ ngOnInit(): void {
     this.us.getOneUser(id).subscribe({
       next: (res)=>{
         if(res.data!=null && res.message=="success"){
-          this.user=res.data;
+          this.user=res.data as User;
           if (this.user.proof)
             this.fileUrl=this.getFileUrl();
         }else{
@@ -71,9 +71,9 @@ deleteUser(id:number){
   this.us.deleteUser(id).subscribe({
     next:(res)=>{
       if (res.message=="success"){
-        alert("user "+res.data?.first_name+" "+res.data?.last_name+" was deleted successfully!!");
+        alert("user "+(res.data as User).first_name+" "+(res.data as User).last_name+" was deleted successfully!!");
       }else if(res.message="failure"){
-        alert("failed to delete user "+res.data?.first_name+" "+res.data?.last_name+"!!");
+        alert("failed to delete user "+(res.data as User).first_name+" "+(res.data as User).last_name+"!!");
       }
     },
     error:(err)=>{

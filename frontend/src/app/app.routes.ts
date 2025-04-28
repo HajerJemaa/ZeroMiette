@@ -12,7 +12,7 @@ import { DashbordDemandeurComponent} from'./dashbord-demandeur/dashbord-demandeu
 
 import { GetDonorAnnouncementsComponent } from './features/donor/get-donor-announcements/get-donor-announcements.component';
 
-import { AuthenticateComponent } from './authenticate/authenticate.component';
+//import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
 
@@ -29,7 +29,7 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
     {path:'User', component:UserComponent},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
-    {path:'User/Authenticate/:action', component:AuthenticateComponent},
+   // {path:'User/Authenticate/:action', component:AuthenticateComponent},
     {path:'Reciever', component:DashbordDemandeurComponent},
     {path:'Donor', component:DonorComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
