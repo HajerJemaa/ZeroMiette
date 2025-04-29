@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
 import { UsersService } from '../services/users.service';
-import { RequestService } from '../services/request.service';
+//import { RequestService } from '../services/request.service';
 import { User } from '../model/user';
 
 @Component({
@@ -35,21 +35,20 @@ export class GetAnnByStateComponent {
       
       this.errorMessage='';
       this.announcementService.getAnnByState(state).subscribe({
-        next: (response :any) => {
-          if (response.message == 'success') {
+        next: (response : any) => {
+          if (response.message === 'success'&& response.data.length > 0) {
             this.announcement = response.data;
             // pour chaque annonce, on récupère le user_name
             this.announcement.forEach(ann => {
               this.isvisible[ann.annCode]=null;
               this.userService.getOneUser(ann.donId).subscribe({
-                next: (resp : any) => {
-                  this.usernames[ann.donId] = resp.user_name; 
-                 },
-                error: (err) => {
-                  this.usernames[ann.donId] = 'Utilisateur inconnu';
-                }
-              });
-              
+                next: (user) => {
+                  this.usernames[ann.donId] = user.user_name;
+               },
+               error: () => {
+                this.usernames[ann.donId] = 'Utilisateur inconnu';
+               }
+             });
           });
           } else {
             this.errorMessage = "Aucune annonce trouvée.";

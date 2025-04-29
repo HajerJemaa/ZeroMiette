@@ -16,7 +16,7 @@ export class GetDonorAnnouncementsComponent {
     this.announcementService.getAnnByDonorId(this.userService.getCurrentUserId()).subscribe(
       {
         next: (data)=>this.announcements=data,
-      error: (error)=> {alert("Erreur in loading annouuncements");}     }
+      error: (error)=> alert("Erreur loading announcements")     }
     );
   }*/
 

@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  @if(ann!=undefined){
+    @for (an of ann; track $index) {
+      <div class="row justify-content-center">
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-sm border-start border-4 border-info">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5 class="card-title text-info fw-bold">{{usernames[an.donId]}}</h5>
+                </div>
+                <div class="col-3">
+                  <strong>Delai :</strong> 
+                  <span class="btn-danger">{{an.deadline}}</span>
+                </div>
+              </div>
+
+              <p class="card-text">
+                <strong>Description :</strong> {{an.content}}
+              </p>
+              <p class="card-text">
+                <strong>DateC :</strong> 
+                <span class="badge bg-secondary">{{an.dateC}}</span>
+              </p> 
+              <div class="row">
+                <div class="col-auto offset-9">
+                  <button class="btn btn-outline-info" (click)="deleteAnn(an.annCode)" >delete</button>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    }
+  }  
+</div>
+<router-outlet></router-outlet>
+  

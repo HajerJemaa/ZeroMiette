@@ -15,8 +15,7 @@
                                     <span class="invalid-feedback">required field</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div><div class="row">
                             <div class="col mt-4">
                                 <div class="form-floating">
                                     <input type="password" formControlName="password" id="password" class="form-control" placeholder="" required /> 
@@ -30,6 +29,11 @@
                         <div class="row">
                             <div class="col mt-1">
                                 <span class="text-danger">{{error}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span>if you are signing in for the first time click </span><a href="/User/Authenticate/FirstSignIn" style="text-decoration: none;">here</a>
                             </div>
                         </div>
                         <div class="row">
@@ -62,4 +66,69 @@
             </div>
         </div> 
     }     
+}@else if(action=="FirstSignIn"){
+    <div class="container mt-5">
+        <form class="was-validated" [formGroup]="signInForm" (ngSubmit)="signIn()">
+            <div class="row justify-content-center mt-5">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col shadow rounded bg-light">
+                            <div class="row">
+                                <div class="col mt-5">
+                                    <div class="form-floating">
+                                        <input type="email" formControlName="email" id="email" class="form-control" placeholder="" required /> 
+                                        <label for="email" style="font-size: 20px;">
+                                            <i class="bi bi-person"></i> Enter your email
+                                        </label> 
+                                        <span class="invalid-feedback">required field</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4">
+                                    <div class="form-floating">
+                                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="" required /> 
+                                        <label class="form-label" for="password" style="font-size: 20px;">
+                                            <i class="bi bi-lock"></i> Enter password 
+                                        </label> 
+                                        <span class="invalid-feedback">required field</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4">
+                                    <div class="form-floating">
+                                        <input type="password" formControlName="password1" id="password" class="form-control" placeholder="" required /> 
+                                        <label class="form-label" for="password" style="font-size: 20px;">
+                                            <i class="bi bi-lock"></i> Confirm password 
+                                        </label> 
+                                        <span class="invalid-feedback">required field</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="un" formControlName="un" placeholder="" required>
+                                        <label for="un" class="form-label">User name</label>
+                                        <span class="invalid-feedback">required field</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-1">
+                                    <span class="text-danger">{{error}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-4 ">
+                                    <input type="submit" name="myBtn" class="btn btn-primary text-white w-100" style="font-size: 32px;font-weight: 600;" value="sign in">
+                                </div>
+                            </div>        
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </form>
+    </div>
 }
