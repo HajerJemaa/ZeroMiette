@@ -30,13 +30,14 @@ if ($exists > 0) {
 }
 
 // Requête SQL pour insérer une nouvelle demande
-$reqsql = "INSERT INTO request (annCode, userId, description) VALUES (:annCode, :userId, :description)";
+$reqsql = "INSERT INTO request (annCode, userId, description, quantity) VALUES (:annCode, :userId, :description,:quantity)";
 $rp = $connexion->prepare($reqsql);
 
 // Liaison des paramètres
 $rp->bindParam(":annCode", $donnees['annCode']);
 $rp->bindParam(":userId", $donnees['userId']);
 $rp->bindParam(":description", $donnees['description']);
+$rp->bindParam(":quantity", $donnees['quantity']);
 
 // Exécution de la requête
 $r = $rp->execute();
@@ -47,7 +48,8 @@ if ($r) {
     $resultat["data"] = [
         "annCode" => $donnees['annCode'],
         "userId" => $donnees['userId'],
-        "description" => $donnees['description']
+        "description" => $donnees['description'],
+        "quantity" => $donnees['quantity']
     ];
 } else {
     $resultat["message"] = "failure";
