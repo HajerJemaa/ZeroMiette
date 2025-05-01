@@ -24,7 +24,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case 'PUT':
-        require("updateRequest.php"); 
+        if (isset($_GET['annCode']) && isset($_GET['requestId']) && isset($_GET['state'])) {
+            require("acceptRequest.php");
+        } else {
+            require("updateRequest.php");
+        }
         break;
 
     case 'DELETE':
