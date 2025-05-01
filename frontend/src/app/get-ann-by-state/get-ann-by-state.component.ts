@@ -1,4 +1,4 @@
-import { Component,OnInit} from '@angular/core';
+import { Component,Input,OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
@@ -14,83 +14,81 @@ import { User } from '../model/user';
 })
 
 export class GetAnnByStateComponent implements OnInit {
-   id!:number ; 
-   announcement: Announcement[] = [];
-   usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
-   @Input()description!:string ;
-   //@Input()quantity!:string;
-   //selectedAnnCode: number | null = null;
-   isvisible: { [annCode: string]: boolean | null } = {};
+  id!:number ; 
+  announcement: Announcement[] = [];
+  usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
+  @Input()description!:string ;
+  @Input()quantity!:string;
+  selectedAnnCode: number | null = null;
+  isvisible: { [annCode: string]: boolean | null } = {};
 
-   errorMessage!:string;
+  errorMessage!:string;
   
-    constructor(
-      private announcementService: AnnouncementService,
-      private userService: UsersService,
-      private requestService: RequestService
-    ) {}
-    ngOnInit(): void {
-      this.getAnnByState('available'); // Appel automatique au chargement
-      this.id=this.userService.getCurrentUserId();
-    }
-    getAnnByState(state: string): void {
-      
-      this.errorMessage='';
-      this.announcementService.getAnnByState(state).subscribe({
-        next: (response) => {
-          if (response.message === 'success'&& (response.data as Announcement[]).length > 0) {
-            this.announcement = response.data as Announcement[];
-            // pour chaque annonce, on récupère le user_name
-            this.announcement.forEach(ann => {
-              this.isvisible[ann.annCode]=null;
-              this.userService.getOneUser(ann.donId).subscribe({
-                next: (res) => {
-                  this.usernames[ann.donId] = (res.data as User).user_name;
-               },
-               error: () => {
-                this.usernames[ann.donId] = 'Utilisateur inconnu';
-               }
-             });
-          });
-          } else {
-            this.errorMessage = "Aucune annonce trouvée.";
-          }
-        },
-        error: () => {
-          this.errorMessage = "Erreur lors du chargement des annonces.";
-        }
-      
-      });
-    }
-    checkDemandeur(code :string){
-      this.requestService.checkIfRequestExists(this.id, code).subscribe({
-        next: (exists: boolean)=>{
-          this.isvisible[code] = !exists;
-        },
-        error: () => {
-          this.errorMessage = 'Erreur lors de la vérification de la demande.';
-        }
-
-      });
-
-    }
-    addRequest(code :string){
-      this.requestService.addRequest( code , this.id, this.description).subscribe({
-        next: (res : any) => {
-  
-          if (res.message == 'success') {
-            console.log('Demande ajoutée avec succès', res.data);
-            this.isvisible[code] = null; // Pour ne plus afficher le champ après l'ajout
-
-          }
-        },
-        error: (err) => {
-          this.errorMessage = 'Erreur de requête';
-          console.error(err);
-        }
-      });
-
-    }
+  constructor(
+    private announcementService: AnnouncementService,
+    private userService: UsersService,
+    private requestService: RequestService
+  ) {}
+  ngOnInit(): void {
+    this.getAnnByState('available'); // Appel automatique au chargement
+    this.id=this.userService.getCurrentUserId();
+  }
+  getAnnByState(state: string): void {
     
+    this.errorMessage='';
+    this.announcementService.getAnnByState(state).subscribe({
+      next: (response) => {
+        if (response.message === 'success'&& (response.data as Announcement[]).length > 0) {
+          this.announcement = response.data as Announcement[];
+          // pour chaque annonce, on récupère le user_name
+          this.announcement.forEach(ann => {
+            this.isvisible[ann.annCode]=null;
+            this.userService.getOneUser(ann.donId).subscribe({
+              next: (res) => {
+                this.usernames[ann.donId] = (res.data as User).user_name;
+              },
+              error: () => {
+              this.usernames[ann.donId] = 'Utilisateur inconnu';
+              }
+            });
+        });
+        } else {
+          this.errorMessage = "Aucune annonce trouvée.";
+        }
+      },
+      error: () => {
+        this.errorMessage = "Erreur lors du chargement des annonces.";
+      }
     
+    });
+  }
+  checkDemandeur(code :string){
+    this.requestService.checkIfRequestExists(this.id, code).subscribe({
+      next: (exists: boolean)=>{
+        this.isvisible[code] = !exists;
+      },
+      error: () => {
+        this.errorMessage = 'Erreur lors de la vérification de la demande.';
+      }
+
+    });
+
+  }
+  addRequest(code :string){
+    this.requestService.addRequest( code , this.id, this.description).subscribe({
+      next: (res : any) => {
+
+        if (res.message == 'success') {
+          console.log('Demande ajoutée avec succès', res.data);
+          this.isvisible[code] = null; // Pour ne plus afficher le champ après l'ajout
+
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Erreur de requête';
+        console.error(err);
+      }
+    });
+
+  } 
 }
