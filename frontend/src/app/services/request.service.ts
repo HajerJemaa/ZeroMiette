@@ -1,7 +1,10 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Result} from '../model/result'
-//import {}
+import { Request } from '../model/request';
+import { RequestResponse } from '../model/requestResponse';
+import { Observable } from 'rxjs';
+import { Result } from '../model/result';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +31,15 @@ export class RequestService {
     return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
-  
- 
+  //public getUserRequestsByState(userId: string, state: string): Observable<RequestResponse> {
+   // return this.http.get<RequestResponse>(`${this.baseUrl}?userId=${userId}&state=${state}`);}
 
-}  
+  public getAnnReqByannCodeAndState(annCod: string, state: string): Observable<RequestResponse> {
+    return this.httpclient.get<RequestResponse>(`${this.baseUrl}?annCod=${annCod}&state=${state}`);
+  }
+
+  acceptOrRefuseRequest(annCode: string, userId: number, state: 'accept' | 'refuse'): Observable<any> {
+    return this.httpclient.get<any>(`${this.baseUrl }?annCode=${annCode}&userId=${userId}&state=${state}`);
+  }
+  
+}
