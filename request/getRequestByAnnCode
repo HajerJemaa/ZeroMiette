@@ -1,0 +1,27 @@
+<?php
+require_once("./connexion.php"); // adjust to your DB connection file
+
+header("Content-Type: application/json");
+
+if (!isset($_GET['annCode'])) {
+    http_response_code(400);
+    echo json_encode(["message" => "Missing annCode"]);
+    exit();
+}
+
+$annCode = $_GET['annCode'];
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM request WHERE annCode = :annCode");
+    $stmt->bindParam(':annCode', $annCode);
+    $stmt->execute();
+
+    $requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode($requests);
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(["message" => "Database error", "error" => $e->getMessage()]);
+}
+?>

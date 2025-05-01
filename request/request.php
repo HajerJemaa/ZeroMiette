@@ -17,6 +17,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         } elseif (isset($_GET['annCode'])&& isset($_GET['state'])) {
             require("getAnnRequestByState.php");
         } 
+        elseif (isset($_GET['annCode'])) {
+            require("getRequestByAnnCode.php");
+        }
         break;
 
     case 'PUT':
