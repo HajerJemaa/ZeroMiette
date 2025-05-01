@@ -17,7 +17,7 @@ export class GetAnnByStateComponent implements OnInit {
    id!:number ; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
-   @Input()description!:string ;
+   @oninputnput()description!:string ;
    //@Input()quantity!:string;
    //selectedAnnCode: number | null = null;
    isvisible: { [annCode: string]: boolean | null } = {};
@@ -94,3 +94,7 @@ export class GetAnnByStateComponent implements OnInit {
     
     
 }
+function oninputnput(): (target: GetAnnByStateComponent, propertyKey: "description") => void {
+  throw new Error('Function not implemented.');
+}
+
