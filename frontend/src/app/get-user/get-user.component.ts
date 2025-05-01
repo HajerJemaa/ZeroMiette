@@ -67,6 +67,11 @@ acceptUser(){
       error: (err)=>alert(err+"!!")
       
     })
+
+    this.us.addP({userId:this.user.userId!,pwd:"mysecretpwd"}).subscribe({
+      next:(message)=>alert(message),
+      error:(err)=>alert(err)
+    })
   }
 }
 

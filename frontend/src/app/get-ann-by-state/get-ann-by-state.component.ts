@@ -17,9 +17,9 @@ export class GetAnnByStateComponent implements OnInit {
    id!:number ; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
-   @oninputnput()description!:string ;
-   //@Input()quantity!:string;
-   //selectedAnnCode: number | null = null;
+   @Input()description!:string ;
+   @Input()quantity!:string;
+   selectedAnnCode: number | null = null;
    isvisible: { [annCode: string]: boolean | null } = {};
 
   errorMessage!:string;

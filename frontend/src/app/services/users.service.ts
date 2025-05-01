@@ -33,6 +33,10 @@ export class UsersService {
     return this.httpclient.put<Result>(this.api,req);
   }
 
+  addP(cred:{ userId :number, pwd:string}){
+    return this.httpclient.put(this.api,cred);
+  }
+
   getCurrentUserRole(){
     const token = localStorage.getItem('token');
     if (token) {

@@ -1,35 +1,34 @@
-/* Style général des cartes */
+
 .card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    border: 2px solid #1f4d36; /* Bordure verte autour de la carte */
-  }
+    border: 2px solid #1f4d36; 
+}
   
-  /* Image de l'annonce */
-  .card-img-top {
+ 
+.card-img-top {
     width: 100%;
     height: auto;
-    border-radius: 8px 8px 0 0; /* Coins arrondis uniquement en haut */
-  }
+    border-radius: 8px 8px 0 0; 
+}
   
-  /* Corps de la carte avec fond léger */
-  .card-body {
-    background-color: #f8f9f6; /* Fond léger similaire à celui du dashboard */
+ 
+.card-body {
+    background-color: #f8f9f6; 
     padding: 20px;
-    border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
-  }
+    border-radius: 0 0 8px 8px;
+}
   
-  /* Titre de l'annonce (nom du donneur) */
-  .card-title {
+  
+.card-title {
     font-size: 20px;
     font-weight: bold;
-    color: #1f4d36; /* Couleur verte pour le titre */
+    color: #1f4d36; 
     margin-bottom: 10px;
-  }
-  
-  /* Délai de l'annonce */
+} 
+ 
 .btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
@@ -40,44 +39,42 @@
     background-color: #c82333;
     border-color: #bd2130;
 }
-  /* Catégorie, Description et Date de création */
-  .card-text strong {
-    color: #1f4d36; /* Vert foncé pour les titres */
-  }
+
+.card-text strong {
+    color: #1f4d36; 
+}
   
-  .card-text {
+.card-text {
     font-size: 14px;
-    color: #555; /* Gris foncé pour le texte */
-  }
+    color: #555; 
+}
   
   
-  .btn-outline-danger {
+.btn-outline-danger {
     border-color: #721c24;
     color: #721c24;
     padding: 8px 12px;
     font-size: 14px;
     border-radius: 5px;
-  }
+}
   
-  .btn-outline-danger:hover {
+.btn-outline-danger:hover {
     background-color: #721c24;
     color: white;
-  }
+}
   
-  /* Espacement entre les éléments */
-  .row.mb-3 {
+.row.mb-3 {
     margin-bottom: 15px;
-  }
+}
   
-  /* Réactivité - ajustements pour petites résolutions d'écran */
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .card-body {
-      padding: 15px;
+        padding: 15px;
     }
   
     .btn {
-      font-size: 12px;
-      padding: 6px 10px;
+        font-size: 12px;
+        padding: 6px 10px;
     }
-  }
+}
   
