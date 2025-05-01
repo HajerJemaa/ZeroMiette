@@ -136,10 +136,10 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
               }),
               map(res => ({
                 userId: request.userId,
-                username: res.data?.user_name || 'Unknown',
-                email: res.data?.email || '',
-                number: res.data?.number || '',
-                profile_pic: res.data?.profile_pic || '/assets/default-profile.jpg'
+                username: (res.data as User).user_name || 'Unknown',
+                email: (res.data as User).email || '',
+                number: (res.data as User).number || '',
+                profile_pic: (res.data as User).profile_pic || '/assets/default-profile.jpg'
               }))
             )
           );
@@ -273,7 +273,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   }
 
   deleteAnnouncement(annCode:string):void{
-    this.announcementService.deleteAnnouncement({ annCode }).subscribe({
+    this.announcementService.deleteAnnouncement(annCode).subscribe({
       next: (res) => {
         this.loadAnnouncements();
         this.errorMessage = '';

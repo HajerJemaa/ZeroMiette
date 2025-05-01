@@ -1,14 +1,10 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { Request } from '../model/request';
 import { RequestResponse } from '../model/requestResponse';
 import { Observable } from 'rxjs';
+import { Result } from '../model/result';
 
-=======
-import {Result} from '../model/result'
-//import {}
->>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
 @Injectable({
   providedIn: 'root'
 })
@@ -35,22 +31,15 @@ export class RequestService {
     return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
-<<<<<<< HEAD
   //public getUserRequestsByState(userId: string, state: string): Observable<RequestResponse> {
    // return this.http.get<RequestResponse>(`${this.baseUrl}?userId=${userId}&state=${state}`);}
 
   public getAnnReqByannCodeAndState(annCod: string, state: string): Observable<RequestResponse> {
-    return this.http.get<RequestResponse>(`${this.baseUrl}?annCod=${annCod}&state=${state}`);
+    return this.httpclient.get<RequestResponse>(`${this.baseUrl}?annCod=${annCod}&state=${state}`);
   }
 
   acceptOrRefuseRequest(annCode: string, userId: number, state: 'accept' | 'refuse'): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl }?annCode=${annCode}&userId=${userId}&state=${state}`);
+    return this.httpclient.get<any>(`${this.baseUrl }?annCode=${annCode}&userId=${userId}&state=${state}`);
   }
   
 }
-=======
-  
- 
-
-}  
->>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
