@@ -4,7 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
-
 // Vérifier le type de requête HTTP et rediriger vers le bon fichier
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'POST': 
@@ -14,8 +13,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         if (isset($_GET['userId']) && isset($_GET['state'])) {
             require("getUserRequestsByState.php"); 
-        } elseif (isset($_GET['annCode'])&& isset($_GET['state'])) {
+        } else if (isset($_GET['annCode'])&& isset($_GET['state'])) {
             require("getAnnRequestByState.php");
+        }else if (isset($_GET['annCode']) && isset($_GET['userId'])) {
+            require("checkIfRequestExists.php");
         } 
         elseif (isset($_GET['annCode'])) {
             require("getRequestByAnnCode.php");

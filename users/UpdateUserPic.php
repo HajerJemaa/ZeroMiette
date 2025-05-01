@@ -37,7 +37,9 @@ if ($up){
 
     $rp->bindParam(":ln",$last_Name);
     $rp->bindParam(":fn",$first_Name);
+    $rp->bindParam(":un",$user_name);
     $rp->bindParam(":em",$email);
+    $rp->bindParam(":pwd",$hashedpwd);
     $rp->bindParam(":reg",$region);
     $rp->bindParam(":add",$address);
     $rp->bindParam(":num",$number);
