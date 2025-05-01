@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../model/user';
 import { Result } from '../model/result';
-import { Results } from '../model/results';
 import { jwtDecode } from 'jwt-decode';
 import { Mytoken } from '../model/mytoken';
 
@@ -16,7 +14,7 @@ export class UsersService {
   httpclient = inject(HttpClient);
 
   getAllUsers(state:String){
-    return this.httpclient.get<Results>(this.api+"?state="+state);
+    return this.httpclient.get<Result>(this.api+"?state="+state);
   }
 
   getOneUser(id:number){
@@ -33,6 +31,10 @@ export class UsersService {
   
   changeUserState(req:{ userId :number }){
     return this.httpclient.put<Result>(this.api,req);
+  }
+
+  addP(cred:{ userId :number, pwd:string}){
+    return this.httpclient.put(this.api,cred);
   }
 
   getCurrentUserRole(){
@@ -52,6 +54,8 @@ export class UsersService {
       return decoded.userId
     }else{
       throw new Error("No user is signed in please try again after signing in!!")
+
     }
   }
 }
+  

@@ -16,9 +16,7 @@ export class AddUserComponent {
   signUpForm= new FormGroup({
     ln: new FormControl('',Validators.required),
     fn: new FormControl('',Validators.required),
-    un: new FormControl('',Validators.required),
     mai: new FormControl('',[Validators.required,Validators.email]),
-    pwd: new FormControl('',Validators.required),
     region: new FormControl('',Validators.required),
     add: new FormControl('',Validators.required),
     num: new FormControl('',[Validators.required,Validators.pattern('[1-9]{1}[0-9]{7}')]),
@@ -42,9 +40,7 @@ export class AddUserComponent {
     const user= new FormData();
     user.append('ln', this.signUpForm.value.ln!);
     user.append('fn', this.signUpForm.value.fn!);
-    user.append('un', this.signUpForm.value.un!);
     user.append('mai', this.signUpForm.value.mai!);
-    user.append('pwd', this.signUpForm.value.pwd!);
     user.append('region', this.signUpForm.value.region!);
     user.append('add', this.signUpForm.value.add!);
     user.append('num', this.signUpForm.value.num!);
@@ -59,7 +55,7 @@ export class AddUserComponent {
         if (mess.message!="success"){
           this.error=mess.message;
         }else{
-          this.error="Would you please wait till your account creation get accepted by the admin"
+          this.error="Would you please wait till your account creation get accepted by the admin";
         }
       },
       error:(err)=>this.error="Api ERROR!!"

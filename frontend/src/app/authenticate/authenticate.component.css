@@ -1,0 +1,24 @@
+.card {
+    border-radius: 10px;
+}
+  
+.btn-primary {
+    background-color: #2E7D32;
+    border-color: #2E7D32;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #1B5E20;
+    border-color: #1B5E20;
+}
+
+.form-control:valid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(21, 133, 19, 0.327);
+    border-color: #28a745;
+}
+
+.form-control:invalid:focus{
+    box-shadow: 0 0 0 0.2rem rgba(254, 51, 51, 0.327);
+    border-color: #dc3545;
+}

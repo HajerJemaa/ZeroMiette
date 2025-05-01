@@ -14,6 +14,7 @@ export class User {
       public proof: string,
       public description: string | null = null ,// description can null or a string
       public state:string,
-      public extention:string
+      public profile_pic:string | null = null,
+      public extention:string | null=null
     ) {}
   }

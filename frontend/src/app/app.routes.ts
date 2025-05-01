@@ -1,29 +1,37 @@
 import { Routes } from '@angular/router';
-import { Component } from '@angular/core';
 import { AccueilComponent } from './accueil/accueil.component';
 import { GetUserComponent } from './get-user/get-user.component';
 //import { GetAllUsersComponent } from './get-all-users/get-all-users.component';
 import { AddUserComponent } from './add-user/add-user.component';
-import { UserComponent } from './user/user.component';
-import { AdministratorComponent } from './administrator/administrator.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
+<<<<<<< HEAD
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
 import { DonorDashboardComponent } from './donor-dashboard/donor-dashboard.component';
 import { GetAllUsersComponent } from './get-all-users/get-all-users.component';
+=======
+import { GetAnnByStateComponent }from './get-ann-by-state/get-ann-by-state.component'
+import { DashbordDemandeurComponent } from './dashbord-demandeur/dashbord-demandeur.component'
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { GetAnnComponent } from './get-ann/get-ann.component';
+import { administratorGuard } from './administrator.guard';
+
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
 export const routes: Routes = [
     {path:'', component:AccueilComponent},    
-    {path:'Administrator', component:AdministratorComponent},
-    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent},
-    {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
-    {path:'User', component:UserComponent},
+    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent, canActivate:[administratorGuard]},
+    {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
-    {path:'Reciever', component:RecieverComponent},
-    {path:'Donor', component:DonorComponent},
+    {path:'Reciever', component:DashbordDemandeurComponent},
+    {path:'Donor', component:GetAnnByStateComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
+<<<<<<< HEAD
     {path:'donor-dashboard',component:DonorDashboardComponent}
+=======
+    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]}
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
 ];

@@ -1,51 +1,81 @@
 <div class="container mt-4 text-center">
+  
+  @if (errorMessage) {
+    <div class="alert alert-warning text-center">{{ errorMessage }}</div>
+  }
+  @else if (announcement.length > 0) {
     <div class="row">
-        <div class="col">
-            <button class="btn btn-primary"(click)="GetAnnByState('available')">les annonces</button>
-        </div>
-        <div class="col">
-            <button class="btn btn-primary" routerLink="/get-user-requests-by-state">Mes demandes</button>
-        </div>
-    </div>
-    @if (errorMessage) {
-        <div class="alert alert-warning text-center">{{ errorMessage }}</div>
-      } 
-      @else if (announcement.length > 0) {
-        <div class="row">
-          @for (ann of announcement; track ann.annCode) {
-            
-              <div class="card shadow-sm h-100 border-start border-4 border-info">
-                <div class="card header"><div class="row">
-                        <div class="col-9">
-                            <h5 class="card-title text-info fw-bold">Annonce #{{ ann.donId }}</h5>
-                        </div>
-                        <div class="col-3">
-                            <strong>Delai :</strong> 
-                            <span class="btn-danger">{{ ann.deadline}}</span>
-                        </div>
-                    </div>
+      @for (ann of announcement; track ann.annCode ) {
+        <div class="col-md-6 ">
+          <div class="card shadow-sm" style="border: 2px solid #1f4d36;">
+            <img src="https://media.istockphoto.com/id/1144823591/photo/spaghetti-in-a-dish-on-a-white-background.jpg?s=612x612&w=0&k=20&c=SeEWmJfPQlX1zVUHPKjL-cgYeMs9cZ97-kdZMm7feA4=" class="card-img-top" alt="Image de l'annonce">
+            <div class="card-body" style="background-color: #f8f9f6;">
+              
+              <!-- Nom du donneur et Délai -->
+              <div class="row" >
+                <div class="col-7">
+                  <h5 class="card-title" style="color: #380303;">{{ann.title}}</h5>
                 </div>
-                    
-                <div class="card-body">
-                  <p class="card-text">
-                    <strong>Description :</strong> {{ ann.content }}
-                  </p>
-                  <p class="card-text">
-                    <strong>DateC :</strong> 
-                    <span class="badge bg-secondary">{{ ann.dateC}}</span>
-                  </p>
+                <div class="col-2"></div>
+                <div class="col-3  text-end">
+                  <strong style="color: #1f4d36;">Délai :</strong>
+                  <span style="color: #570505;">{{ ann.deadline }}</span>
                 </div>
               </div>
-            
-          }
+
+              <!-- Catégorie -->
+              <div class="row">
+                <div class="col">
+                  <strong style="color: #1f4d36;">Catégorie :</strong>
+                  <p>{{ann.category}}</p>
+                </div>
+              </div>
+
+              <!-- Description de l'annonce -->
+              <div class="row">
+                <div class="col">
+                  <strong style="color: #1f4d36;">Description :</strong>
+                  <p>{{ ann.content }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong style="color: #1f4d36;">Quantité :</strong>
+                  <p>{{ann.qte}}kg</p> <!-- Affichage de la quantité -->
+                </div>
+              </div>
+
+              <!-- Date de création et bouton -->
+              <div class="row">
+                <div class="col-8">
+                  <strong style="color: #1f4d36;">Date de création :</strong>
+                  <span>{{ ann.dateC }}</span>
+                </div>
+                <div class="col-4 text-end">
+                  @if ((isvisible[ann.annCode]==null)){
+                    <button class="btn btn-outline-info" (click)="checkDemandeur(ann.annCode)">Envoyer demande</button>
+                  } @else if(isvisible[ann.annCode]==true){
+                    <div class="row">
+                      <label>Add Request:</label>
+                    </div>
+                    <div class="row">
+                      <textarea [value]="description"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-outline-info" (click)="addRequest(ann.annCode)">Envoyer</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="getAnnByState('available')">Annuler</button>
+                  } @else {
+                    <div class="alert alert-danger" role="alert">Vous avez déjà envoyé une demande pour cette annonce.</div>
+                  }
+                </div>
+              </div>
+
+            </div>  
+          </div>
         </div>
-      } 
-      @else {
-        <div class="alert alert-warning text-center">🛈 no available announcement</div>
       }
-
-  </div>
+    </div>
+  }
   
-  <router-outlet></router-outlet>
-  
+</div>
 
+<router-outlet></router-outlet>

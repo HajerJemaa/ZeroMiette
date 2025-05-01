@@ -1,26 +1,41 @@
 import { Injectable,inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+<<<<<<< HEAD
 import { Request } from '../model/request';
 import { RequestResponse } from '../model/requestResponse';
 import { Observable } from 'rxjs';
 
+=======
+import {Result} from '../model/result'
+//import {}
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
 
-  private baseUrl = 'http://localhost/backend/request/request.php';
+  baseUrl:string ="http://localhost/backend/request/request.php";
+                   
 
-  http = inject(HttpClient);
+  httpclient = inject(HttpClient);
 
-  getUserRequestsByState(userId: number, state: string): Observable<Request[]> {
-    const url = `${this.baseUrl}?userId=${userId}&state=${state}`;
-    return this.http.get<Request[]>(url);
+
+  getUserRequestsByState(userId: number, state: string) {
+    return this.httpclient.get<Result>(`${this.baseUrl}?userId=${userId}&state=${state}`); 
+  }
+  addRequest(annCode: string, userId: number, description: string){
+    const body = { annCode, userId, description };
+    return this.httpclient.post<{ message: string; data?: Request }>(this.baseUrl, body);
+  }
+  
+  checkIfRequestExists(userId: number, annCode: string) {
+     return this.httpclient.get<boolean>(this.baseUrl + "?userId=" + userId + "&annCode=" + annCode);
   }
   public getAnnReqByState (annCod: string , state: string) {
-    return this.http.get<any[]>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
+    return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
+<<<<<<< HEAD
   //public getUserRequestsByState(userId: string, state: string): Observable<RequestResponse> {
    // return this.http.get<RequestResponse>(`${this.baseUrl}?userId=${userId}&state=${state}`);}
 
@@ -33,3 +48,9 @@ export class RequestService {
   }
   
 }
+=======
+  
+ 
+
+}  
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
