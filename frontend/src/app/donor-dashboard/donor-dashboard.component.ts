@@ -126,21 +126,22 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
           const pendingData = resPending.data || [];
           const acceptedData = resAccepted.data || [];
           this.requests = [...pendingData, ...acceptedData];
-  
-          // Fetch user data for each request
           const userRequests = this.requests.map(request =>
             this.userService.getOneUser(request.userId).pipe(
               catchError(err => {
                 console.error(`Error fetching user ${request.userId}:`, err);
                 return of({ data: null });
               }),
-              map(res => ({
-                userId: request.userId,
-                username: res.data?.user_name || 'Unknown',
-                email: res.data?.email || '',
-                number: res.data?.number || '',
-                profile_pic: res.data?.profile_pic || '/assets/default-profile.jpg'
-              }))
+              map(res => {
+                const user = res.data as User;
+                return {
+                  userId: request.userId,
+                  username: user.user_name || 'Unknown',
+                  email: user.email || '',
+                  number: user.number || '',
+                  profile_pic: user.profile_pic || '/assets/default-profile.jpg'
+                };
+              })
             )
           );
   
@@ -206,7 +207,9 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   closeCreateAnnouncementModel():void{
     this.showAnnouncementsModel=false;
     this.isEdit=false;
-    this.form.reset();
+    if (this.form) {
+      this.form.reset();
+    }
     this.selectedAnnouncement = null;
     this.selectedAnnCode = null;
     this.imagePreview = null;
@@ -273,12 +276,12 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   }
 
   deleteAnnouncement(annCode:string):void{
-    this.announcementService.deleteAnnouncement({ annCode }).subscribe({
-      next: (res) => {
+    this.announcementService.deleteAnnouncement(annCode).subscribe({
+      next: (res:any) => {
         this.loadAnnouncements();
         this.errorMessage = '';
       },
-      error: (err) => {
+      error: (err:any) => {
         this.errorMessage = err.error?.message || 'Error deleting announcement';
       }
     });
@@ -287,7 +290,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   acceptRequest(request: Request): void {
     if (request.userId && request.annCode) {
       this.requestService.acceptOrRefuseRequest(request.annCode, request.userId, 'accept').subscribe({
-        next: (res) => {
+        next: (res:any) => {
           this.loadRequests(request.annCode);
           this.errorMessage = ''; 
         },
