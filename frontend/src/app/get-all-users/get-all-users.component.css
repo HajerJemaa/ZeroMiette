@@ -1,44 +1,43 @@
 .container-fluid {
-    background-color: #e0ebbe;
-    min-height: 100vh;
-  }
-  
-  h2 {
-    color: #19700c;
-    text-align: center;
-  }
-  
-  .page {
-    padding: 20px;
-    width: 1000px;
-    background-color: #e0ebbe;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
+  background-color: white;
+  min-height: 100vh;
+}
 
-  .table-responsive {
-    max-width: auto; /* Constrain table width */
-  }
-  
-  .table {
-    background-color: #abcd8c;
-    border-radius: 8px;
-    color: #19700c;
-    font-size: large;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .table th, .table td {
-    vertical-align: middle;
-  }
-  
-  .zebra {
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .zebra:hover {
-    background-color: #19700c;
-    color: #abcd8c;
-  }
-  
+h2 {
+  color: #040803;
+  text-align: center;
+}
+
+.page {
+  padding: 20px;
+  width: 1000px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table-responsive {
+  max-width: auto; /* Constrain table width */
+}
+
+.table {
+  background-color: white;
+  border-radius: 8px;
+  color: #040803;
+  font-size: large;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+a{
+  color: #19700c;
+  background-color: transparent;
+}
+
+.zebra:hover{
+  background-color: #19700c;
+  color: white;
+}
+

@@ -1,4 +1,4 @@
-import { Component,Input,OnInit} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
@@ -8,11 +8,12 @@ import { User } from '../model/user';
 
 @Component({
   selector: 'app-get-ann-by-state',
-  imports: [RouterOutlet,],
+  imports: [RouterOutlet],
   templateUrl: './get-ann-by-state.component.html',
   styleUrl: './get-ann-by-state.component.css'
 })
-export class GetAnnByStateComponent {
+
+export class GetAnnByStateComponent implements OnInit {
    id!:number ; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
@@ -36,9 +37,9 @@ export class GetAnnByStateComponent {
       
       this.errorMessage='';
       this.announcementService.getAnnByState(state).subscribe({
-        next: (response : any) => {
-          if (response.message === 'success'&& response.data.length > 0) {
-            this.announcement = response.data;
+        next: (response) => {
+          if (response.message === 'success'&& (response.data as Announcement[]).length > 0) {
+            this.announcement = response.data as Announcement[];
             // pour chaque annonce, on récupère le user_name
             this.announcement.forEach(ann => {
               this.isvisible[ann.annCode]=null;

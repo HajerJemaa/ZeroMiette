@@ -12,8 +12,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class GetUserComponent implements OnInit{
 user:User|undefined|null;
-fileName?:string
-fileUrl?:string | SafeResourceUrl
+fileName?:string;
+fileUrl?:string | SafeResourceUrl;
+loading:boolean = true;
+proofError:boolean = false;
+
 constructor (public us:UsersService,private route:ActivatedRoute,private r:Router,private trustUrl: DomSanitizer){}
 
 ngOnInit(): void {
@@ -22,54 +25,68 @@ ngOnInit(): void {
       next: (res)=>{
         if(res.message=="success"){
           this.user=res.data as User;
+          this.loading=false;
           if (this.user.proof)
-            this.fileUrl=this.getFileUrl();
+            console.log('Proof path:', this.user.proof);
+            this.fileUrl = this.getFileUrl();
         }else{
           alert(res.message+" to get user!!");
         }
       },
-      error: (error)=>alert("Api Error!!")
+      error: (err)=>{
+        alert("Api Error!!");
+        this.loading=false;
+      }
     })
 }
 
-getFileUrl(act?:string){
+onProofError(event: Event): void {
+  console.error('Failed to load proof:', this.user?.proof, event);
+  this.proofError = true;
+}
+
+openProofModal(): void {
+  const modal = new (window as any).bootstrap.Modal(document.getElementById('proofModal'));
+  modal.show();
+}
+
+getFileUrl(){
   this.fileName=this.user!.proof.split("/").pop();
-  if (act){
-    return this.trustUrl.bypassSecurityTrustResourceUrl(`http://localhost/backend/Proofs/${this.fileName}`);
-  }else{
-    return`http://localhost/backend/Proofs/${this.fileName}`
+  return this.trustUrl.bypassSecurityTrustResourceUrl(`assets/${this.fileName}`);
+  
+}
+
+acceptUser(){
+  if (this.user && confirm(`Are you sure you want to approve ${this.user.first_name} ${this.user.last_name}?`)) {
+    this.us.changeUserState({userId:this.user?.userId!}).subscribe({
+      next: (res)=>{
+        if(res.message=="failure"){
+          alert("Failure to accept user!!!");
+        }else this.r.navigate([`${this.user?.userId!}`])
+      },
+      error: (err)=>alert(err+"!!")
+      
+    })
   }
 }
 
-acceptUser(id:number){
-  this.us.changeUserState({userId:id}).subscribe({
-    next: (res)=>{
-      if(res.message=="failure"){
-        alert("Failure to update user!!!");
-      }
-    },
-    error: (err)=>{
-      alert("Api ERROR!!")
-      this.r.navigate(["/Administrator/getAllUsers/pending"]);
-    }
-  })
-}
-
-deleteUser(id:number){
-  this.us.deleteUser(id).subscribe({
-    next:(res)=>{
-      if (res.message=="success"){
-        alert("user "+this.user!.first_name+" "+this.user!.last_name+" was deleted successfully!!");
-        this.redir();
-      }else if(res.message=="failure"){
-        alert("failed to delete user "+this.user!.first_name+" "+this.user!.last_name+"!!");
-      }
-    },
-    error:(err)=> alert("Api ERROR!!")
-  })
+deleteUser(act:string){
+  if (this.user && confirm(`Are you sure you want to ${act} ${this.user.first_name} ${this.user.last_name}?`)) {
+    this.us.deleteUser(this.user.userId!).subscribe({
+      next:(res)=>{
+        if (res.message=="success"){
+          alert("user "+this.user!.first_name+" "+this.user!.last_name+" was "+act+" successfully!!");
+          this.redir();
+        }else if(res.message=="failure"){
+          alert("failed to "+act+" user "+this.user!.first_name+" "+this.user!.last_name+"!!");
+        }
+      },
+      error:(err)=> alert("Api ERROR!!")
+    })
+  }
 }
 
 redir(){
-  this.r.navigate([`/Administrator/getAllUsers/${this.user?.state}`])
+  this.r.navigate([`/Administrator/ProcessAccount/getAllUsers/${this.user?.state}`])
 }
 }

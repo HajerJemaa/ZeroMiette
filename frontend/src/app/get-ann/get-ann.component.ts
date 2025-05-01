@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../model/announcement';
 import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
@@ -11,7 +11,7 @@ import { User } from '../model/user';
   templateUrl: './get-ann.component.html',
   styleUrl: './get-ann.component.css'
 })
-export class GetAnnComponent {
+export class GetAnnComponent implements OnInit{
   ann:Announcement[]|undefined;
   usernames!: { [key: number]: string }
 

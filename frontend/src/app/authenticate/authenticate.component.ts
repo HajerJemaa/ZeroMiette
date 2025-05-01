@@ -1,4 +1,4 @@
-/*import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -80,4 +80,4 @@ export class AuthenticateComponent {
   SignOut(){
     this.as.signOut();
   }
-}*/
+}
