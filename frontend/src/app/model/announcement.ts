@@ -8,5 +8,5 @@ export interface Announcement {
     state: 'expired' | 'available'; // État de l'annonce
     qte:number;
     title:string;
-    recipient_type: 'animal' | 'human';
+    category: 'animal' | 'human';
   }
