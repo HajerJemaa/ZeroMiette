@@ -22,12 +22,27 @@ h1, h2, h3 {
   z-index: 1000;
 }
 
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .sidebar-header {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .nav-menu {
+  list-style-type: none;
+}
+
+.nav-menu:not(.bottom-menu) {
+  flex-grow: 0;
+}
+
+.bottom-menu {
+  margin-top: auto; /* Pushes the auth menu to the bottom */
   list-style-type: none;
 }
 
@@ -135,12 +150,9 @@ h1, h2, h3 {
 }
 
 @media (max-width: 768px) {
-  .sidebar-header{
-      display: none;
-  }
 
   .sidebar {
-    width: 70px;
+    width: 90px;
   }
   
   .nav-link span {
@@ -153,7 +165,7 @@ h1, h2, h3 {
   }
 
   .content {
-    margin-left: 70px;
+    margin-left: 90px;
   }
 
   .pending-users .clock-badge {
@@ -176,5 +188,9 @@ h1, h2, h3 {
 
   .nav-menu.block {
     display: block;
+  }
+
+  .bottom-menu {
+    margin-top: auto;
   }
 }
