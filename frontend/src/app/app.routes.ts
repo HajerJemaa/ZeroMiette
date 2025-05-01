@@ -16,9 +16,10 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
-    {path:'Reciever', component:DashbordDemandeurComponent},
+    {path:'app-dashbord-demandeur', component:DashbordDemandeurComponent},
     {path:'Donor', component:GetAnnByStateComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
+
     {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]}
 ];
