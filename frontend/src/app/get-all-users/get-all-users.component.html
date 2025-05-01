@@ -18,6 +18,9 @@
                     <th>Role</th>
                     <th>Details</th>
                 </tr>
+<<<<<<< HEAD
+               cd 
+=======
                 @for (i of users; track $index) {
                     <tr class="zebra">
                         <td>{{i.first_name}} {{i.last_name}}</td>
@@ -27,6 +30,7 @@
                         <td>{{i.role}}</td>
                         <td><a [routerLink]="['/Administrator/ProcessAccount/getUser',i.userId]" style="text-decoration: none;">...</a></td>
                     </tr>
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209
                 }
             </table>
         </div>
@@ -45,6 +49,11 @@
         </div>
 
 }
+<<<<<<< HEAD
+<router-outlet></router-outlet> 
+
+=======
 </div>
 </div>
 <router-outlet></router-outlet>
+>>>>>>> b3b1eb44337571faee42ca9e38faf60f1ec69209

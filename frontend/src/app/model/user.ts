@@ -6,6 +6,7 @@ export class User {
       public user_name: string,
       public email: string,
       public pwd: string,
+      public profile_pic: string |null,
       public region: string,
       public address: string,
       public number: string,
