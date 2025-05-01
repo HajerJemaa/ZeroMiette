@@ -7,9 +7,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component'
 import {DashbordDemandeurComponent} from './dashbord-demandeur/dashbord-demandeur.component'
-import { GetDonorAnnouncementsComponent } from './get-donor-announcements/get-donor-announcements.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
-import { RecieverComponent } from './reciever/reciever.component';
 import { DonorComponent } from './donor/donor.component';
 import { GetAnnComponent } from './get-ann/get-ann.component';
 import { administratorGuard } from './administrator.guard';
@@ -25,6 +23,4 @@ export const routes: Routes = [
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
     {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent}
-    {path: 'get-donor-announcements' , component:GetDonorAnnouncementsComponent}
-
 ];
