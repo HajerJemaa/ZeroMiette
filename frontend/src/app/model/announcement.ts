@@ -6,5 +6,7 @@ export interface Announcement {
     dateC: string;           // Date de création (timestamp en ISO string)
     deadline: any;        // Heure limite (format 'HH:mm:ss')
     state: 'expired' | 'available'; // État de l'annonce
-    qte:number
+    qte:number;
+    title:string;
+    recipient_type: 'animal' | 'human';
   }

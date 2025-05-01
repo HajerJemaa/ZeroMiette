@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
 import { UsersService } from '../services/users.service';
-//import { RequestService } from '../services/request.service';
+import { RequestService } from '../services/request.service';
 import { User } from '../model/user';
 
 @Component({
@@ -13,14 +13,15 @@ import { User } from '../model/user';
   styleUrl: './get-ann-by-state.component.css'
 })
 export class GetAnnByStateComponent {
-   id:number=3; 
+   id!:number ; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
-   description = '';
-   selectedAnnCode: number | null = null;
+   @Input()description!:string ;
+   //@Input()quantity!:string;
+   //selectedAnnCode: number | null = null;
    isvisible: { [annCode: string]: boolean | null } = {};
 
-   errorMessage: string = '';
+   errorMessage!:string;
   
     constructor(
       private announcementService: AnnouncementService,
@@ -42,8 +43,8 @@ export class GetAnnByStateComponent {
             this.announcement.forEach(ann => {
               this.isvisible[ann.annCode]=null;
               this.userService.getOneUser(ann.donId).subscribe({
-                next: (user) => {
-                  this.usernames[ann.donId] = user.user_name;
+                next: (res) => {
+                  this.usernames[ann.donId] = (res.data as User).user_name;
                },
                error: () => {
                 this.usernames[ann.donId] = 'Utilisateur inconnu';
@@ -54,7 +55,7 @@ export class GetAnnByStateComponent {
             this.errorMessage = "Aucune annonce trouvée.";
           }
         },
-        error: (err) => {console.log(err);
+        error: () => {
           this.errorMessage = "Erreur lors du chargement des annonces.";
         }
       

@@ -5,7 +5,7 @@
   }
   @else if (announcement.length > 0) {
     <div class="row">
-      @for (ann of announcement; track ann.annCode) {
+      @for (ann of announcement; track ann.annCode ) {
         <div class="col-md-6 ">
           <div class="card shadow-sm" style="border: 2px solid #1f4d36;">
             <img src="https://media.istockphoto.com/id/1144823591/photo/spaghetti-in-a-dish-on-a-white-background.jpg?s=612x612&w=0&k=20&c=SeEWmJfPQlX1zVUHPKjL-cgYeMs9cZ97-kdZMm7feA4=" class="card-img-top" alt="Image de l'annonce">
@@ -14,7 +14,7 @@
               <!-- Nom du donneur et Délai -->
               <div class="row" >
                 <div class="col-7">
-                  <h5 class="card-title" style="color: #380303;">Restaurant Le Pecheur</h5>
+                  <h5 class="card-title" style="color: #380303;">{{ann.title}}</h5>
                 </div>
                 <div class="col-2"></div>
                 <div class="col-3  text-end">
@@ -27,7 +27,7 @@
               <div class="row">
                 <div class="col">
                   <strong style="color: #1f4d36;">Catégorie :</strong>
-                  <p>humain</p>
+                  <p>{{ann.recipient_type}}</p>
                 </div>
               </div>
 
@@ -41,7 +41,7 @@
               <div class="row">
                 <div class="col">
                   <strong style="color: #1f4d36;">Quantité :</strong>
-                  <p>1 kg</p> <!-- Affichage de la quantité -->
+                  <p>{{ann.qte}}kg</p> <!-- Affichage de la quantité -->
                 </div>
               </div>
 
@@ -59,7 +59,7 @@
                       <label>Add Request:</label>
                     </div>
                     <div class="row">
-                      <textarea></textarea>
+                      <textarea [value]="description"></textarea>
                     </div>
                     <button type="button" class="btn btn-outline-info" (click)="addRequest(ann.annCode)">Envoyer</button>
                     <button type="button" class="btn btn-outline-danger" (click)="getAnnByState('available')">Annuler</button>

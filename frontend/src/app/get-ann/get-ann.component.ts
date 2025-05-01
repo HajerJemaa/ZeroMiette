@@ -19,7 +19,7 @@ export class GetAnnComponent {
 
   ngOnInit(): void {
     this.usernames={};
-    this.as.GetAnnByState('available').subscribe({
+    this.as.getAnnByState('available').subscribe({
       next:(res)=>{
         if (res.message=="success"){
           this.ann=res.data as Announcement[],

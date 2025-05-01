@@ -11,7 +11,7 @@ export class AnnouncementService {
   
     httpclient = inject(HttpClient);
 
-    getAnnByState(state:String){
+    getAnnByState(state:string){
       //if(id==undefined)
       return this.httpclient.get<Result>(this.api+"?state="+state);
     //else
