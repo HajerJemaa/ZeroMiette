@@ -4,8 +4,8 @@ require_once("../connexion.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($data["annCode"], $data["title"],$data["content"], $data["deadline"],$data["quantity"])) {
-    $sql = "UPDATE announcement SET title = :title, content = :content, img = :img, deadline = :deadline ,quantity= :quantity WHERE annCode = :annCode";
+if (isset($data["annCode"], $data["title"],$data["content"], $data["deadline"],$data["quantity"],$data["category"])) {
+    $sql = "UPDATE announcement SET title = :title, content = :content, img = :img, deadline = :deadline ,quantity= :quantity ,category= :category WHERE annCode = :annCode";
     $stmt = $connexion->prepare($sql);
     
     $stmt->execute([
@@ -15,6 +15,7 @@ if (isset($data["annCode"], $data["title"],$data["content"], $data["deadline"],$
         ":img" => isset($data["img"]) ? $data["img"] : null,
         ":deadline" => $data["deadline"],
         ":quantity" => $data["quantity"],
+        ":category" => $data["category"]
         
     ]);
 

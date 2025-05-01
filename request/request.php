@@ -18,10 +18,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }else if (isset($_GET['annCode']) && isset($_GET['userId'])) {
             require("checkIfRequestExists.php");
         } 
+        elseif (isset($_GET['annCode'])) {
+            require("getRequestByAnnCode.php");
+        }
         break;
 
     case 'PUT':
-        require("updateRequest.php"); 
+        if (isset($_GET['annCode']) && isset($_GET['requestId']) && isset($_GET['state'])) {
+            require("acceptRequest.php");
+        } else {
+            require("updateRequest.php");
+        }
         break;
 
     case 'DELETE':

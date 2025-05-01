@@ -3,8 +3,8 @@ require_once("../connexion.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($data["donId"], $data["title"],$data["content"], $data["deadline"],$data["quantity"])) {
-    $sql = "INSERT INTO announcement (donId,title ,content, img, deadline,quantity) VALUES (:donId,:title, :content, :img, :deadline,:quantity)";
+if (isset($data["donId"], $data["title"],$data["content"], $data["deadline"],$data["quantity"],$data["category"])) {
+    $sql = "INSERT INTO announcement (donId,title ,content, img, deadline,quantity,category) VALUES (:donId,:title, :content, :img, :deadline,:quantity,:category)";
     $stmt = $connexion->prepare($sql);
     
     $stmt->execute([
@@ -13,7 +13,8 @@ if (isset($data["donId"], $data["title"],$data["content"], $data["deadline"],$da
         ":content" => $data["content"],
         ":img" => isset($data["img"]) ? $data["img"] : null,
         ":deadline" => $data["deadline"],
-        ":quantity" => $data["quantity"]
+        ":quantity" => $data["quantity"],
+        ":category" => $data["category"]
     ]);
 
     echo json_encode(["message" => "Announcement created successfully"]);
