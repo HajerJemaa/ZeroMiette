@@ -14,13 +14,13 @@ import { administratorGuard } from './administrator.guard';
 
 export const routes: Routes = [
     {path:'', component:AccueilComponent},    
-    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent,},
-    {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent},
+    {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent, canActivate:[administratorGuard]},
+    {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
     {path:'Reciever', component:DashbordDemandeurComponent},
-    {path:'Donor', component:DonorComponent},
+    {path:'Donor', component:GetAnnByStateComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
-    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent}
+    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]}
 ];

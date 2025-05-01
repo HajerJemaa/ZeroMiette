@@ -7,20 +7,22 @@ export const administratorGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
 
-  if (token){
-    try{
-      const decoded:Mytoken=jwtDecode(token);
-      const now = Math.floor(Date.now()/1000);
+  if (token) {
+    try {
+      const decoded: Mytoken = jwtDecode(token);
+      const now = Math.floor(Date.now() / 1000);
 
-      if(decoded.exp>now && decoded.role=="administrator"){
+      if (decoded.exp > now && decoded.role === 'administrator') {
         return true;
-      }else{
-        localStorage.removeItem('token');
       }
-    }catch (e){
-      console.error('Invalid token', e)
+      localStorage.removeItem('token');
+      router.navigate(['Authentificate/SignIn']);
+      return false;
+    } catch (e) {
+      console.error('Invalid token', e);
+      localStorage.removeItem('token');
     }
-  }  
+  }
   router.navigate(['Authentificate/SignIn']);
   return false;
 };
