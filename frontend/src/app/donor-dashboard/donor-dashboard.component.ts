@@ -274,11 +274,15 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
 
   deleteAnnouncement(annCode:string):void{
     this.announcementService.deleteAnnouncement(annCode).subscribe({
+<<<<<<< HEAD
       next: (res:any) => {
+=======
+      next: (res) => {
+>>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab
         this.loadAnnouncements();
         this.errorMessage = '';
       },
-      error: (err:any) => {
+      error: (err) => {
         this.errorMessage = err.error?.message || 'Error deleting announcement';
       }
     });
