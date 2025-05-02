@@ -14,18 +14,18 @@ import { Announcement } from '../model/announcement';
 })
 export class GetUserRequestsByStateComponent{
   requests: Request[] = [];
-  userId: number=3;
+  userId!: number;
   errorMessage: string = '';
   annonces: { [key: string]: Announcement } = {};
   isvisible: { [annCode: string]: boolean | null } = {};
 
   constructor(
     private requestService: RequestService,
-    //private usersService:UsersService,
+    private usersService:UsersService,
     private announcementService:AnnouncementService) {}
-  /*ngOnInit(){
+  ngOnInit(){
     this.userId=this.usersService.getCurrentUserId();
-  }*/
+  }
   getUserRequestsByState(state: string): void {
     this.errorMessage='';
     this.requestService.getUserRequestsByState(this.userId, state).subscribe({

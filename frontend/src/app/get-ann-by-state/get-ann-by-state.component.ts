@@ -14,7 +14,7 @@ import { User } from '../model/user';
 })
 
 export class GetAnnByStateComponent implements OnInit {
-   id:number=3; 
+   id!:number; 
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
    description!:string ;
@@ -30,7 +30,7 @@ export class GetAnnByStateComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getAnnByState('available'); // Appel automatique au chargement
-   // this.id=this.userService.getCurrentUserId();
+    this.id=this.userService.getCurrentUserId();
   }
   getAnnByState(state: string): void {
     
