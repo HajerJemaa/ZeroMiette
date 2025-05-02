@@ -23,7 +23,7 @@ $user_name=$putData['user_name'];
 
 $hashedpwd = password_hash($pwd, PASSWORD_BCRYPT);
 
-$reqsql="Update users set password=:pass, user_name=:us where userid=:id";
+$reqsql="Update users set pwd = :pass, user_name = :un where userid = :id";
 
 $rp =$connexion->prepare($reqsql); 
 
