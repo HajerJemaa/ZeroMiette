@@ -1,28 +1,22 @@
 
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
 })
 export class AddUserComponent {
-  error?:string;
+  error:string|null|undefined;
+  mess:string|null|undefined;
   file!:File;
-  signUpForm= new FormGroup({
-    ln: new FormControl('',Validators.required),
-    fn: new FormControl('',Validators.required),
-    mai: new FormControl('',[Validators.required,Validators.email]),
-    region: new FormControl('',Validators.required),
-    add: new FormControl('',Validators.required),
-    num: new FormControl('',[Validators.required,Validators.pattern('[1-9]{1}[0-9]{7}')]),
-    rad: new FormControl('',Validators.required),
-    desc: new FormControl(''),
-  })
+  formValidated:boolean=false;
+  signUpForm!: FormGroup;
+  
    getFile(event:Event){
     const inputFile=event.target as HTMLInputElement;
     if (inputFile.files && inputFile.files.length > 0){
@@ -30,13 +24,29 @@ export class AddUserComponent {
     }
    }
 
-  constructor(private us:UsersService,private route:Router){}
+  constructor(private us:UsersService, private route:Router, private fb: FormBuilder){
+    this.signUpForm= this.fb.group({
+      ln: ['',Validators.required,Validators.minLength(2)],
+      fn: ['',Validators.required,Validators.minLength(2)],
+      mai: ['',[Validators.required,Validators.email]],
+      region: ['',Validators.required],
+      add: ['',Validators.required],
+      num: ['',[Validators.required,Validators.pattern(/^(2|4|5|9)\d{7}$/)]],
+      rad: ['',Validators.required],
+      desc: ['']
+    })
+  }
 
+  
   signUp(){
-    if (this.signUpForm.invalid){
+    this.formValidated = true;
+
+    if (this.signUpForm.invalid) {
       this.signUpForm.markAllAsTouched();
       return;
     }
+    this.error = null;
+
     const user= new FormData();
     user.append('ln', this.signUpForm.value.ln!);
     user.append('fn', this.signUpForm.value.fn!);
@@ -51,14 +61,14 @@ export class AddUserComponent {
     user.append('proof',this.file);
 
     this.us.addUser(user).subscribe({
-      next: (mess)=>{
-        if (mess.message!="success"){
-          this.error=mess.message;
+      next: (res)=>{
+        if (res.message!="success"){
+          this.error=res.message;
         }else{
-          this.error="Would you please wait till your account creation get accepted by the admin";
+          this.mess="Would you please wait till your account creation get accepted by the admin";
         }
       },
-      error:(err)=>this.error="Api ERROR!!"
+      error:(err)=>this.error="Api ERROR!! : "+err
     })
   }
 
@@ -71,5 +81,14 @@ export class AddUserComponent {
   redir(){
     this.route.navigate(["/"]);
   }
+
+  get lastName() { return this.signUpForm.get('ln'); }
+  get firstName() { return this.signUpForm.get('fn'); }
+  get email() { return this.signUpForm.get('mai'); }
+  get region() { return this.signUpForm.get('region'); }
+  get address() { return this.signUpForm.get('add'); }
+  get number() { return this.signUpForm.get('num'); }
+  get role() { return this.signUpForm.get('rad'); }
+
 }
 

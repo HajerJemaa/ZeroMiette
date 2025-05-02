@@ -4,5 +4,5 @@ export interface Request {
   description: string;
   dateC: string;
   state: 'pending' | 'accepted' | 'refused';
-  quantity: string;
+  quantity: number;
 }

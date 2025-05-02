@@ -31,8 +31,13 @@
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.0",
     "@types/jasmine": "~5.1.0",
+<<<<<<< HEAD
     "@types/jwt-decode": "^2.2.1",
     "@types/node": "^22.15.3",
+=======
+    "@types/node": "^22.15.3",
+    "@types/jwt-decode": "^2.2.1",
+>>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

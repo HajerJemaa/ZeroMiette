@@ -4,8 +4,6 @@ import { GetUserComponent } from './get-user/get-user.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { GetUserRequestsByStateComponent } from './get-user-requests-by-state/get-user-requests-by-state.component';
 import {GetAnnByStateComponent}from './get-ann-by-state/get-ann-by-state.component';
-//import { RecieverComponent } from './reciever/reciever.component';
-import { DonorComponent } from './donor/donor.component';
 import { DonorDashboardComponent } from './donor-dashboard/donor-dashboard.component';
 import { GetAllUsersComponent } from './get-all-users/get-all-users.component';
 import { DashbordDemandeurComponent } from './dashbord-demandeur/dashbord-demandeur.component'
@@ -18,11 +16,10 @@ export const routes: Routes = [
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
-    {path:'Reciever', component:DashbordDemandeurComponent},
+    {path:'app-dashbord-demandeur', component:DashbordDemandeurComponent},
     {path:'Donor', component:GetAnnByStateComponent},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent },
     {path:'get-ann-by-state', component:GetAnnByStateComponent},
     {path:'donor-dashboard',component:DonorDashboardComponent},
     {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]}
-
 ];
