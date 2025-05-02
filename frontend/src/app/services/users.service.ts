@@ -37,6 +37,14 @@ export class UsersService {
     return this.httpclient.put(this.api,cred);
   }
 
+  updateUser(data:any){
+    return this.httpclient.put(this.api,data)
+  }
+
+  updateProof(data:any){
+    return this.httpclient.put(this.api,data)
+  }
+
   getCurrentUserRole(){
     const token = localStorage.getItem('token');
     if (token) {
