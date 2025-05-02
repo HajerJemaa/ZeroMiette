@@ -1,0 +1,94 @@
+/* Style général des cartes */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 2px solid #1f4d36; /* Bordure verte autour de la carte */
+  }
+  
+  /* Image de l'annonce */
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0; /* Coins arrondis uniquement en haut */
+  }
+  
+  /* Corps de la carte avec fond léger */
+  .card-body {
+    background-color: #f8f9f6; /* Fond léger similaire à celui du dashboard */
+    padding: 20px;
+    border-radius: 0 0 8px 8px; /* Coins arrondis uniquement en bas */
+  }
+  
+  /* Titre de l'annonce (nom du donneur) */
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1f4d36; /* Couleur verte pour le titre */
+    margin-bottom: 10px;
+  }
+  
+  /* Délai de l'annonce */
+  .btn-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  /* Catégorie, Description et Date de création */
+  .card-text strong {
+    color: #1f4d36; /* Vert foncé pour les titres */
+  }
+  
+  .card-text {
+    font-size: 14px;
+    color: #555; /* Gris foncé pour le texte */
+  }
+  
+  /* Boutons */
+  .btn-outline-info {
+    border-color: #1f4d36;
+    color: #1f4d36;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  
+  .btn-outline-info:hover {
+    background-color: #1f4d36;
+    color: white;
+  }
+  
+  .btn-outline-danger {
+    border-color: #f8d7da;
+    color: #721c24;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* Espacement entre les éléments */
+  .row.mb-3 {
+    margin-bottom: 15px;
+  }
+  
+  /* Réactivité - ajustements pour petites résolutions d'écran */
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 15px;
+    }
+  
+    .btn {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }
+  

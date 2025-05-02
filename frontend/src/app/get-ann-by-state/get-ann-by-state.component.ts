@@ -18,8 +18,7 @@ export class GetAnnByStateComponent implements OnInit {
    announcement: Announcement[] = [];
    usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
    description!:string ;
-   //@Input()quantity!:string;
-   //selectedAnnCode: number | null = null;
+   quantity!:number;
    isvisible: { [annCode: string]: boolean | null } = {};
 
   errorMessage!:string;
@@ -75,7 +74,7 @@ export class GetAnnByStateComponent implements OnInit {
 
   }
   addRequest(code :string){
-    this.requestService.addRequest( code , this.id, this.description).subscribe({
+    this.requestService.addRequest( code , this.id, this.description, this.quantity).subscribe({
       next: (res ) => {
 
         if (res.message == 'success') {
@@ -92,7 +91,6 @@ export class GetAnnByStateComponent implements OnInit {
 
   } 
 }
-function oninputnput(): (target: GetAnnByStateComponent, propertyKey: "description") => void {
-  throw new Error('Function not implemented.');
-}
+
+
 
