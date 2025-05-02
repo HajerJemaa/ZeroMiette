@@ -30,11 +30,11 @@
                 placeholder="Enter your full name"
                 required>
               <div class="invalid-feedback">
-                @if (name?.errors?.['required']) {
-                  <span>Full name is required.</span>
-                } @else if (name?.errors?.['minlength']) {
-                  <span>Full name must be at least 2 characters long.</span>
-                }
+                  @if (name?.errors?.['required']) {
+                    <span>Full name is required.</span>
+                  } @else if (name?.errors?.['minlength']) {
+                    <span>Full name must be at least 2 characters long.</span>
+                  }
               </div>
             </div>
 
@@ -217,7 +217,7 @@
 
           <!-- Sign In Link -->
           <div class="text-center mt-3">
-            <p>Already have an account? <a [routerLink]="['/User/Authenticate/SignIn']" class="text-primary">Sign In</a></p>
+            <p>Already have an account? <a routerLink="/User/Authenticate/SignIn" style="text-decoration: none;">Sign in</a></p>
           </div>
         </div>
       </div>
