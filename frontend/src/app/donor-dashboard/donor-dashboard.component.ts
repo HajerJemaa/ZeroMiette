@@ -132,18 +132,6 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
                 console.error(`Error fetching user ${request.userId}:`, err);
                 return of({ data: null });
               }),
-<<<<<<< HEAD
-              map(res => {
-                const user = res.data as User;
-                return {
-                  userId: request.userId,
-                  username: user.user_name || 'Unknown',
-                  email: user.email || '',
-                  number: user.number || '',
-                  profile_pic: user.profile_pic || '/assets/default-profile.jpg'
-                };
-              })
-=======
               map(res => ({
                 userId: request.userId,
                 username: (res.data as User).user_name || 'Unknown',
@@ -151,7 +139,6 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
                 number: (res.data as User).number || '',
                 profile_pic: (res.data as User).profile_pic || '/assets/default-profile.jpg'
               }))
->>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
             )
           );
   
@@ -287,11 +274,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
 
   deleteAnnouncement(annCode:string):void{
     this.announcementService.deleteAnnouncement(annCode).subscribe({
-<<<<<<< HEAD
-      next: (res:any) => {
-=======
       next: (res) => {
->>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
         this.loadAnnouncements();
         this.errorMessage = '';
       },
