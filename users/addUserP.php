@@ -1,6 +1,13 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 header("content-type:application/json");
+
 require_once("../connexion.php");
+
 $response=["message"=>"","data"=>null];
 
 $putData=json_decode(file_get_contents("php://input"),true);
@@ -16,13 +23,13 @@ $user_name=$putData['user_name'];
 
 $hashedpwd = password_hash($pwd, PASSWORD_BCRYPT);
 
-$reqsql="Update users set password:=pass, user_name:=us where userid=:id";
+$reqsql="Update users set pwd = :pass, user_name = :un where userid = :id";
 
 $rp =$connexion->prepare($reqsql); 
 
 $rp->bindParam(":id",$id);
 $rp->bindParam(":un",$user_name);
-$rp->bindParam(":pwd",$hashedpwd);
+$rp->bindParam(":pass",$hashedpwd);
 
 $r=$rp->execute();
 
