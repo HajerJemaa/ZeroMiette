@@ -25,29 +25,29 @@ $Type=$_FILES['proof']['type'];
 $pNameSplitExten=explode(".",$pName);
 $pExtention=strtolower(end($pNameSplitExten));
 
-if ($pExtention!="pdf"||$pExtention!="jpg"||$pExtention!="png"){
+if (($pExtention!="pdf")&&($pExtention!="jpg")&&($pExtention!="png")){
 
-    $response["message"]="Proof format is not supported please enter a pdf, a jpg or a png";
+    $response["message"]="Proof format : ".$pExtention." is not supported please enter a pdf, a jpg or a png";
     
 }else{
-    $newpName=uniqid().'.'.$pExtention;
-    $destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
+    
+    $reqcheck="select * from users where email = :em";
+    $checkEmail = $connexion->prepare($reqcheck);
+    $checkEmail->bindParam(":em", $email);
+    $checkEmail->execute();
+    $emailExists = $checkEmail->fetchAll(PDO::FETCH_ASSOC);
 
-    $up=move_uploaded_file($tem_path,$destp_path);
+    if ($emailExists) {
 
-    if ($up){
+        $response["message"] = "Email already exists!";
 
-        $reqcheck="select * from users where email = :em";
-        $checkEmail = $connexion->prepare($reqcheck);
-        $checkEmail->bindParam(":em", $email);
-        $checkEmail->execute();
-        $emailExists = $checkEmail->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $newpName=uniqid().'.'.$pExtention;
+        $destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
 
-        if ($emailExists) {
+        $up=move_uploaded_file($tem_path,$destp_path);
 
-            $response["message"] = "Email already exists!";
-
-        } else {
+        if ($up){
             $reqsql="insert into users (last_name,first_name,email,region,address,number,role,proof,description) values (:ln,:fn,:em,:reg,:add,:num,:r,:p,:d)";
 
             $rp =$connexion->prepare($reqsql); 
@@ -69,9 +69,9 @@ if ($pExtention!="pdf"||$pExtention!="jpg"||$pExtention!="png"){
             }else {
                 $response["message"]="failure to create account!!!";
             }
+        }else{
+            $response["message"]="Proof was not uploaded";
         }
-    }else{
-        $response["message"]="Proof was not uploaded";
     }
 }
 echo json_encode($response);
