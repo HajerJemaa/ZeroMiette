@@ -51,23 +51,27 @@
                   <strong style="color: #1f4d36;">Date de création :</strong>
                   <span>{{ ann.dateC }}</span>
                 </div>
-                <div class="col-4 text-end">
+              </div>
                   @if ((isvisible[ann.annCode]==null)){
+                    <div class="col-4 text-end">
                     <button class="btn btn-outline-info" (click)="checkDemandeur(ann.annCode)">Envoyer demande</button>
-                  } @else if(isvisible[ann.annCode]==true){
+                    </div>
+                  }@else if(isvisible[ann.annCode]==true){
+               
                     <div class="row">
                       <label>Add Request:</label>
                     </div>
                     <div class="row">
-                      <textarea [value]="description"></textarea>
+                      <textarea (input)="description = $any($event.target).value" ></textarea>
+                      
                     </div>
                     <button type="button" class="btn btn-outline-info" (click)="addRequest(ann.annCode)">Envoyer</button>
                     <button type="button" class="btn btn-outline-danger" (click)="getAnnByState('available')">Annuler</button>
                   } @else {
                     <div class="alert alert-danger" role="alert">Vous avez déjà envoyé une demande pour cette annonce.</div>
                   }
-                </div>
-              </div>
+              
+           
 
             </div>  
           </div>
