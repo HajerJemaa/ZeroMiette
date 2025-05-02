@@ -1,4 +1,4 @@
-import { Component,Input,OnInit} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AnnouncementService } from '../services/announcement.service';
 import {Announcement} from'../model/announcement'
@@ -15,8 +15,8 @@ import { User } from '../model/user';
 
 export class GetAnnByStateComponent implements OnInit {
    id!:number; 
-   announcement: Announcement[] = [];
-   usernames: { [key: number]: string } = {}; // clé = donId, valeur = user_name
+   announcement!: Announcement[];
+   usernames!: { [key: number]: string }; // clé = donId, valeur = user_name
    description!:string ;
    quantity!:number;
    isvisible: { [annCode: string]: boolean | null } = {};

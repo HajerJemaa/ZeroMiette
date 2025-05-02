@@ -5,11 +5,6 @@ import { RequestResponse } from '../model/requestResponse';
 import { Observable } from 'rxjs';
 import { Result } from '../model/result';
 
-<<<<<<< HEAD
-import {Result} from '../model/result'
-//import {}
-=======
->>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
 @Injectable({
   providedIn: 'root'
 })
@@ -40,12 +35,6 @@ export class RequestService {
     return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
-<<<<<<< HEAD
-
-  //public getUserRequestsByState(userId: string, state: string): Observable<RequestResponse> {
-   // return this.http.get<RequestResponse>(`${this.baseUrl}?userId=${userId}&state=${state}`);}
-=======
->>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
 
  
   public getAnnReqByannCodeAndState(annCod: string, state: string): Observable<RequestResponse> {
@@ -57,8 +46,3 @@ export class RequestService {
   }
   
 }
-<<<<<<< HEAD
-  
- 
-=======
->>>>>>> 150a4a1849cecffd24f2772d401c3a7684c2c67f
