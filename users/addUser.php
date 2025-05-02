@@ -25,36 +25,54 @@ $Type=$_FILES['proof']['type'];
 $pNameSplitExten=explode(".",$pName);
 $pExtention=strtolower(end($pNameSplitExten));
 
-$newpName=uniqid().'.'.$pExtention;
-$destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
+if ($pExtention!="pdf"||$pExtention!="jpg"||$pExtention!="png"){
 
-$up=move_uploaded_file($tem_path,$destp_path);
-
-if ($up){
-    $reqsql="insert into users (last_name,first_name,email,region,address,number,role,proof,description) values (:ln,:fn,:em,:reg,:add,:num,:r,:p,:d)";
-
-    $rp =$connexion->prepare($reqsql); 
-
-    $rp->bindParam(":ln",$last_Name);
-    $rp->bindParam(":fn",$first_Name);
-    $rp->bindParam(":em",$email);
-    $rp->bindParam(":reg",$region);
-    $rp->bindParam(":add",$address);
-    $rp->bindParam(":num",$number);
-    $rp->bindParam(":r",$role);
-    $rp->bindParam(":p",$destp_path);
-    $rp->bindParam(":d",$description);
-
-    $r=$rp->execute();
-
-    if ($r){
-        $response["message"]="success";
-    }else {
-        $response["message"]="failure to create account!!!";
-    }
+    $response["message"]="Proof format is not supported please enter a pdf, a jpg or a png";
+    
 }else{
-    $response["message"]="Proof was not uploaded";
-}
+    $newpName=uniqid().'.'.$pExtention;
+    $destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
 
+    $up=move_uploaded_file($tem_path,$destp_path);
+
+    if ($up){
+
+        $reqcheck="select * from users where email = :em";
+        $checkEmail = $connexion->prepare($reqcheck);
+        $checkEmail->bindParam(":em", $email);
+        $checkEmail->execute();
+        $emailExists = $checkEmail->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($emailExists) {
+
+            $response["message"] = "Email already exists!";
+
+        } else {
+            $reqsql="insert into users (last_name,first_name,email,region,address,number,role,proof,description) values (:ln,:fn,:em,:reg,:add,:num,:r,:p,:d)";
+
+            $rp =$connexion->prepare($reqsql); 
+
+            $rp->bindParam(":ln",$last_Name);
+            $rp->bindParam(":fn",$first_Name);
+            $rp->bindParam(":em",$email);
+            $rp->bindParam(":reg",$region);
+            $rp->bindParam(":add",$address);
+            $rp->bindParam(":num",$number);
+            $rp->bindParam(":r",$role);
+            $rp->bindParam(":p",$destp_path);
+            $rp->bindParam(":d",$description);
+
+            $r=$rp->execute();
+
+            if ($r){
+                $response["message"]="success";
+            }else {
+                $response["message"]="failure to create account!!!";
+            }
+        }
+    }else{
+        $response["message"]="Proof was not uploaded";
+    }
+}
 echo json_encode($response);
 ?>
