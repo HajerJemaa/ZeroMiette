@@ -30,14 +30,14 @@ $r=$rp->execute();
 
 $r=$rp->fetch(PDO::FETCH_ASSOC);
 
-$state="accepted";
 
 if ($r){
     $state=$r["state"];
+
     if($state=="pending"){
         echo json_encode(["error"=>'it seems you have changed your proof recently please wait for the administrator to validate your account']);
     }else if((password_verify($data["password"],$r["pwd"]))||($data["password"]===$r["pwd"])){
-        $secretKey = getenv("JWT_SECRET"); 
+        $secretKey = "only-I-know"; 
         $issued = time();
         $expire = $issued+3600;
         $tokendata=["issAt"=>$issued,"exp"=>$expire,"userId"=>$r["userId"],"email"=>$data["email"],"role"=>$r["role"],];

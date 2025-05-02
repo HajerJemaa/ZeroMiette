@@ -5,26 +5,41 @@ require_once("../connexion.php");
 
 $putData=json_decode(file_get_contents("php://input"),true);
 
-if (!isset($putData['userId'])) {
-    $response["message"] = "Missing user ID";
-    echo json_encode($response);
-    exit;
-}
-
 $userId = $putData['userId'];
 
-$reqsql = "UPDATE users SET state = 'accepted' WHERE userId = :id";
+if ((isset($putData['pwd']))&&($putData['pwd']!=null)){
+    $pwd=$putData['pwd'];
 
-$rp = $connexion->prepare($reqsql);
+    $hashedpwd = password_hash($pwd, PASSWORD_BCRYPT);
 
-$rp->bindParam(':id', $userId);
-$r=$rp->execute();
 
-if ($r) {
-    $response["message"] = "success";
-} else {
-    $response["message"] = "failure";
+    $reqsql = "UPDATE users SET state = 'accepted' , pwd = :pwd WHERE userId = :id";
+    $rp = $connexion->prepare($reqsql);
+
+    $rp->bindParam(':id', $userId);
+    $rp->bindParam(':pwd', $hashedpwd);
+
+    $r=$rp->execute();
+
+    if ($r) {
+        $response["message"] = "success";
+    } else {
+        $response["message"] = "failure";
+    }
+}else{
+    $reqsql = "UPDATE users SET state = 'pending' WHERE userId = :id";
+    $rp = $connexion->prepare($reqsql);
+
+    $rp->bindParam(':id', $userId);
+    $r=$rp->execute();
+
+    if ($r) {
+        $response["message"] = "success";
+    } else {
+        $response["message"] = "failure";
+    }
 }
+
 
 echo json_encode($response);
 ?>
