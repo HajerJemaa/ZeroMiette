@@ -10,8 +10,10 @@ import { DashbordDemandeurComponent } from './dashbord-demandeur/dashbord-demand
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { GetAnnComponent } from './get-ann/get-ann.component';
 import { administratorGuard } from './administrator.guard';
+import { UpdateUserComponent } from './update-user/update-user.component';
 export const routes: Routes = [
-    {path:'', component:AccueilComponent},    
+    {path:'', component:AccueilComponent}, 
+    {path:'Administrator', component:UpdateUserComponent, canActivate:[administratorGuard]},   
     {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent, canActivate:[administratorGuard]},
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},

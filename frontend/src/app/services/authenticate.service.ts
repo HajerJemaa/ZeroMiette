@@ -36,6 +36,9 @@ export class AuthenticateService {
     return !!localStorage.getItem('token');
   }
 
+  changePassword(cred:any){
+    return this.httpclient.put(this.api,cred)
+  }
 
   getToken():string|null{
     return localStorage.getItem('token');
