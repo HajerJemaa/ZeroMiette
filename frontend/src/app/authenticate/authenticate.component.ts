@@ -53,7 +53,7 @@ export class AuthenticateComponent {
               window.location.reload();
             });
           }else if (res.user.role=="reciever"){
-            this.router.navigate(['/Reciever']).then(() => {
+            this.router.navigate(['/app-dashbord-demandeur']).then(() => {
               window.location.reload();
             });
           }else if (res.user.role=="administrator"){

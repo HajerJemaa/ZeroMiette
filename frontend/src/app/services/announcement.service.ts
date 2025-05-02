@@ -13,10 +13,7 @@ export class AnnouncementService {
     httpclient = inject(HttpClient);
 
     getAnnByState(state:string){
-      //if(id==undefined)
       return this.httpclient.get<Result>(this.api+"?state="+state);
-    //else
-     //return this.httpclient.get<any[]>(this.api+"?state="+state+"&donId="+id);
     }
 
     getAnnByDonorId(donId: number) {
@@ -37,5 +34,8 @@ export class AnnouncementService {
 
     deleteAnnouncement(code:string){
       return this.httpclient.delete<any>(`${this.api}?annCode=${code}`);
+    }
+    getOneAnnouncement(code:string){
+      return this.httpclient.get<Result>(`${this.api}?annCode=${code}`);
     }
 }
