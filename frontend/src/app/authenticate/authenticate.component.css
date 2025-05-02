@@ -14,7 +14,11 @@
 }
 
 a:hover{
-    color: #114da7  !important;
+    color: #1B5E20  !important;
+}
+
+a{
+    color: #28a745;
 }
 
 .form-control:valid:focus {
