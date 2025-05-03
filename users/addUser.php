@@ -44,6 +44,7 @@ if (($pExtention!="pdf")&&($pExtention!="jpg")&&($pExtention!="png")){
     } else {
         $newpName=uniqid().'.'.$pExtention;
         $destp_path='C:/xampp/htdocs/backend/Proofs/proof'.$newpName;
+        $proofUrl='http://localhost/backend/proofs/proof'.$newpName;
 
         $up=move_uploaded_file($tem_path,$destp_path);
 
@@ -59,7 +60,7 @@ if (($pExtention!="pdf")&&($pExtention!="jpg")&&($pExtention!="png")){
             $rp->bindParam(":add",$address);
             $rp->bindParam(":num",$number);
             $rp->bindParam(":r",$role);
-            $rp->bindParam(":p",$destp_path);
+            $rp->bindParam(":p",$proofUrl);
             $rp->bindParam(":d",$description);
 
             $r=$rp->execute();

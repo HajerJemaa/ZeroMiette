@@ -14,9 +14,10 @@ $rp->bindParam(":t",$x);
 $r=$rp->execute();
 $r=$rp->fetch(PDO::FETCH_ASSOC);
 
-$p=$r['proof'];
+
 
 if ($r){
+    $p=$r['proof'];
     if (!is_null($r['proof'])){
         $pname=explode(".",$p);
         $extention=end($pname);
