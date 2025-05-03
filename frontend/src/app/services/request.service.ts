@@ -4,7 +4,6 @@ import { Request } from '../model/request';
 import { RequestResponse } from '../model/requestResponse';
 import { Observable } from 'rxjs';
 import { Result } from '../model/result';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,12 +32,6 @@ export class RequestService {
   }
   public getAnnReqByState (annCod: string , state: string) {
     return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
-  }
-
-
- 
-  public getAnnReqByannCodeAndState(annCod: string, state: string): Observable<RequestResponse> {
-    return this.httpclient.get<RequestResponse>(`${this.baseUrl}?annCod=${annCod}&state=${state}`);
   }
 
   acceptOrRefuseRequest(annCode: string, userId: number, state: 'accept' | 'refuse'): Observable<any> {

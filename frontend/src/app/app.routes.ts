@@ -32,6 +32,5 @@ export const routes: Routes = [
     {path:'app-dashbord-demandeur', component:DashbordDemandeurComponent, canActivate:[recieverGuard]},
     {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent, canActivate:[recieverGuard] },
     {path:'get-ann-by-state', component:GetAnnByStateComponent, canActivate:[recieverGuard]}
-    
-    
+
 ];
