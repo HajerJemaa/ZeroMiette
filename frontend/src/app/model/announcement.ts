@@ -10,7 +10,3 @@ export interface Announcement {
     state: 'expired' | 'available'; // État de l'annonce
     category: 'human' | 'animal' ;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab

@@ -4,10 +4,6 @@ import { Request } from '../model/request';
 import { RequestResponse } from '../model/requestResponse';
 import { Observable } from 'rxjs';
 import { Result } from '../model/result';
-<<<<<<< HEAD
-=======
-
->>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab
 @Injectable({
   providedIn: 'root'
 })
@@ -38,22 +34,8 @@ export class RequestService {
     return this.httpclient.get<Result>(`${this.baseUrl}?annCod=${annCod}&state=${state}`)
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab
- 
-  public getAnnReqByannCodeAndState(annCod: string, state: string): Observable<RequestResponse> {
-    return this.httpclient.get<RequestResponse>(`${this.baseUrl}?annCod=${annCod}&state=${state}`);
-  }
-
   acceptOrRefuseRequest(annCode: string, userId: number, state: 'accept' | 'refuse'): Observable<any> {
     return this.httpclient.get<any>(`${this.baseUrl }?annCode=${annCode}&userId=${userId}&state=${state}`);
   }
   
 }
-<<<<<<< HEAD
-  
- 
-=======
->>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab

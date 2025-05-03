@@ -10,6 +10,7 @@ import { UsersService } from '../services/users.service';
 import { catchError, forkJoin, map, of} from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RequestResponse } from '../model/requestResponse';
+import { Result } from '../model/result';
 
 @Component({
   selector: 'app-donor-dashboard',
@@ -118,13 +119,13 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
     this.requests = [];
     this.requesterDetails = {};
     forkJoin([
-      this.requestService.getAnnReqByannCodeAndState(annCode, 'pending'),
-      this.requestService.getAnnReqByannCodeAndState(annCode, 'accepted')
+      this.requestService.getAnnReqByState (annCode, 'pending'),
+      this.requestService.getAnnReqByState (annCode, 'accepted')
     ]).subscribe({
-      next: ([resPending, resAccepted]: [RequestResponse, RequestResponse]) => {
+      next: ([resPending, resAccepted]: [Result, Result]) => {
         if (resPending.message === 'success' && resAccepted.message === 'success') {
-          const pendingData = resPending.data || [];
-          const acceptedData = resAccepted.data || [];
+          const pendingData = resPending.data as Request[] || [];
+          const acceptedData = resAccepted.data as Request[] || [];
           this.requests = [...pendingData, ...acceptedData];
           const userRequests = this.requests.map(request =>
             this.userService.getOneUser(request.userId).pipe(
@@ -274,11 +275,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
 
   deleteAnnouncement(annCode:string):void{
     this.announcementService.deleteAnnouncement(annCode).subscribe({
-<<<<<<< HEAD
-      next: (res:any) => {
-=======
       next: (res) => {
->>>>>>> ba9492156e4444d156888240b78bc48da93ec5ab
         this.loadAnnouncements();
         this.errorMessage = '';
       },
