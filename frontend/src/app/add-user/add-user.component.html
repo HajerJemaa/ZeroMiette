@@ -13,33 +13,32 @@
                         }
                         <form class="was-validated" [formGroup]="signUpForm" (ngSubmit)="signUp()" [class]="{'was-validated': formValidated}" novalidate>
                             <div class="row">
-                                <div class="col">
-                                    <div class="form-floating">					
-                                        <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required> 
-                                        <label for="ln" class="form-label">Last name</label>
-                                        <span class="invalid-feedback">
-                                            @if (lastName?.errors?.['required']) {
-                                                First name is required.
-                                            } @else if (lastName?.errors?.['minlength']) {
-                                                First name must be at least 2 characters long.
-                                            }
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                                <div class="col">
+                                <div class="col-md">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" required minlength="2">
                                         <label for="fn" class="form-label">First name</label>
                                         <span class="invalid-feedback">
-                                            @if (lastName?.errors?.['required']) {
+                                            @if (firstName?.errors?.['required']) {
                                                 Last name is required.
-                                            } @else if (lastName?.errors?.['minlength']) {
+                                            } @else if (firstName?.errors?.['minlength']) {
                                                 Last name must be at least 2 characters long.
                                             }
                                         </span>
                                     </div>
                                 </div>
+                                <div class="col-md mt-4 mt-md-0">
+                                    <div class="form-floating">					
+                                            <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required minlength="2"> 
+                                            <label for="ln" class="form-label">Last name</label>
+                                            <span class="invalid-feedback">
+                                                @if (lastName?.errors?.['required']) {
+                                                    First name is required.
+                                                } @else if (lastName?.errors?.['minlength']) {
+                                                    First name must be at least 2 characters long.
+                                                }
+                                            </span>
+                                    </div>                                    
+                                </div>                                               
                             </div>
                             <div class="row">
                                 <div class="col mt-4">
@@ -93,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col mt-4">
+                                <div class="col-md mt-4">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="add" formControlName="add" placeholder="" required>
                                         <label for="add" class="form-label">Address</label>
@@ -104,9 +103,9 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-auto mt-4">
+                                <div class="col-md-auto mt-4">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="num" formControlName="num" placeholder="" pattern="[2459]{1}[0-9]{7}" maxlength="8" required>
+                                        <input type="tel" class="form-control" id="num" formControlName="num" placeholder="" pattern="[2459]{1}[0-9]{7}" maxlength="8" required>
                                         <label for="num" class="form-label">Phone number</label>
                                         <span class="invalid-feedback">
                                             @if (number?.errors?.['required']) {
@@ -134,8 +133,8 @@
                                         </label>
                                     </div> 
                                     <span class="invalid-feedback">
-                                        @if (address?.errors?.['required']) {
-                                            Address is required.
+                                        @if (role?.errors?.['required']) {
+                                            Role is required.
                                         }
                                     </span>
                                 </div>
@@ -145,6 +144,11 @@
                                     <label for="proof"></label>
                                     <input type="file" class="form-control" (change)="getFile($event)" id="proof" required>
                                     <span class="invalid-feedback">Proof is required.</span>
+                                    <span class="invalid-feedback">
+                                        @if (proof?.errors?.['required']) {
+                                            Role is required.
+                                        }
+                                    </span>
                                 </div>
                             </div>
                             <div class="row">

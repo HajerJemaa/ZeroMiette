@@ -28,13 +28,9 @@ export class UsersService {
   addUser(us:any){
     return this.httpclient.post<Result>(this.api,us);
   }
-  
-  changeUserState(req:{ userId :number }){
-    return this.httpclient.put<Result>(this.api,req);
-  }
 
-  addP(cred:{ userId :number, pwd:string}){
-    return this.httpclient.put(this.api,cred);
+  updateUserState(cred:{ userId :number, pwd:string, state:string}){
+    return this.httpclient.put<Result>(this.api,cred);
   }
 
   updateUser(data:any){

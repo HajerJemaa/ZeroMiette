@@ -12,17 +12,10 @@ import { UsersService } from './services/users.service';
 })
 export class AppComponent {
   state: boolean = false;
-  role: string = '';
-  isSidebarOpen: boolean = false;
-  title = 'ZeroMiette';
   as = inject(AuthenticateService);
-  us = inject(UsersService);
-
+  title='ZeroMiette'
   ngOnInit() {
     this.state = this.as.isSignedIn();
-    if (this.state) {
-      this.role = this.us.getCurrentUserRole() || '';
-    }
   }
 
 }

@@ -10,6 +10,7 @@ import { UsersService } from '../services/users.service';
 import { catchError, forkJoin, map, of} from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RequestResponse } from '../model/requestResponse';
+import { AuthenticateService } from '../services/authenticate.service';
 
 @Component({
   selector: 'app-donor-dashboard',
@@ -40,6 +41,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
     private announcementService: AnnouncementService,
     private requestService: RequestService,
     private userService: UsersService,
+    private authenticateService: AuthenticateService,
     private fb : FormBuilder
   ){
     this.form = this.fb.group({
@@ -316,7 +318,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   }
 }
   logout():void{
-
+    this.authenticateService.signOut();
   }
 
   startCountdown():void{
