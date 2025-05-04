@@ -133,9 +133,9 @@
           @for (request of requests ; track $index) {
             @if (request.state === 'pending') {
               <div class="request-card">
-                <img [src]="requesterDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                <img [src]="requesterDetails[request.userId].profile_pic || '/assets/default-profile.jpg'" alt="Profile">
                 <div class="request-info">
-                  <strong>{{ requesterDetails[request.userId]?.username || 'Unknown' }}</strong>
+                  <strong>{{ requesterDetails[request.userId].username || 'Unknown' }}</strong>
                   <small class="text-muted">{{ formatDateForInput(request.dateC) }}</small>
                   <p>{{ request.description }}</p>
                   <div class="status">Pending</div>
@@ -151,12 +151,12 @@
           @for (request of requests ; track $index) {
             @if (request.state === 'accepted') {
               <div class="request-card">
-                <img [src]="requesterDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                <img [src]="requesterDetails[request.userId].profile_pic || '/assets/default-profile.jpg'" alt="Profile">
                 <div class="request-info">
-                  <strong>{{ requesterDetails[request.userId]?.username || 'Unknown' }}</strong>
+                  <strong>{{ requesterDetails[request.userId].username || 'Unknown' }}</strong>
                   <small class="text-muted">{{ formatDateForInput(request.dateC) }}</small>
                   <p>{{ request.description }}</p>
-                  <p><strong>Contact:</strong> {{ requesterDetails[request.userId]?.email }}</p>
+                  <p><strong>Contact:</strong> {{ requesterDetails[request.userId].email }}</p>
                   <div class="status">Accepted</div>
                 </div>
               </div>

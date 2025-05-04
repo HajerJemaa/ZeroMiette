@@ -1,10 +1,24 @@
 @if (error==undefined){
     <div class="container-fluid py-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-2">
+            <div class="col-auto">
+                <img src="assets/logo.ico" alt="ZeroMiette Icon" class="brand-icon mb-2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <h3 style="color: #3b5e2b;">Create a ZeroMiette Account</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-4 text-center">
+                <span style="color: #424242;font-size: larger;">Join our community to fight food waste</span>
+            </div>
+        </div>       
+        <div class="row justify-content-center mt-4">
             <div class="col-md-8 col-lg-6">
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
-                        <h3 class="card-title text-center mb-4">Join our community to fight food waste</h3>
                         @if (error) {
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ error }}
@@ -13,7 +27,7 @@
                         }
                         <form class="was-validated" [formGroup]="signUpForm" (ngSubmit)="signUp()" [class]="{'was-validated': formValidated}" novalidate>
                             <div class="row">
-                                <div class="col-md">
+                                <div class="col">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" required minlength="2">
                                         <label for="fn" class="form-label">First name</label>
@@ -26,7 +40,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-md mt-4 mt-md-0">
+                                <div class="col">
                                     <div class="form-floating">					
                                             <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required minlength="2"> 
                                             <label for="ln" class="form-label">Last name</label>

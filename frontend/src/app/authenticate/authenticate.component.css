@@ -13,6 +13,11 @@
     border-color: #1B5E20;
 }
 
+.brand-icon {
+    height: 4rem; /* Match the font-size of 1.5rem used for nav links */
+    width: auto; /* Maintain aspect ratio */
+}
+
 a:hover{
     color: #1B5E20  !important;
 }

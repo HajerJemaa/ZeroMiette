@@ -18,13 +18,25 @@ h1, h2, h3 {
   padding-bottom: 0;
 }
 
-
-.custom-navbar .navbar-brand,
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem; /* Increase font size of brand and links */
+  line-height: 70px; /* Match line height to navbar height for vertical centering */
+  color: #3b5e2b ;
+}
 .custom-navbar .nav-link {
   font-size: 1.5rem; /* Increase font size of brand and links */
   line-height: 70px; /* Match line height to navbar height for vertical centering */
-  color: #3b5e2b !important;
+  color: #779855 ;
 }
+.custom-navbar .nav-link:hover{
+  color: #3b5e2b;
+}
+
+.custom-navbar .nav-link.active {
+  font-weight: 500;
+  color: #3b5e2b;
+}
+
 
 .custom-navbar .navbar-toggler {
   font-size: 1.7rem; 
@@ -34,10 +46,38 @@ h1, h2, h3 {
   background-color: white; /* Match navbar background */
 }
 
-@media (max-width: 767px) {
-  .custom-navbar .navbar-nav .nav-link {
-    line-height: 35px; /* Smaller line-height for stacked items */
-    padding: 10px 15px; /* Add padding for better spacing */
+
+
+@media (max-width: 666px) {
+  .custom-navbar .navbar-collapse {
+    display: none !important;
+  }
+
+  .custom-navbar .navbar-collapse.show {
+    display: block !important;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: block;
+  }
+}
+
+@media (min-width: 667px) {
+  .custom-navbar {
+    flex-wrap: nowrap;
+  }
+
+  .custom-navbar .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+
+  .custom-navbar .navbar-nav {
+    flex-direction: row;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: none;
   }
 }
 
