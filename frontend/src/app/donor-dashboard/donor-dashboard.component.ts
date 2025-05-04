@@ -73,7 +73,6 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
             let user=res?.data as User;
             if (user){
               this.user=user;
-              this.user.profile_pic=this.user.profile_pic||''; 
             }
           },
           error:(err)=> {

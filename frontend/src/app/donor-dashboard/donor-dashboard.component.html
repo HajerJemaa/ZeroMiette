@@ -1,9 +1,10 @@
 <div class="content">
     @if (activeTab === 'dashboard') {
-     
+      <p>Dashboard is working</p>
+
       <div class="page">
         <div class="profile-header">
-          <img [src]="user?.profile_pic || '/assets/default-profile.jpg'" alt="Profile" width="50">
+          <img [src]="user?.profile_pic || '/assets/default-profile.png'" alt="Profile" width="50">
           <span>{{ user?.user_name }}</span>
         </div>
         <div class="donation-prompt" (click)="openAnnouncementModel()">

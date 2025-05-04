@@ -49,7 +49,7 @@ export class AuthenticateComponent {
           this.error=res.error;
         }else{
           if(res.user.role=="donor"){
-            this.router.navigate(['/Donor']).then(() => {
+            this.router.navigate(['/donor-dashboard']).then(() => {
               window.location.reload();
             });
           }else if (res.user.role=="reciever"){
