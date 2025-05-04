@@ -23,6 +23,8 @@ export const administratorGuard: CanActivateFn = (route, state) => {
       localStorage.removeItem('token');
     }
   }
-  router.navigate(['Authentificate/SignIn']);
+  router.navigate(['User/Authenticate/SignIn']).then(() => {
+    window.location.reload();
+  });
   return false;
 };

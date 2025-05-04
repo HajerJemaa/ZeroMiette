@@ -1,15 +1,101 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 h1, h2, h3 {
   color: #3b5e2b;
 }
 
+.brand-icon {
+  height: 2.2rem; /* Match the font-size of 1.5rem used for nav links */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between icon and text */
+  vertical-align: middle; /* Align with text baseline */
+  position: relative;
+  top: -3px; /* Move up slightly (adjust as needed) */
+}
 
+.custom-navbar {
+  min-height: 70px; /* Increase navbar height */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.custom-navbar .navbar-brand {
+  font-size: 1.5rem; /* Increase font size of brand and links */
+  line-height: 70px; /* Match line height to navbar height for vertical centering */
+  color: #3b5e2b ;
+}
+.custom-navbar .nav-link {
+  font-size: 1.5rem; /* Increase font size of brand and links */
+  line-height: 70px; /* Match line height to navbar height for vertical centering */
+  color: #779855 ;
+}
+.custom-navbar .nav-link:hover{
+  color: #3b5e2b;
+}
+
+.custom-navbar .nav-link.active {
+  font-weight: 500;
+  color: #3b5e2b;
+}
+
+
+.custom-navbar .navbar-toggler {
+  font-size: 1.7rem; 
+}
+
+.custom-navbar .navbar-collapse {
+  background-color: white; /* Match navbar background */
+}
+
+
+
+@media (max-width: 666px) {
+  .custom-navbar .navbar-collapse {
+    display: none !important;
+  }
+
+  .custom-navbar .navbar-collapse.show {
+    display: block !important;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: block;
+  }
+}
+
+@media (min-width: 667px) {
+  .custom-navbar {
+    flex-wrap: nowrap;
+  }
+
+  .custom-navbar .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+
+  .custom-navbar .navbar-nav {
+    flex-direction: row;
+  }
+
+  .custom-navbar .navbar-toggler {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .custom-navbar .navbar-brand{
+    margin-left: 100px; /* Space on the left for left-aligned items */
+  }
+
+  .custom-navbar .navbar-nav.me-auto {
+    margin-left: 50px; /* Space on the right for right-aligned items */
+  }
+
+  .custom-navbar .navbar-nav.ms-auto {
+    margin-right: 200px; /* Space on the right for right-aligned items */
+  }
+}
+
+/*
 .sidebar {
   background-color: #265442;
   width: 240px;
@@ -42,7 +128,7 @@ h1, h2, h3 {
 }
 
 .bottom-menu {
-  margin-top: auto; /* Pushes the auth menu to the bottom */
+  margin-top: auto; // Pushes the auth menu to the bottom 
   list-style-type: none;
 }
 
@@ -194,3 +280,4 @@ h1, h2, h3 {
     margin-top: auto;
   }
 }
+*/

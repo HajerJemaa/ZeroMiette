@@ -17,10 +17,10 @@ export class AddUserComponent {
   formValidated:boolean=false;
   signUpForm!: FormGroup;
   
-   getFile(event:Event){
-    const inputFile=event.target as HTMLInputElement;
-    if (inputFile.files && inputFile.files.length > 0){
-      this.file=inputFile.files[0];
+   getFile(event: any){
+    const file = event.target.files[0];
+    if (file) {
+      this.signUpForm.get('proof')?.setValue(file);
     }
    }
 
@@ -33,7 +33,8 @@ export class AddUserComponent {
       add: ['',Validators.required],
       num: ['',[Validators.required,Validators.pattern(/^(2|4|5|9)\d{7}$/)]],
       rad: ['',Validators.required],
-      desc: ['']
+      desc: [''],
+      proof: [null, Validators.required]
     })
   }
 
@@ -89,6 +90,6 @@ export class AddUserComponent {
   get address() { return this.signUpForm.get('add'); }
   get number() { return this.signUpForm.get('num'); }
   get role() { return this.signUpForm.get('rad'); }
-
+  get proof() { return this.signUpForm.get('proof'); }
 }
 

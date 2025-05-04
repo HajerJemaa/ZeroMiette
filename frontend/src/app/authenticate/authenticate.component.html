@@ -1,10 +1,24 @@
 @if(action=="SignIn"){
     <div class="container-fluid py-5">
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center mb-2">
+            <div class="col-auto">
+                <img src="assets/logo.ico" alt="ZeroMiette Icon" class="brand-icon mb-2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <h3 style="color: #3b5e2b;">Welcome back to ZeroMiette</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-4 text-center">
+                <span style="color: #424242;font-size: larger;">Sign in to you account</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
             <div class="col-8 col-lg-5">
                 <div class="card shadow-sm">
                     <div class="card-body p-4">
-                        <h3 class="card-title text-center mb-4">Welcome back</h3>
 
                         @if (error) {
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">

@@ -57,7 +57,7 @@ export class AuthenticateComponent {
               window.location.reload();
             });
           }else if (res.user.role=="administrator"){
-            this.router.navigate(['/Administrator/ProcessAccount/getAllUsers/accepted']).then(() => {
+            this.router.navigate(['/User/Account']).then(() => {
               window.location.reload();
             });
           }

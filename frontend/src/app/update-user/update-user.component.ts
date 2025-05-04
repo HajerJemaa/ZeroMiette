@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractContro
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service'; // Adjust path
 import { AuthenticateService } from '../services/authenticate.service'; // Adjust path
+import { User } from '../model/user';
   
 
 @Component({
@@ -16,9 +17,8 @@ export class UpdateUserComponent {
   passwordForm: FormGroup;
   proofForm: FormGroup;
   loading: { user: boolean; password: boolean; proof: boolean } = { user: false, password: false, proof: false };
-  errorMessage: { user: string | null; password: string | null; proof: string | null } = { user: null, password: null, proof: null };
+  error: { user: string | null; password: string | null; proof: string | null } = { user: null, password: null, proof: null };
   formValidated: { user: boolean; password: boolean; proof: boolean } = { user: false, password: false, proof: false };
-  regions: string[] = ['North', 'South', 'East', 'West', 'Central'];
   userData: any = { firstName: '', lastName: '', username: '', number: '', region: '', address: '' };
 
   constructor(
@@ -28,19 +28,21 @@ export class UpdateUserComponent {
     private as: AuthenticateService
   ) {
     this.userDataForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      email:['',Validators.email],
-      number: ['', [Validators.required, Validators.pattern(/^(2|4|5|9)\d{7}$/)]],
+      fn: ['', [Validators.required, Validators.minLength(2)]],
+      ln: ['', [Validators.required, Validators.minLength(2)]],
+      un: ['', [Validators.required, Validators.minLength(3)]],
+      mai:['',Validators.email],
+      num: ['', [Validators.required, Validators.pattern(/^(2|4|5|9)\d{7}$/)]],
       region: ['', Validators.required],
-      address: ['', Validators.required]
+      add: ['', Validators.required]
     });
+
     this.passwordForm = this.fb.group({
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
+
     this.proofForm = this.fb.group({
       proof: [null, Validators.required]
     });
@@ -55,7 +57,16 @@ export class UpdateUserComponent {
   }
 
   loadUserData(): void {
-    this.userData = this.usersService.getCurrentUserId() || this.userData;
+    this.usersService.getOneUser(this.usersService.getCurrentUserId()).subscribe({
+      next: (res)=>{
+        if(res.message=="success"){
+          this.userData=res.data as User;
+        }else{
+          alert(res.message+" to get user!!");
+        }
+              },
+      error: (err)=> alert("Api Error: "+err+"!!")
+    });
     this.userDataForm.patchValue(this.userData);
   }
 
@@ -66,7 +77,7 @@ export class UpdateUserComponent {
       return;
     }
     this.loading.user = true;
-    this.errorMessage.user = null;
+    this.error.user = null;
 
     const formData = this.userDataForm.value;
     console.log('Update user attempt:', formData);
@@ -76,11 +87,11 @@ export class UpdateUserComponent {
       this.loading.user = false;
       this.usersService.updateUser(formData).subscribe({
         next: () => {
-          this.errorMessage.user = 'Profile updated successfully.';
+          this.error.user = 'Profile updated successfully.';
           setTimeout(() => this.router.navigate(['/User/Profile']), 2000); // Redirect after 2s
         },
         error: (error) => {
-          this.errorMessage.user = error.message || 'An error occurred. Please try again.';
+          this.error.user = error.message || 'An error occurred. Please try again.';
         }
       });
     }, 1000);
@@ -93,7 +104,7 @@ export class UpdateUserComponent {
       return;
     }
     this.loading.password = true;
-    this.errorMessage.password = null;
+    this.error.password = null;
 
     const formData = this.passwordForm.value;
     console.log('Change password attempt:', formData);
@@ -102,15 +113,15 @@ export class UpdateUserComponent {
     setTimeout(() => {
       this.loading.password = false;
       if (formData.currentPassword !== 'oldpassword123') { // Mock current password check
-        this.errorMessage.password = 'Current password is incorrect.';
+        this.error.password = 'Current password is incorrect.';
       } else {
         this.as.changePassword(formData.newPassword).subscribe({
           next: () => {
-            this.errorMessage.password = 'Password changed successfully.';
+            this.error.password = 'Password changed successfully.';
             setTimeout(() => this.passwordForm.reset(), 2000); // Reset after 2s
           },
           error: (error) => {
-            this.errorMessage.password = error.message || 'An error occurred. Please try again.';
+            this.error.password = error.message || 'An error occurred. Please try again.';
           }
         });
       }
@@ -123,7 +134,7 @@ export class UpdateUserComponent {
       return;
     }
     this.loading.proof = true;
-    this.errorMessage.proof = null;
+    this.error.proof = null;
 
     const formData = new FormData();
     formData.append('proof', this.proofForm.get('proof')?.value);
@@ -135,11 +146,11 @@ export class UpdateUserComponent {
       this.loading.proof = false;
       this.usersService.updateProof(formData).subscribe({
         next: () => {
-          this.errorMessage.proof = 'Proof updated successfully.';
+          this.error.proof = 'Proof updated successfully.';
           setTimeout(() => this.proofForm.reset(), 2000); // Reset after 2s
         },
         error: (error) => {
-          this.errorMessage.proof = error.message || 'An error occurred. Please try again.';
+          this.error.proof = error.message || 'An error occurred. Please try again.';
         }
       });
     }, 1000);
@@ -152,12 +163,12 @@ export class UpdateUserComponent {
     }
   }
 
-  get firstName() { return this.userDataForm.get('firstName'); }
-  get lastName() { return this.userDataForm.get('lastName'); }
-  get username() { return this.userDataForm.get('username'); }
-  get number() { return this.userDataForm.get('number'); }
+  get firstName() { return this.userDataForm.get('fn'); }
+  get lastName() { return this.userDataForm.get('ln'); }
+  get username() { return this.userDataForm.get('un'); }
+  get number() { return this.userDataForm.get('num'); }
   get region() { return this.userDataForm.get('region'); }
-  get address() { return this.userDataForm.get('address'); }
+  get address() { return this.userDataForm.get('add'); }
   get currentPassword() { return this.passwordForm.get('currentPassword'); }
   get newPassword() { return this.passwordForm.get('newPassword'); }
   get confirmPassword() { return this.passwordForm.get('confirmPassword'); }
