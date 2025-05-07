@@ -49,7 +49,7 @@ export class AuthenticateComponent {
           this.error=res.error;
         }else{
           if(res.user.role=="donor"){
-            this.router.navigate(['/Donor']).then(() => {
+            this.router.navigate(['/donor-dashboard']).then(() => {
               window.location.reload();
             });
           }else if (res.user.role=="reciever"){
@@ -57,7 +57,7 @@ export class AuthenticateComponent {
               window.location.reload();
             });
           }else if (res.user.role=="administrator"){
-            this.router.navigate(['/Administrator/ProcessAccount/getAllUsers/accepted']).then(() => {
+            this.router.navigate(['/User/Account']).then(() => {
               window.location.reload();
             });
           }

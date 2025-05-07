@@ -28,10 +28,10 @@ export class GetAllUsersComponent implements OnInit,OnDestroy{
     );
   }
   getUser(state:string){
-    this.us.getAllUsers(this.state).subscribe({
+    this.us.getAllUsers(state).subscribe({
       next: (res)=>this.users=res.data as User[],
       error: (error)=>alert("Api Error")
-      })
+    });
   };
   
   ngOnDestroy(): void {

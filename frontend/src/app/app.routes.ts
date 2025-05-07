@@ -12,19 +12,28 @@ import { GetAnnComponent } from './get-ann/get-ann.component';
 import { administratorGuard } from './administrator.guard';
 import { recieverGuard } from './reciever.guard';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { AdministratorComponent } from './administrator/administrator.component';
 
 
 export const routes: Routes = [
     {path:'', component:AccueilComponent}, 
-    {path:'Administrator', component:UpdateUserComponent, canActivate:[administratorGuard]},   
+    {path:'Administrator', component:AdministratorComponent, canActivate:[administratorGuard]},   
     {path:'Administrator/ProcessAccount/getAllUsers/:state', component:GetAllUsersComponent, canActivate:[administratorGuard]},
     {path:'Administrator/ProcessAccount/getUser/:id', component:GetUserComponent, canActivate:[administratorGuard]},
+    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]},
+
     {path:'User/CreateAccount/SignUp',component:AddUserComponent},
     {path:'User/Authenticate/:action', component:AuthenticateComponent},
-    {path:'app-dashbord-demandeur', component:DashbordDemandeurComponent, canActivate:[recieverGuard]},
-    {path:'Donor', component:GetAnnByStateComponent},
-    {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent, canActivate:[recieverGuard] },
-    {path:'get-ann-by-state', component:GetAnnByStateComponent, canActivate:[recieverGuard]},
+    {path:'User/Account', component:UpdateUserComponent},
+
+    {path:'Donor/Announcements', component:GetAnnByStateComponent},
+    {path:'Donor', component:UpdateUserComponent},
+
     {path:'donor-dashboard',component:DonorDashboardComponent},
-    {path:'Administrator/ConsultAnnouncement', component:GetAnnComponent, canActivate:[administratorGuard]}
+
+    {path:'app-dashbord-demandeur', component:DashbordDemandeurComponent, canActivate:[recieverGuard]},
+    {path:'get-user-requests-by-state', component: GetUserRequestsByStateComponent, canActivate:[recieverGuard] },
+    {path:'get-ann-by-state', component:GetAnnByStateComponent, canActivate:[recieverGuard]}
+    
+    
 ];

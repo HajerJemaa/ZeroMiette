@@ -29,13 +29,15 @@
             </table>
         </div>
         }@else {
-            <div class="col">
-                <div class="alert alert-info text-center">
-                    @if (state=="pending"){
-                        <strong>there are no {{state}} Users!</strong>
-                    }@else {
-                        <strong>there are no Users!</strong>
-                    }
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="alert alert-info text-center">
+                        @if (state=="pending"){
+                            <strong>there are no {{state}} Users!</strong>
+                        }@else {
+                            <strong>there are no Users!</strong>
+                        }
+                    </div>
                 </div>
             </div>
         }

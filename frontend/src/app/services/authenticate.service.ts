@@ -11,9 +11,13 @@ export class AuthenticateService {
 
   httpclient = inject(HttpClient);
   
-  router =inject(Router);
+  router = inject(Router);
 
   signIn(creds :{email:string,password:string}){
+    if (this.isSignedIn()){
+      localStorage.removeItem("token");
+    }
+
     return this.httpclient.post<any>(this.api, creds).pipe(
       tap((res)=>{
         if (res.token){

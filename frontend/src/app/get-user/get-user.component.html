@@ -69,7 +69,7 @@
                     <div class="modal-body">
                         @if (user.proof && fileUrl) {
                             @if (user.extention!='pdf') {
-                                <img [src]="fileUrl" alt="Proof" class="proof-image-modal" (error)="onProofError($event)">
+                                <img [src]="user.proof" alt="Proof" class="proof-image-modal" (error)="onProofError($event)">
                             } @else if (user.extention=='pdf') {
                                 <embed [src]="fileUrl" class="proof-pdf-modal" (error)="onProofError($event)">
                             } @else {

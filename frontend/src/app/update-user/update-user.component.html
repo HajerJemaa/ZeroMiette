@@ -7,10 +7,10 @@
   
             <!-- User Data Form -->
             <h4 class="mt-4">Personal Information</h4>
-            @if (errorMessage.user) {
-              <div class="alert alert-{{ errorMessage.user.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
-                {{ errorMessage.user }}
-                <button type="button" class="btn-close" (click)="errorMessage.user = null" aria-label="Close"></button>
+            @if (error.user) {
+              <div class="alert alert-{{ error.user.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ error.user }}
+                <button type="button" class="btn-close" (click)="error.user = null" aria-label="Close"></button>
               </div>
             }
             <form
@@ -20,109 +20,109 @@
               novalidate>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="firstName" class="form-label">First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    class="form-control"
-                    formControlName="firstName"
-                    placeholder="Enter your first name"
-                    required>
-                  <div class="invalid-feedback">
-                    @if (firstName?.errors?.['required']) {
-                      <span>First name is required.</span>
-                    } @else if (firstName?.errors?.['minlength']) {
-                      <span>First name must be at least 2 characters long.</span>
-                    }
-                  </div>
+                  <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" required minlength="2">
+                        <label for="fn" class="form-label">First name</label>
+                        <span class="invalid-feedback">
+                            @if (firstName?.errors?.['required']) {
+                                Last name is required.
+                            } @else if (firstName?.errors?.['minlength']) {
+                                Last name must be at least 2 characters long.
+                            }
+                        </span>
+                    </div>
+                </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="lastName" class="form-label">Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    class="form-control"
-                    formControlName="lastName"
-                    placeholder="Enter your last name"
-                    required>
-                  <div class="invalid-feedback">
-                    @if (lastName?.errors?.['required']) {
-                      <span>Last name is required.</span>
-                    } @else if (lastName?.errors?.['minlength']) {
-                      <span>Last name must be at least 2 characters long.</span>
-                    }
+                  <div class="form-floating">					
+                    <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required> 
+                    <label for="ln" class="form-label">Last name</label>
+                    <span class="invalid-feedback">
+                        @if (lastName?.errors?.['required']) {
+                            First name is required.
+                        } @else if (lastName?.errors?.['minlength']) {
+                            First name must be at least 2 characters long.
+                        }
+                    </span>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    id="username"
-                    class="form-control"
-                    formControlName="username"
-                    placeholder="Enter your username"
-                    required>
-                  <div class="invalid-feedback">
-                    @if (username?.errors?.['required']) {
-                      <span>Username is required.</span>
-                    } @else if (username?.errors?.['minlength']) {
-                      <span>Username must be at least 3 characters long.</span>
-                    }
+                  <div class="form-floating">
+                    <input type="text" id="username" class="form-control" formControlName="un" placeholder="" required>
+                    <label for="username" class="form-label">Username</label>
+                    <div class="invalid-feedback">
+                      @if (username?.errors?.['required']) {
+                        <span>Username is required.</span>
+                      } @else if (username?.errors?.['minlength']) {
+                        <span>Username must be at least 3 characters long.</span>
+                      }
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="number" class="form-label">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="number"
-                    class="form-control"
-                    formControlName="number"
-                    placeholder="Enter your phone number (10 digits)"
-                    required>
-                  <div class="invalid-feedback">
-                    @if (number?.errors?.['required']) {
-                      <span>Phone number is required.</span>
-                    } @else if (number?.errors?.['pattern']) {
-                      <span>Please enter a valid 10-digit phone number.</span>
-                    }
-                  </div>
+                  <div class="form-floating">
+                    <input type="tel" class="form-control" id="num" formControlName="num" placeholder="" pattern="[2459]{1}[0-9]{7}" maxlength="8" required>
+                    <label for="num" class="form-label">Phone number</label>
+                    <span class="invalid-feedback">
+                        @if (number?.errors?.['required']) {
+                            <span>Phone number is required.</span>
+                        } @else if (number?.errors?.['pattern']) {
+                            <span>Please enter a valid 8-digit phone number.</span>
+                        }
+                    </span>
+                </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="region" class="form-label">Region</label>
-                  <select
-                    id="region"
-                    class="form-select"
-                    formControlName="region"
-                    required>
-                    <option value="" disabled>Select your region</option>
-                    @for (regionOption of regions; track regionOption) {
-                      <option [value]="regionOption">{{ regionOption }}</option>
-                    }
-                  </select>
-                  <div class="invalid-feedback">
-                    @if (region?.errors?.['required']) {
-                      <span>Region is required.</span>
-                    }
+                  <div class="form-floating">
+                    <select formControlName="region" id="region" class="form-select" required>
+                        <option value="Tunis">Tunis</option>
+                        <option value="Ariana">Ariana</option>
+                        <option value="Ben Arous">Ben Arous</option>
+                        <option value="Manouba">Manouba</option>
+                        <option value="Nabeul">Nabeul</option>
+                        <option value="Zaghouan">Zaghouan</option>
+                        <option value="Bizerte">Bizerte</option>
+                        <option value="Beja">Beja</option>
+                        <option value="Jendouba">Jendouba</option>
+                        <option value="Kef">Le Kef</option>
+                        <option value="Siliana">Siliana</option>
+                        <option value="Kairouan">Kairouan</option>
+                        <option value="Kasserine">Kasserine</option>
+                        <option value="Sidi_Bouzid">Sidi Bouzid</option>
+                        <option value="Sfax">Sfax</option>
+                        <option value="Mahdia">Mahdia</option>
+                        <option value="Monastir">Monastir</option>
+                        <option value="Sousse">Sousse</option>
+                        <option value="Gafsa">Gafsa</option>
+                        <option value="Tozeur">Tozeur</option>
+                        <option value="Kebili">Kebili</option>
+                        <option value="Medenine">Medenine</option>
+                        <option value="Tataouine">Tataouine</option>
+                        <option value="Gabes">Gabes</option>
+                    </select>
+                    <label for="region">Choose a region</label>
+                    <span class="invalid-feedback">
+                        @if (region?.errors?.['required']) {
+                            Region is required.
+                        }
+                    </span>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <label for="address" class="form-label">Address</label>
-                  <input
-                    type="text"
-                    id="address"
-                    class="form-control"
-                    formControlName="address"
-                    placeholder="Enter your address"
-                    required>
-                  <div class="invalid-feedback">
-                    @if (address?.errors?.['required']) {
-                      <span>Address is required.</span>
-                    }
-                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="add" formControlName="add" placeholder="" required>
+                    <label for="add" class="form-label">Address</label>
+                    <span class="invalid-feedback">
+                        @if (address?.errors?.['required']) {
+                            Address is required.
+                        }
+                    </span>
+                </div>
                 </div>
               </div>
               <button
@@ -140,10 +140,10 @@
   
             <!-- Password Form -->
             <h4 class="mt-4">Change Password</h4>
-            @if (errorMessage.password) {
-              <div class="alert alert-{{ errorMessage.password.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
-                {{ errorMessage.password }}
-                <button type="button" class="btn-close" (click)="errorMessage.password = null" aria-label="Close"></button>
+            @if (error.password) {
+              <div class="alert alert-{{ error.password.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ error.password }}
+                <button type="button" class="btn-close" (click)="error.password = null" aria-label="Close"></button>
               </div>
             }
             <form
@@ -215,10 +215,10 @@
   
             <!-- Proof Form -->
             <h4 class="mt-4">Update Proof</h4>
-            @if (errorMessage.proof) {
-              <div class="alert alert-{{ errorMessage.proof.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
-                {{ errorMessage.proof }}
-                <button type="button" class="btn-close" (click)="errorMessage.proof = null" aria-label="Close"></button>
+            @if (error.proof) {
+              <div class="alert alert-{{ error.proof.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ error.proof }}
+                <button type="button" class="btn-close" (click)="error.proof = null" aria-label="Close"></button>
               </div>
             }
             <form
