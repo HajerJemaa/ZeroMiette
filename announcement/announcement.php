@@ -8,9 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case 'POST':
-        require("createAnnouncement.php");
+        if (isset($_GET['update'])) {
+            require("updateAnnouncement.php");
+        } else {
+            require("createAnnouncement.php");
+        }
         break;
-
     case 'GET':
         if (isset($_GET['annCode']) && $_GET['annCode'] != null) {
             require("getOneAnnouncement.php");
