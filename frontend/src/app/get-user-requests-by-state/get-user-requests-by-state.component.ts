@@ -4,11 +4,11 @@ import { Request } from '../model/request';
 import { UsersService } from '../services/users.service';
 import { AnnouncementService } from '../services/announcement.service';
 import { Announcement } from '../model/announcement';
-
+import { UpdateRequestComponent} from '../update-request/update-request.component'
 
 @Component({
   selector: 'app-get-user-requests-by-state',
-  imports: [],
+  imports: [UpdateRequestComponent],
   templateUrl: './get-user-requests-by-state.component.html',
   styleUrl: './get-user-requests-by-state.component.css'
 })
@@ -77,22 +77,35 @@ export class GetUserRequestsByStateComponent{
     }
     })
 }
-updateRequest(req: any) {
-  const data = {
-    description: req.description,
-    quantity: req.quantity
-  };
+selectedRequest: any = null;
 
-  this.requestService.updateRequest(req.annCode, this.userId, data).subscribe({
-    next: (res) => {
-      console.log('Mise à jour réussie:', res.message);
-      this.editMode[req.annCode] = false;
-      this.getUserRequestsByState(req.state);
+editRequest(req: any) {
+  this.selectedRequest = { ...req }; // on clone pour éviter les modifs directes
+}
+
+cancelUpdate() {
+  this.selectedRequest = null;
+}
+
+submitUpdate() {
+  if (!this.selectedRequest) return;
+
+  this.requestService.updateRequest(
+    this.selectedRequest.annCode,
+    this.userId,
+    this.selectedRequest.description,
+    this.selectedRequest.quantity
+  ).subscribe({
+    next: () => {
+      this.selectedRequest = null;
+      this.getUserRequestsByState('pending'); // ou l’état actif
     },
-    error: () => {
-      console.error('Erreur de mise à jour');
+    error: (err) => {
+      console.error("Erreur lors de l'update", err);
     }
   });
 }
+
+
 
 }

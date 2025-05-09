@@ -37,9 +37,13 @@ export class RequestService {
   acceptOrRefuseRequest(annCode: string, userId: number, state: 'accept' | 'refuse'): Observable<any> {
     return this.httpclient.get<any>(`${this.baseUrl }?annCode=${annCode}&userId=${userId}&state=${state}`);
   }
-  updateRequest(annCode: string, userId: number, data: { description: string, quantity: number }) {
-  const url = `${this.baseUrl}?annCode=${annCode}&userId=${userId}`;
-  return this.httpclient.put<{ message: string }>(url, data);
+  updateRequest(updatedData: { annCode: string, userId: number, description: string, quantity: number }) {
+  const url = `${this.baseUrl}?annCode=${updatedData.annCode}&userId=${updatedData.userId}`;
+  const body = {
+    description: updatedData.description,
+    quantity: updatedData.quantity
+  };
+  return this.httpclient.put<{ message: string }>(url, body);
 }
 }
 
