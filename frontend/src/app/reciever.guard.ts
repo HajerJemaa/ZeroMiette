@@ -21,6 +21,8 @@ export const recieverGuard: CanActivateFn = (route, state) => {
       console.error('Invalid token', e)
     }
   }  
-  router.navigate(['Authentificate/SignIn']);
+  router.navigate(['Authentificate/SignIn']).then(()=>{
+    window.location.reload();
+  });
   return false;
 };

@@ -1,33 +1,28 @@
+@if(userData!=undefined){
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
-      <div class="col-md-10 col-lg-8">
+      <div class="col-7 col-md-10 col-lg-8">
         <div class="card shadow-sm">
           <div class="card-body p-4">
             <h3 class="card-title text-center mb-4">Update Profile</h3>
-  
             <!-- User Data Form -->
             <h4 class="mt-4">Personal Information</h4>
+            
             @if (error.user) {
               <div class="alert alert-{{ error.user.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
                 {{ error.user }}
                 <button type="button" class="btn-close" (click)="error.user = null" aria-label="Close"></button>
               </div>
             }
-            <form
-              [formGroup]="userDataForm"
-              (ngSubmit)="onSubmitUser()"
-              [class]="{'was-validated': formValidated.user}"
-              novalidate>
+            <form [formGroup]="userDataForm" (ngSubmit)="onSubmitUser()" [class]="{'was-validated': formValidated.user}" novalidate>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="col">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" required minlength="2">
+                        <input type="text" class="form-control" id="fn" formControlName="fn" placeholder="" minlength="2">
                         <label for="fn" class="form-label">First name</label>
                         <span class="invalid-feedback">
-                            @if (firstName?.errors?.['required']) {
-                                Last name is required.
-                            } @else if (firstName?.errors?.['minlength']) {
+                            @if (firstName?.errors?.['minlength']) {
                                 Last name must be at least 2 characters long.
                             }
                         </span>
@@ -36,12 +31,10 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="form-floating">					
-                    <input type="text" class="form-control" id="ln" formControlName="ln" placeholder="" required> 
+                    <input type="text" class="form-control" id="ln" formControlName="ln" placeholder=""> 
                     <label for="ln" class="form-label">Last name</label>
                     <span class="invalid-feedback">
-                        @if (lastName?.errors?.['required']) {
-                            First name is required.
-                        } @else if (lastName?.errors?.['minlength']) {
+                        @if (lastName?.errors?.['minlength']) {
                             First name must be at least 2 characters long.
                         }
                     </span>
@@ -51,12 +44,10 @@
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="form-floating">
-                    <input type="text" id="username" class="form-control" formControlName="un" placeholder="" required>
+                    <input type="text" id="username" class="form-control" formControlName="un" placeholder="" minlength="3">
                     <label for="username" class="form-label">Username</label>
                     <div class="invalid-feedback">
-                      @if (username?.errors?.['required']) {
-                        <span>Username is required.</span>
-                      } @else if (username?.errors?.['minlength']) {
+                      @if (username?.errors?.['minlength']) {
                         <span>Username must be at least 3 characters long.</span>
                       }
                     </div>
@@ -64,22 +55,39 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="form-floating">
-                    <input type="tel" class="form-control" id="num" formControlName="num" placeholder="" pattern="[2459]{1}[0-9]{7}" maxlength="8" required>
+                    <input type="tel" class="form-control" id="num" formControlName="num" placeholder="" pattern="[2459]{1}[0-9]{7}" maxlength="8">
                     <label for="num" class="form-label">Phone number</label>
                     <span class="invalid-feedback">
-                        @if (number?.errors?.['required']) {
-                            <span>Phone number is required.</span>
-                        } @else if (number?.errors?.['pattern']) {
+                        @if (number?.errors?.['pattern']) {
                             <span>Please enter a valid 8-digit phone number.</span>
                         }
                     </span>
+                  </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col mb-3">
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="mai" formControlName="mai" placeholder="">
+                    <label for="num" class="form-label">Email</label>
+                    <span class="invalid-feedback">
+                        @if (email?.errors?.['email']) {
+                            <span>Please enter a valid email (e.g. you&#64;example.com).</span>
+                        }
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="form-floating">
-                    <select formControlName="region" id="region" class="form-select" required>
+                    <input type="text" class="form-control" id="add" formControlName="add" placeholder="">
+                    <label for="add" class="form-label">Address</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-floating">
+                    <select formControlName="region" id="region" class="form-select">
                         <option value="Tunis">Tunis</option>
                         <option value="Ariana">Ariana</option>
                         <option value="Ben Arous">Ben Arous</option>
@@ -107,22 +115,8 @@
                     </select>
                     <label for="region">Choose a region</label>
                     <span class="invalid-feedback">
-                        @if (region?.errors?.['required']) {
-                            Region is required.
-                        }
                     </span>
                   </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="add" formControlName="add" placeholder="" required>
-                    <label for="add" class="form-label">Address</label>
-                    <span class="invalid-feedback">
-                        @if (address?.errors?.['required']) {
-                            Address is required.
-                        }
-                    </span>
-                </div>
                 </div>
               </div>
               <button
@@ -137,82 +131,6 @@
                 }
               </button>
             </form>
-  
-            <!-- Password Form -->
-            <h4 class="mt-4">Change Password</h4>
-            @if (error.password) {
-              <div class="alert alert-{{ error.password.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
-                {{ error.password }}
-                <button type="button" class="btn-close" (click)="error.password = null" aria-label="Close"></button>
-              </div>
-            }
-            <form
-              [formGroup]="passwordForm"
-              (ngSubmit)="onSubmitPassword()"
-              [class]="{'was-validated': formValidated.password}"
-              novalidate>
-              <div class="mb-3">
-                <label for="currentPassword" class="form-label">Current Password</label>
-                <input
-                  type="password"
-                  id="currentPassword"
-                  class="form-control"
-                  formControlName="currentPassword"
-                  placeholder="Enter current password"
-                  required>
-                <div class="invalid-feedback">
-                  @if (currentPassword?.errors?.['required']) {
-                    <span>Current password is required.</span>
-                  }
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="newPassword" class="form-label">New Password</label>
-                <input
-                  type="password"
-                  id="newPassword"
-                  class="form-control"
-                  formControlName="newPassword"
-                  placeholder="Enter new password"
-                  required>
-                <div class="invalid-feedback">
-                  @if (newPassword?.errors?.['required']) {
-                    <span>New password is required.</span>
-                  } @else if (newPassword?.errors?.['minlength']) {
-                    <span>New password must be at least 6 characters long.</span>
-                  }
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  class="form-control"
-                  formControlName="confirmPassword"
-                  placeholder="Confirm new password"
-                  required>
-                <div class="invalid-feedback">
-                  @if (confirmPassword?.errors?.['required']) {
-                    <span>Confirm password is required.</span>
-                  } @else if (passwordForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
-                    <span>Passwords do not match.</span>
-                  }
-                </div>
-              </div>
-              <button
-                type="submit"
-                class="btn btn-primary w-100 mb-4"
-                [disabled]="loading.password">
-                @if (loading.password) {
-                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                  Changing...
-                } @else {
-                  Change Password
-                }
-              </button>
-            </form>
-  
             <!-- Proof Form -->
             <h4 class="mt-4">Update Proof</h4>
             @if (error.proof) {
@@ -221,20 +139,10 @@
                 <button type="button" class="btn-close" (click)="error.proof = null" aria-label="Close"></button>
               </div>
             }
-            <form
-              [formGroup]="proofForm"
-              (ngSubmit)="onSubmitProof()"
-              [class]="{'was-validated': formValidated.proof}"
-              novalidate>
+            <form [formGroup]="proofForm" (ngSubmit)="onSubmitProof()" [class]="{'was-validated': formValidated.proof}" novalidate>
               <div class="mb-3">
-                <label for="proof" class="form-label">Upload Proof (e.g., ID or Document)</label>
-                <input
-                  type="file"
-                  id="proof"
-                  class="form-control"
-                  (change)="onFileChange($event)"
-                  accept="image/*,application/pdf"
-                  required>
+                <label for="proof" class="form-label">Upload Proof (e.g. ID or Document)</label>
+                <input type="file" id="proof" class="form-control" (change)="onFileChange($event)" accept="image/*,application/pdf" required>
                 <div class="invalid-feedback">
                   @if (proof?.errors?.['required']) {
                     <span>Proof is required.</span>
@@ -255,6 +163,72 @@
             </form>
           </div>
         </div>
+        
+      </div>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            
+            <!-- Password Form -->
+            <h4 class="mt-4">Change Password</h4>
+            @if (error.password) {
+              <div class="alert alert-{{ error.password.includes('successfully') ? 'success' : 'danger' }} alert-dismissible fade show" role="alert">
+                {{ error.password }}
+                <button type="button" class="btn-close" (click)="error.password = null" aria-label="Close"></button>
+              </div>
+            }
+            <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()" [class]="{'was-validated': formValidated.password}" novalidate>
+              <div class="mb-3">
+                <div class="form-floating">
+                  <label for="currentPassword" class="form-label">Current Password</label>
+                  <input type="password" id="currentPassword" class="form-control" formControlName="currentPassword" placeholder="" required>
+                  <div class="invalid-feedback">
+                    @if (currentPassword?.errors?.['required']) {
+                      <span>Current password is required.</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-floating">
+                  <label for="newPassword" class="form-label">New Password</label>
+                  <input type="password" id="newPassword" class="form-control" formControlName="newPassword" placeholder="" required>
+                  <div class="invalid-feedback">
+                    @if (newPassword?.errors?.['required']) {
+                      <span>New password is required.</span>
+                    } @else if (newPassword?.errors?.['minlength']) {
+                      <span>New password must be at least 6 characters long.</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-floating">
+                  <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                  <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="" required>
+                  <div class="invalid-feedback">
+                    @if (confirmPassword?.errors?.['required']) {
+                      <span>Confirm password is required.</span>
+                    } @else if (passwordForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
+                      <span>Passwords do not match.</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100 mb-4" [disabled]="loading.password">
+                @if (loading.password) {
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Changing...
+                } @else {
+                  Change Password
+                }
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+}

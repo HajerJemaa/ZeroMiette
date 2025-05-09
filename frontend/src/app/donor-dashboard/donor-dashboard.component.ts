@@ -9,7 +9,6 @@ import { RequestService } from '../services/request.service';
 import { UsersService } from '../services/users.service';
 import { catchError, forkJoin, map, of} from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { RequestResponse } from '../model/requestResponse';
 import { Result } from '../model/result';
 import { AuthenticateService } from '../services/authenticate.service';
 
@@ -50,7 +49,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
       content: ['', Validators.required],
       quantity: ['', Validators.required],
       deadline: ['', Validators.required],
-      recipientType: ['', Validators.required],
+      category: ['', Validators.required],
       image: [null]
     });
   }
@@ -59,6 +58,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
     this.loadAnnouncements();
     this.startCountdown();
   }
+  
 
   ngOnDestroy(): void {
     if (this.countdownSubscription) {
@@ -238,8 +238,9 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
       this.errorMessage = 'Please fill all required fields';
       return;
     }
-  
+    
     const formData = {
+      donId:this.user?.userId,
       title: this.form.value.title,
       content: this.form.value.content,
       deadline: this.form.value.deadline,
@@ -301,6 +302,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
       this.errorMessage = 'Invalid request ID or missing annCode'; 
     }
   }
+
   
   refuseRequest(request: Request): void {
     if (request.userId && request.annCode) {
@@ -338,7 +340,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   }
 
   calculateCountdown(deadline:string):string{
-    const deadlineDate = new Date(deadline);
+  const deadlineDate = new Date(deadline);
   const now = new Date();
   const diffMs = deadlineDate.getTime() - now.getTime();
 

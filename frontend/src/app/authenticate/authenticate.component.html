@@ -78,23 +78,4 @@
             </div>    
         </div>   
     </div>
-}@else if(action=="SignOut"){
-    @if(user!=undefined){
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <div class="row mt-4">
-                    <div class="col-auto mt-2">
-                        <div class="alert alert-danger">
-                            <strong>{{user.role}} {{user.first_name}} {{user.last_name}} are you sure you want to sign out??</strong>
-                        </div>        
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-auto mt-4 ">
-                        <input type="submit" (click)="SignOut()" name="myBtn" class="btn btn-primary text-white" value="sign out">
-                    </div>
-                </div>
-            </div>
-        </div> 
-    }     
 }

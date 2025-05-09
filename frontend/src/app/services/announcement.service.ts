@@ -25,11 +25,11 @@ export class AnnouncementService {
 
     }
     createAnnouncement(data: { title: string, content: string, deadline: string, quantity: string, category: string, img?: string | null }): Observable<{ message: string }> {
-      return this.httpclient.post<{ message: string }>(`${this.api}createAnnouncement.php`, data);
+      return this.httpclient.post<{ message: string }>(this.api, data);
     }
   
     updateAnnouncement(data: { annCode: string, title: string, content: string, deadline: string, quantity: string, category: string, img?: string | null }): Observable<{ message: string }> {
-      return this.httpclient.put<{ message: string }>(`${this.api}updateAnnouncement.php`, data);
+      return this.httpclient.put<{ message: string }>(this.api, data);
     }
 
     deleteAnnouncement(code:string){
