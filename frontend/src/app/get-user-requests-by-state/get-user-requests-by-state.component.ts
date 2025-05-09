@@ -4,11 +4,11 @@ import { Request } from '../model/request';
 import { UsersService } from '../services/users.service';
 import { AnnouncementService } from '../services/announcement.service';
 import { Announcement } from '../model/announcement';
-
+import { UpdateRequestComponent} from '../update-request/update-request.component'
 
 @Component({
   selector: 'app-get-user-requests-by-state',
-  imports: [],
+  imports: [UpdateRequestComponent],
   templateUrl: './get-user-requests-by-state.component.html',
   styleUrl: './get-user-requests-by-state.component.css'
 })
@@ -18,6 +18,8 @@ export class GetUserRequestsByStateComponent{
   errorMessage: string = '';
   annonces: { [key: string]: Announcement } = {};
   isvisible: { [annCode: string]: boolean | null } = {};
+  selectedState!: string;
+  editMode: { [key: string]: boolean } = {}; // pour suivre les requêtes en modification
 
   constructor(
     private requestService: RequestService,
@@ -27,6 +29,8 @@ export class GetUserRequestsByStateComponent{
     this.userId=this.usersService.getCurrentUserId();
   }
   getUserRequestsByState(state: string): void {
+      this.selectedState = state;        
+
     this.errorMessage='';
     this.requestService.getUserRequestsByState(this.userId, state).subscribe({
       next: (response) => {
@@ -41,9 +45,10 @@ export class GetUserRequestsByStateComponent{
 
               this.announcementService.getOneAnnouncement(req.annCode).subscribe({
                 next: (res) => {
-                  console.log("Annonce reçue :", res.data);
-
+                  //console.log("Annonce reçue :", (res.data as Announcement).title);
+                   console.log("response    ........................... "+response.data);
                   this.annonces[req.annCode] = (res.data as Announcement);
+                  console.log("annonce    ........................... "+this.annonces[req.annCode]);
                 },
                 error: () => {
                   console.log("erreur lors du chargement de l'annonce")
@@ -64,6 +69,7 @@ export class GetUserRequestsByStateComponent{
     this.requestService.deleteRequest(this.userId, annCode).subscribe({
     next: (res) => {
       console.log('Demande supprimée', res.data);
+      this.getUserRequestsByState(this.selectedState)
 
     },
     error: (err) => {
@@ -71,4 +77,35 @@ export class GetUserRequestsByStateComponent{
     }
     })
 }
+selectedRequest: any = null;
+
+editRequest(req: any) {
+  this.selectedRequest = { ...req }; // on clone pour éviter les modifs directes
+}
+
+cancelUpdate() {
+  this.selectedRequest = null;
+}
+
+submitUpdate() {
+  if (!this.selectedRequest) return;
+
+  this.requestService.updateRequest(
+    this.selectedRequest.annCode,
+    this.userId,
+    this.selectedRequest.description,
+    this.selectedRequest.quantity
+  ).subscribe({
+    next: () => {
+      this.selectedRequest = null;
+      this.getUserRequestsByState('pending'); // ou l’état actif
+    },
+    error: (err) => {
+      console.error("Erreur lors de l'update", err);
+    }
+  });
+}
+
+
+
 }

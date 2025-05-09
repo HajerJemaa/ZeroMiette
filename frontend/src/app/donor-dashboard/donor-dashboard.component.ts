@@ -21,9 +21,12 @@ import { AuthenticateService } from '../services/authenticate.service';
 })
 export class DonorDashboardComponent implements OnInit, OnDestroy {
   user: User|null=null;
-  state:string ='available';
+  state: string = 'available';
+  selectedFile: File | null = null;
   announcements: Announcement[]=[];
-  requests: Request[] = [];
+  userDetails: { [userId: number]: { username: string, email: string, number: string, profile_pic: string } } = {};
+  pendingRequests: Request[] = [];
+  acceptedRequests :Request[]= [];
   requesterDetails: { [userId: number]: { username?: string, email?: string, number?: string, profile_pic?: string } } = {};
   activeTab: 'dashboard'|'myAnnouncements'='dashboard';
   showAnnouncementsModel=false;
@@ -55,7 +58,6 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.loadUser();
-    this.loadAnnouncements();
     this.startCountdown();
   }
   
@@ -75,6 +77,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
             let user=res?.data as User;
             if (user){
               this.user=user;
+              this.loadAnnouncements(); 
             }
           },
           error:(err)=> {
@@ -87,35 +90,111 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
     
   }
 
+  
+  loadAnnouncements(): void {
+    this.announcements= [];
+    if (this.user?.userId) {
+      this.announcementService.getAnnByDonorIdAndState(this.user.userId, this.state).subscribe({
+        next: (res: any) => {
+          if (res.message === 'success') {
+            this.announcements = res.data;
+          } else {
+            this.announcements = [];
+            this.errorMessage = 'No announcements found';
+          }
+        },
+        error: (err) => {
+          console.error('Error loading my announcements:', err);
+          this.announcements = [];
+          this.errorMessage = 'Error while loading announcements';
+        }
+      });
+    }
+  }
+  
+
   toggleState(state:string):void{
     this.state=state;
     this.loadAnnouncements();
   }
 
-  loadAnnouncements():void{
-    if (this.user?.userId){
-      this.announcementService.getAnnByDonorIdAndState(this.user.userId,this.state).subscribe(
-        {
-          next:(res:any)=>{
-            if (res.message==='success'){
-              this.announcements=res.data;
-            }else{
-              this.announcements=[];
-              this.errorMessage='No announcements found';
-          }
-         },
-         error: (err)=>{
-          console.error('Error while loading user announcements:',err);
-          this.announcements = [];
-          this.errorMessage = 'Error while loading announcements';
-         } 
-        });
-    }
-    
-    
-  }
 
   loadRequests(annCode: string): void {
+    this.errorMessage = '';
+    this.pendingRequests = [];
+    this.acceptedRequests = [];
+    this.userDetails = {};
+    console.log('Fetching requests for annCode:', annCode);
+      this.requestService.getAnnReqByState(annCode, 'pending').subscribe({
+      next: (res) => {
+        console.log('Pending requests response:', res);
+        if (res) {
+          this.pendingRequests = res.data as Request[];
+        } else {
+          this.pendingRequests = [];
+        }
+      },
+      error: () => {
+        this.pendingRequests = [];
+      }
+    });
+
+  
+    this.requestService.getAnnReqByState(annCode, 'accepted').subscribe({
+      next: (res) => {
+        console.log('Pending requests response:', res);
+        if (res) {
+          this.acceptedRequests = res.data as Request[];
+        } else {
+          this.acceptedRequests = [];
+        }
+        this.loadUserDetails();
+      },
+      error: () => {
+        this.acceptedRequests = [];
+      }
+    });
+  
+  }
+
+  loadUserDetails(): void {
+    
+    const userIds: number[] = [];
+    for (let request of this.acceptedRequests) {
+      const userId = Number(request.userId);
+      if (!userIds.includes(userId)) {
+        userIds.push(userId);
+      }
+    }
+    for (let userId of userIds) {
+      this.userService.getOneUser(userId).subscribe({
+      
+        next: (res) => {
+          console.log('User details:', res); 
+          const user = res.data as User;
+          this.userDetails[userId] = {
+            username: user?.user_name || 'Unknown',
+            email: user?.email || 'No email',
+            number: user?.number || 'No phone',
+            profile_pic: user?.profile_pic || '/assets/default-profile.jpg'
+          };
+        },
+        error: (err) => {
+          console.error('Error fetching user ' + userId + ':', err);
+          this.userDetails[userId] = {
+            username: 'Unknown',
+            email: 'No email',
+            number: 'No phone',
+            profile_pic: '/assets/default-profile.jpg'
+          };
+        }
+      });
+    }
+  }
+
+
+
+ /* loadRequests(annCode: string): void {
     this.errorMessage = '';
     this.requests = [];
     this.requesterDetails = {};
@@ -171,12 +250,12 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
         this.requests = [];
       }
     });
-  }
+  }*/
 
-  switchTab(tab: 'dashboard'|'myAnnouncements'):void{
+ switchTab(tab: 'dashboard'|'myAnnouncements'):void{
     this.activeTab = tab;
-    if (tab === 'myAnnouncements') {
-      this.loadAnnouncements();
+    if (tab === 'dashboard') {
+      this.state='available'; 
     }
   }
 
@@ -216,6 +295,7 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
 
   openRequestModel(annCode:string):void{
     this.showRequestModel = true;
+    console.log("Opening request model for announcement:", annCode);
     this.selectedAnnCode = annCode;
     this.loadRequests(annCode);
 
@@ -224,34 +304,44 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   closeRequestModel(annCode:string):void{
     this.showRequestModel = false;
     this.selectedAnnCode = null;
-    this.requests = [];
+    this.pendingRequests = [];
+    this.acceptedRequests =[];
     this.errorMessage = '';
 
   }
-
-  onFileChange(event:Event):void{
-
+  getFile(event: any): void {
+    const file = event.target.files[0];
+    console.log('Selected file:', this.selectedFile); 
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
+
+
   onSubmit():void {
-    if (!this.form.valid) {
-      this.errorMessage = 'Please fill all required fields';
+    if (!this.form.valid || (!this.selectedFile && !this.isEdit)) {
+      this.errorMessage = 'Please fill all required fields and select an image';
       return;
     }
-    
-    const formData = {
-      donId:this.user?.userId,
-      title: this.form.value.title,
-      content: this.form.value.content,
-      deadline: this.form.value.deadline,
-      quantity: this.form.value.quantity,
-      category: this.form.value.category,
-      img: this.form.value.image || null
-    };
-  
+    const formData = new FormData();
+    formData.append('donId', this.user?.userId?.toString() || '');
+    formData.append('title', this.form.value.title);
+    formData.append('content', this.form.value.content);
+    formData.append('deadline', this.form.value.deadline);
+    formData.append('quantity', this.form.value.quantity.toString());
+    formData.append('category', this.form.value.category);
+    if (this.selectedFile) {
+      formData.append('img', this.selectedFile);
+    }
     if (this.isEdit && this.selectedAnnCode) {
-      const updateData = { annCode: this.selectedAnnCode, ...formData };
-      this.announcementService.updateAnnouncement(updateData).subscribe({
+      formData.append('annCode', this.selectedAnnCode);
+      this.announcementService.updateAnnouncement(formData).subscribe({
         next: (res) => {
           this.loadAnnouncements();
           this.closeCreateAnnouncementModel();
@@ -354,14 +444,6 @@ export class DonorDashboardComponent implements OnInit, OnDestroy {
   const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
 
   return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  formatDateForInput(date:string):string{
-    const parsedDate = new Date(date);
-    if (isNaN(parsedDate.getTime())) {
-      return '';
-    }
-    return parsedDate.toISOString().split('T')[0];
   }
 
 

@@ -41,51 +41,49 @@
               <div class="donation-prompt" (click)="openAnnouncementModel()">
                   Got any donation today?
               </div>
-              <div class="state-toggles">
-                  <button [class.active]="state === 'available'" (click)="toggleState('available')">Available</button>
-                  <button [class.active]="state === 'expired'" (click)="toggleState('expired')">Expired</button>
-              </div>
               <div class="row mt-3">
                   @if (announcements.length > 0) {
                       @for (ann of announcements; track ann.annCode) {
-                          <div class="col-md-4 mb-4">
-                              <div class="card announcement-card">
-                                  <div class="card-header">
-                                      @if (user?.profile_pic) {
-                                          <img [src]="user?.profile_pic" alt="Profile">
-                                      } @else {
-                                          <img src="/assets/default-profile.png" alt="Profile">
-                                      }
-                                      <span class="ms-2">{{ user?.user_name }}</span>
-                                      <small>{{ ann.dateC | date:'yyyy-MM-dd' }}</small>
-                                  </div>
-                                  <img [src]="ann.img" class="food-img" alt="Food">
-                                  <div class="card-body">
-                                      <h5 class="card-title">{{ ann.title }}</h5>
-                                      <p class="card-text">{{ ann.content }}</p>
-                                      <p><strong>Quantity:</strong> {{ ann.quantity }}</p>
-                                      <p><strong>Category:</strong> {{ ann.category }}</p>
-                                      @if (ann.state === 'available') {
-                                          <span class="badge bg-success">Available</span>
-                                      } @else if (ann.state === 'expired') {
-                                          <span class="badge bg-danger">Expired</span>
-                                      }
-                                      <p><strong>Time Left:</strong> {{ countdowns[ann.annCode] || 'Calculating...' }}</p>
-                                      <div class="dropdown">
-                                          <button class="btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
-                                          </button>
-                                          <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="#" (click)="openAnnouncementModel(ann)">Edit</a></li>
-                                              <li><a class="dropdown-item" href="#" (click)="deleteAnnouncement(ann.annCode)">Delete</a></li>
-                                          </ul>
-                                      </div>
-                                      <button class="btn btn-secondary mt-2" (click)="openRequestModel(ann.annCode)">Requests</button>
-                                  </div>
-                              </div>
-                          </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card announcement-card">
+                                    <div class="card-header">
+                                        @if (user?.profile_pic) {
+                                            <img [src]="user?.profile_pic" alt="Profile">
+                                        } @else {
+                                            <img src="/assets/default-profile.png" alt="Profile">
+                                        }
+                                        <span class="ms-2">{{ user?.user_name }}</span>
+                                        <small>{{ ann.dateC | date:'yyyy-MM-dd' }}</small>
+                                    </div>
+                                    <img [src]="ann.img" class="food-img" alt="Food">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ ann.title }}</h5>
+                                        <p class="card-text">{{ ann.content }}</p>
+                                        <p><strong>Quantity:</strong> {{ ann.quantity }}</p>
+                                        <p><strong>Category:</strong> {{ ann.category }}</p>
+                                        <p><strong>location:</strong> {{ user?.region }}   {{ user?.address }} </p>
+                                        @if (ann.state === 'available') {
+                                            <span class="badge bg-success">Available</span>
+                                        } @else if (ann.state === 'expired') {
+                                            <span class="badge bg-danger">Expired</span>
+                                        }
+                                        <p><strong>Time Left:</strong> {{ann.deadline }}</p>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" (click)="openAnnouncementModel(ann)">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#" (click)="deleteAnnouncement(ann.annCode)">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                        <button class="btn btn-secondary mt-2" (click)="openRequestModel(ann.annCode)">Requests</button>
+                                    </div>
+                                </div>
+                            </div>
+                        
                       }
-                  } @else {
+                    } @else {
                       <div class="col-12">
                           <div class="alert alert-info">
                               No announcements found. Create a new one!
@@ -102,9 +100,6 @@
               <div class="state-toggles">
                   <button [class.active]="state === 'available'" (click)="toggleState('available')">Available</button>
                   <button [class.active]="state === 'expired'" (click)="toggleState('expired')">Expired</button>
-                  <button class="create-btn" (click)="openAnnouncementModel()">
-                      <i class="fas fa-plus"></i> Create New
-                  </button>
               </div>
               @if (errorMessage) {
                   <div class="alert alert-danger">{{ errorMessage }}</div>
@@ -112,48 +107,45 @@
               <div class="row mt-3">
                   @if (announcements.length > 0) {
                       @for (ann of announcements; track ann.annCode) {
-                          <div class="col-md-4 mb-4">
-                              <div class="card announcement-card">
-                                  <div class="card-header">
-                                      @if (user?.profile_pic) {
-                                          <img [src]="user!.profile_pic" alt="Profile">
-                                      } @else {
-                                          <img src="/assets/default-profile.jpg" alt="Profile">
-                                      }
-                                      <span class="ms-2">{{ user?.user_name }}</span>
-                                      <small>{{ ann.dateC | date:'yyyy-MM-dd' }}</small>
-                                  </div>
-                                  @if (ann.img) {
-                                      <img [src]="ann.img" class="food-img" alt="Food">
-                                  } @else {
-                                      <img src="/assets/default-food.jpg" class="food-img" alt="Food">
-                                  }
-                                  <div class="card-body">
-                                      <h5 class="card-title">{{ ann.title }}</h5>
-                                      <p class="card-text">{{ ann.content }}</p>
-                                      <p><strong>Quantity:</strong> {{ ann.quantity }}</p>
-                                      <p><strong>Category:</strong> {{ ann.category }}</p>
-                                      @if (ann.state === 'available') {
-                                          <span class="badge bg-success">Available</span>
-                                      } @else if (ann.state === 'expired') {
-                                          <span class="badge bg-danger">Expired</span>
-                                      }
-                                      <p><strong>Time Left:</strong> {{ countdowns[ann.annCode] || 'Calculating...' }}</p>
-                                      <div class="dropdown">
-                                          <button class="btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
-                                          </button>
-                                          <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="#" (click)="openAnnouncementModel(ann)">Edit</a></li>
-                                              <li><a class="dropdown-item" href="#" (click)="deleteAnnouncement(ann.annCode)">Delete</a></li>
-                                          </ul>
-                                      </div>
-                                      <button class="btn btn-secondary mt-2" (click)="openRequestModel(ann.annCode)">Requests</button>
-                                  </div>
-                              </div>
-                          </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card announcement-card">
+                                    <div class="card-header">
+                                        @if (user?.profile_pic) {
+                                            <img [src]="user!.profile_pic" alt="Profile">
+                                        } @else {
+                                            <img src="/assets/default-profile.png" alt="Profile">
+                                        }
+                                        <span class="ms-2">{{ user?.user_name }}</span>
+                                        <small>{{ ann.dateC | date:'yyyy-MM-dd' }}</small>
+                                    </div>
+                                    <img [src]="ann.img" class="food-img" alt="Food">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ ann.title }}</h5>
+                                        <p class="card-text">{{ ann.content }}</p>
+                                        <p><strong>Quantity:</strong> {{ ann.quantity }}</p>
+                                        <p><strong>Category:</strong> {{ ann.category }}</p>
+                                        <p><strong>location:</strong> {{ user?.region }}   {{ user?.address }} </p>
+                                        @if (ann.state === 'available') {
+                                            <span class="badge bg-success">Available</span>
+                                        } @else if (ann.state === 'expired') {
+                                            <span class="badge bg-danger">Expired</span>
+                                        }
+                                        <p><strong>Time Left:</strong> {{ann.deadline }} </p>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" (click)="openAnnouncementModel(ann)">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#" (click)="deleteAnnouncement(ann.annCode)">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                        <button class="btn btn-secondary mt-2" (click)="openRequestModel(ann.annCode)">Requests</button>
+                                    </div>
+                                </div>
+                            </div>}
                       }
-                  } @else {
+                  @else {
                       <div class="col-12">
                           <div class="alert alert-info">
                               No announcements found. Create a new one!
@@ -162,7 +154,7 @@
                   }
               </div>
           </div>
-      }
+        }
 
       <!-- Create/Edit Announcement Modal -->
       @if (showAnnouncementsModel) {
@@ -177,20 +169,20 @@
                           </div>
                           <div class="modal-body">
                               @if (errorMessage) {
-                                  <div class="alert alert-danger">{{ errorMessage }}</div>
+                                <div class="alert alert-danger">{{ errorMessage }}</div>
                               }
                               <input type="text" formControlName="title" class="form-control mb-2" placeholder="Title" required>
                               <textarea formControlName="content" class="form-control mb-2" placeholder="Content" required></textarea>
                               <input type="text" formControlName="quantity" class="form-control mb-2" placeholder="Quantity (e.g., 10 kg)" required>
-                              <input type="file" class="form-control mb-2" (change)="onFileChange($event)" accept="image/*">
+                              <input type="file" class="form-control mb-2" (change)="getFile($event)" required>
                               @if (imagePreview) {
                                   <div class="img-preview mb-2">
-                                      <img [src]="imagePreview" alt="Preview">
+                                      <img [src]="imagePreview" alt="Preview" style="max-width: 200px;">
                                   </div>
                               }
-                              <input type="date" formControlName="deadline" class="form-control mb-2" required>
+                              <input type="time" formControlName="deadline" class="form-control mb-2" required>
                               <div class="mb-3">
-                                  <label class="form-label">Recipient Type</label>
+                                  <label class="form-label">Category</label>
                                   <div>
                                       <input type="radio" formControlName="category" id="human" value="human" required>
                                       <label for="human">Human</label>
@@ -209,70 +201,58 @@
               </div>
           </div>
       }
-
       @if (showRequestModel) {
-          <div class="modal-backdrop show"></div>
-          <div class="modal show d-block" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Requests for Announcement</h5>
-                  <button type="button" class="btn-close" (click)="closeRequestModel(selectedAnnCode || '')"></button>
-                </div>
-                <div class="modal-body">
-                  @if (errorMessage) {
-                    <div class="alert alert-danger">{{ errorMessage }}</div>
-                  }
-                  <!-- Pending Requests -->
-                  <h6>Pending Requests</h6>
-                  @if (requests.length > 0) {
-                    @for (request of requests; track request.userId) {
-                      <div class="request-card">
-                        @if (requesterDetails[request.userId].profile_pic) {
-                          <img [src]="requesterDetails[request.userId].profile_pic" alt="Profile">
-                        } @else {
-                          <img src="/assets/default-profile.jpg" alt="Profile">
-                        }
-                        <div class="request-info">
-                          <strong>{{ requesterDetails[request.userId].username || 'Unknown User' }}</strong>
-                          <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
-                          <div class="status">Pending</div>
-                        </div>
-                        <div class="request-actions">
-                          <button class="btn btn-success btn-sm" (click)="acceptRequest(request)">Accept</button>
-                          <button class="btn btn-danger btn-sm" (click)="refuseRequest(request)">Refuse</button>
-                        </div>
+        <div class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Requests for Announcement</h5>
+                <button type="button" class="btn-close" (click)="closeRequestModel(selectedAnnCode || '')"></button>
+              </div>
+              <div class="modal-body">
+                <!-- Pending Requests -->
+                <h6>Pending Requests</h6>
+                @if (pendingRequests.length > 0) {
+                  @for (request of pendingRequests; track request.userId) {
+                    <div class="request-card">
+                      <img [src]="userDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                      <div class="request-info">
+                        <strong>{{ userDetails[request.userId]?.username || 'Loading...' }}</strong>
+                        <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
+                        <div class="status">Pending</div>
                       </div>
-                    }
-                  } @else {
-                    <p>No pending requests</p>
-                  }
-                  <!-- Accepted Requests -->
-                  <h6 class="mt-3">Accepted Requests</h6>
-                  @if (requests.length > 0) {
-                    @for (request of requests; track request.userId) {
-                      <div class="request-card">
-                        @if (requesterDetails[request.userId].profile_pic) {
-                          <img [src]="requesterDetails[request.userId].profile_pic" alt="Profile">
-                        } @else {
-                          <img src="/assets/default-profile.jpg" alt="Profile">
-                        }
-                        <div class="request-info">
-                          <strong>{{ requesterDetails[request.userId].username || 'Unknown User' }}</strong>
-                          <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
-                          <p><strong>Contact:</strong> {{ requesterDetails[request.userId].email || 'No email' }} | {{ requesterDetails[request.userId].number || 'No phone' }}</p>
-                          <div class="status">Accepted</div>
-                        </div>
+                      <div class="request-actions">
+                        <button class="btn btn-success btn-sm" (click)="acceptRequest(request)">Accept</button>
+                        <button class="btn btn-danger btn-sm" (click)="refuseRequest(request)">Refuse</button>
                       </div>
-                    }
-                  } @else {
-                    <p>No accepted requests</p>
+                    </div>
                   }
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" (click)="closeRequestModel(selectedAnnCode || '')">Close</button>
-                </div>
+                } @else {
+                  <p>No pending requests</p>
+                }
+                <!-- Accepted Requests -->
+                <h6 class="mt-3">Accepted Requests</h6>
+                @if (acceptedRequests.length > 0) {
+                  @for (request of acceptedRequests; track request.userId) {
+                    <div class="request-card">
+                      <img [src]="userDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                      <div class="request-info">
+                        <strong>{{ userDetails[request.userId]?.username || 'Loading...' }}</strong>
+                        <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
+                        <p><strong>Contact:</strong> {{ userDetails[request.userId]?.email || 'No email' }} | {{ userDetails[request.userId]?.number || 'No phone' }}</p>
+                        <div class="status">Accepted</div>
+                      </div>
+                    </div>
+                  }
+                } @else {
+                  <p>No accepted requests</p>
+                }
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeRequestModel(selectedAnnCode || '')">Close</button>
               </div>
             </div>
           </div>
-        }
+     </div>
+    }
+</div>
