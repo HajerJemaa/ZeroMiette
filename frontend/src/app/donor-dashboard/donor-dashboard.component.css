@@ -1,5 +1,5 @@
 .sidebar {
-    background-color: #336a29;
+    background-color: #265442;
     width: 240px;
     padding: 20px 0;
     transition: all 0.3s ease;
@@ -10,7 +10,7 @@
   .sidebar-header {
     padding: 20px;
     text-align: center;
-    color: rgb(220, 216, 206);
+    color: rgb(206, 202, 192);
     font-weight: bold;
     font-size: 24px;
     margin-bottom: 20px;
@@ -42,7 +42,7 @@
   }
   
   .sidebar-link.active {
-    background-color: #f0f2f5;
+    background-color:rgb(244, 244, 243);
     color: #0a0e02;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -57,7 +57,7 @@
     width: 20px;
     background-color: transparent;
     border-bottom-right-radius: 20px;
-    box-shadow: 7px 7px 0 7px #f0f2f5;
+    box-shadow: 7px 7px 0 7px rgb(244, 244, 243);
   }
   
   .sidebar-link.active::after {
@@ -69,13 +69,13 @@
     width: 20px;
     background-color: transparent;
     border-top-right-radius: 20px;
-    box-shadow: 7px -7px 0 7px #f0f2f5;
+    box-shadow: 7px -7px 0 7px rgb(244, 244, 243);
   }
   
   .content {
     flex: 1;
     padding: 20px;
-    background-color: #dfe2a7;
+    background-color:rgb(244, 244, 243);
     margin-left: 240px;
     min-height: 100vh;
   }

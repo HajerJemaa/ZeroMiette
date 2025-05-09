@@ -24,12 +24,11 @@ export class AnnouncementService {
       return this.httpclient.get<any[]>(`${this.api}?donId=${donId}&state=${state}`);
 
     }
-    createAnnouncement(data: { title: string, content: string, deadline: string, quantity: string, category: string, img?: string | null }): Observable<{ message: string }> {
-      return this.httpclient.post<{ message: string }>(this.api, data);
+    createAnnouncement(data:any){
+      return this.httpclient.post(this.api, data);
     }
-  
-    updateAnnouncement(data: { annCode: string, title: string, content: string, deadline: string, quantity: string, category: string, img?: string | null }): Observable<{ message: string }> {
-      return this.httpclient.put<{ message: string }>(this.api, data);
+    updateAnnouncement(data:any){
+      return this.httpclient.post(this.api+"?update=true", data);
     }
 
     deleteAnnouncement(code:string){
