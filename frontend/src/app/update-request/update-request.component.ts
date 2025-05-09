@@ -34,9 +34,9 @@ export class UpdateRequestComponent {
   submit() {
     const updatedData = {
       annCode: this.request.annCode,
-      userId: this.userId,
+      userId: Number(this.userId),
       description: this.form.value.description,
-      quantity: this.form.value.quantity
+      quantity: Number(this.form.value.quantity)
     };
 
     this.requestService.updateRequest(updatedData).subscribe({
