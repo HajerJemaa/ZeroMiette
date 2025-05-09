@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Result } from '../model/result';
 import { jwtDecode } from 'jwt-decode';
 import { Mytoken } from '../model/mytoken';
+import { AdminDashbord } from '../model/admin-dashbord';
 
 
 @Injectable({
@@ -33,12 +34,24 @@ export class UsersService {
     return this.httpclient.put<Result>(this.api,cred);
   }
 
+  updateAdmin(data:any){
+    return this.httpclient.put("http://localhost/backend/updateUser/updateAdmin.php",data);
+  }
+
   updateUser(data:any){
-    return this.httpclient.put(this.api,data)
+    return this.httpclient.put("http://localhost/backend/updateUser/updateUser.php",data);
   }
 
   updateProof(data:any){
-    return this.httpclient.put(this.api,data)
+    return this.httpclient.post("http://localhost/backend/updateUser/updateProof.php",data);
+  }
+
+  getAdminDash(id:number){
+    return this.httpclient.get<AdminDashbord>(this.api+"?userId="+id);
+  }
+
+  changePassword(cred:{ userId : number, pwd : string }){
+    return this.httpclient.put(this.api,cred);
   }
 
   getCurrentUserRole(){

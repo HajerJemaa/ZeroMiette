@@ -62,9 +62,8 @@ constructor (public us:UsersService,private route:ActivatedRoute,private r:Route
             alert("Failure to accept user!!!");
 
           }else{ 
-            this.r.navigate([`${this.user?.userId!}`]).then(() => {
+            alert("User "+this.user!.first_name+" "+this.user!.last_name+" was accepted successfully!!");
               window.location.reload();
-            });
           }
         },
         error: (err)=>alert(err+"!!")

@@ -54,7 +54,7 @@ export class AuthenticateComponent {
               window.location.reload();
             });
           }else if (res.user.role=="administrator"){
-            this.router.navigate(['/User/Account']).then(() => {
+            this.router.navigate(['/Administrator/Home']).then(() => {
               window.location.reload();
             });
           }

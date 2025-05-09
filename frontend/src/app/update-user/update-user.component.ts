@@ -85,21 +85,16 @@ export class UpdateUserComponent implements OnInit{
     this.error.user = null;
 
     const formData = this.userDataForm.value;
-    console.log('Update user attempt:', formData);
-
-    // Simulate an API call
-    setTimeout(() => {
       this.loading.user = false;
-      this.us.updateUser(formData).subscribe({
+      this.us.updateUser({userId : this.us.getCurrentUserId(), fn: formData.fn ,ln: formData.ln,mai : formData.mai,un : formData.un,num : formData.num,add : formData.add,region : formData.region}).subscribe({
         next: () => {
           this.error.user = 'Profile updated successfully.';
-          setTimeout(() => this.router.navigate(['/User/Profile']), 2000); // Redirect after 2s
+          setTimeout(() => this.router.navigate(['/User/Profile']), 4000); 
         },
         error: (error) => {
           this.error.user = error.message || 'An error occurred. Please try again.';
         }
       });
-    }, 1000);
   }
 
   onSubmitPassword(): void {
@@ -114,12 +109,12 @@ export class UpdateUserComponent implements OnInit{
 
     const formData = this.passwordForm.value;
     console.log('Change password attempt:', formData);
-
+    formData['userId'] = this.us.getCurrentUserId(); // Add userId to formData
     this.loading.password = false;
     if (this.as.passwordVerif({ userId : this.us.getCurrentUserId(), pwd : formData.password })) { 
       this.error.password = 'Current password is incorrect.';
     } else {
-      this.as.changePassword({ userId : this.us.getCurrentUserId(), pwd : formData.newPassword }).subscribe({
+      this.us.changePassword({ userId : this.us.getCurrentUserId(), pwd : formData.newPassword }).subscribe({
         next: () => {
           this.error.password = 'Password changed successfully.';
           setTimeout(() => this.passwordForm.reset(), 2000); // Reset after 2s
@@ -140,11 +135,11 @@ export class UpdateUserComponent implements OnInit{
     this.loading.proof = true;
     this.error.proof = null;
 
-    const formData = new FormData();
+    const formData = new FormData();    
+    formData.append('userId', String(this.us.getCurrentUserId()));
     formData.append('proof', this.proofForm.get('proof')?.value);
 
     console.log('Update proof attempt:', formData);
-
       this.loading.proof = false;
       this.us.updateProof(formData).subscribe({
         next: () => {

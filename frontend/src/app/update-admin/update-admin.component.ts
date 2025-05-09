@@ -75,9 +75,10 @@ export class UpdateAdminComponent implements OnInit{
 
     const formData = this.userDataForm.value;
     console.log('Update user attempt:', formData);
+    formData['userId'] = this.us.getCurrentUserId(); // Add userId to formData
 
       this.loading.user = false;
-      this.us.updateUser(formData).subscribe({
+      this.us.updateAdmin({userId : this.us.getCurrentUserId(), fn: formData.fn ,ln: formData.ln,mai : formData.mai,un : formData.un,num : formData.num}).subscribe({
         next: () => {
           this.error.user = 'Profile updated successfully.';
           setTimeout(() => this.router.navigate(['/User/Profile']), 4000);
@@ -105,7 +106,7 @@ export class UpdateAdminComponent implements OnInit{
     if (!this.as.passwordVerif({ userId : this.us.getCurrentUserId(), pwd : formData.password })) { 
       this.error.password = 'Current password is incorrect.';
     } else {
-      this.as.changePassword({ userId : this.us.getCurrentUserId(), pwd : formData.newPassword }).subscribe({
+      this.us.changePassword({ userId : this.us.getCurrentUserId(), pwd : formData.newPassword }).subscribe({
         next: () => {
           this.error.password = 'Password changed successfully.';
           setTimeout(() => this.passwordForm.reset(), 2000); // Reset after 2s

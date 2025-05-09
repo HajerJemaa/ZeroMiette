@@ -17,17 +17,18 @@ export class AddUserComponent {
   formValidated:boolean=false;
   signUpForm!: FormGroup;
   
-   getFile(event: any){
-    const file = event.target.files[0];
-    if (file) {
-      this.signUpForm.get('proof')?.setValue(file);
-    }
-   }
+   getFile(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    this.file = file; 
+    this.signUpForm.get('proof')?.setValue(file); // Update form control
+  }
+}
 
   constructor(private us:UsersService, private route:Router, private fb: FormBuilder){
     this.signUpForm= this.fb.group({
-      ln: ['',Validators.required,Validators.minLength(2)],
-      fn: ['',Validators.required,Validators.minLength(2)],
+      ln: ['',[Validators.required,Validators.minLength(2)]],
+      fn: ['',[Validators.required,Validators.minLength(2)]],
       mai: ['',[Validators.required,Validators.email]],
       region: ['',Validators.required],
       add: ['',Validators.required],
@@ -73,15 +74,6 @@ export class AddUserComponent {
     })
   }
 
-  signUpAgain(){
-    this.route.navigate(["/User/SignUp"]).then(() => {
-      window.location.reload();
-    });
-  }
-
-  redir(){
-    this.route.navigate(["/"]);
-  }
 
   get lastName() { return this.signUpForm.get('ln'); }
   get firstName() { return this.signUpForm.get('fn'); }

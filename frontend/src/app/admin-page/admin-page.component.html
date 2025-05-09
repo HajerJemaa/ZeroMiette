@@ -1,0 +1,79 @@
+<div class="dashboard-container">
+    <h1 class="text-center">Welcome, {{ dashboardData?.admin_profile?.user_name  }}</h1>
+  
+    @if (error) {
+      <div class="error">{{ error }}</div>
+    }
+  
+    <!-- Stats Cards -->
+    <div class="stats-grid text-center">
+      <div class="stat-card">
+        <h3>Total Users</h3>
+        @if (dashboardData?.stats?.total_users) {
+          <p>{{ dashboardData?.stats?.total_users }}</p>
+        } @else {
+          <p>0</p>
+        }
+        <a routerLink="/Administrator/ProcessAccount/getAllUsers/accepted">View Users</a>
+      </div>
+      <div class="stat-card">
+        <h3>Pending Users</h3>
+        @if (dashboardData?.stats?.pending_users) {
+          <p>{{ dashboardData?.stats?.pending_users }}</p>
+        } @else {
+          <p>0</p>
+        }
+        <a routerLink="/Administrator/ProcessAccount/getAllUsers/pending">Manage Pending</a>
+      </div>
+      <div class="stat-card">
+        <h3>Announcements</h3>
+        @if (dashboardData?.stats?.total_announcements) {
+          <p>{{ dashboardData?.stats?.total_announcements }}</p>
+        } @else {
+          <p>0</p>
+        }
+        <a routerLink="/Administrator/ConsultAnnouncement">View Announcements</a>
+      </div>
+    </div>
+  
+    <!-- Admin Profile -->
+    <div class="profile-card">
+      <h3 class="text-center" style="font-size: larger;">Your Profile</h3>
+      @if (dashboardData?.admin_profile) {
+        <p><strong style="color: #045308;">Username:</strong> {{ dashboardData?.admin_profile?.user_name }}</p>
+        <p><strong style="color: #045308;">Email:</strong> {{ dashboardData?.admin_profile?.email }}</p>
+        @if (dashboardData?.admin_profile?.first_name || dashboardData?.admin_profile?.last_name) {
+          <p><strong style="color: #045308;">Name:</strong> {{ dashboardData?.admin_profile?.first_name }} {{ dashboardData?.admin_profile?.last_name }}</p>
+        }
+        @if (dashboardData?.admin_profile?.number) {
+          <p><strong style="color: #045308;">Phone number:</strong> {{ dashboardData?.admin_profile?.number }}</p>
+        } @else {
+          <p><strong style="color: #045308;">Phone number:</strong> Not provided</p>
+        }
+        <a routerLink="/Administrator/Profile">Edit Profile</a>
+      } @else {
+        <p>Profile data not available</p>
+      }
+    </div>
+  
+    <!-- Recent Activity -->
+    <div class="activity-feed">
+      <h3>Recent Activity</h3>
+      <ul>
+        @if (dashboardData?.recent_activity?.length) {
+          @for (activity of dashboardData?.recent_activity; track activity.dateC) {
+            <li>
+              @if (activity.type === 'user') {
+                <span>New user <strong>{{ activity.user_name }}</strong> signed up</span>
+              } @else {
+                <span>Announcement <strong>{{ activity.title }}</strong> posted</span>
+              }
+              <span class="timestamp">{{ activity.dateC | date:'short' }}</span>
+            </li>
+          }
+        } @else {
+          <li>No recent activity</li>
+        }
+      </ul>
+    </div>
+  </div>

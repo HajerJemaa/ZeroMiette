@@ -18,7 +18,7 @@ export class AuthenticateService {
       localStorage.removeItem("token");
     }
 
-    return this.httpclient.post<any>(this.api+"signIn.php", creds).pipe(
+    return this.httpclient.post<any>(this.api+"signIn.php",creds).pipe(
       tap((res)=>{
         if (res.token){
           localStorage.setItem("token", res.token);
@@ -40,9 +40,7 @@ export class AuthenticateService {
     return !!localStorage.getItem('token');
   }
 
-  changePassword(cred:{ userId : number, pwd : string }){
-    return this.httpclient.put(this.api+"signIn.php",cred)
-  }
+  
 
   passwordVerif(cred:{ userId : number, pwd : string }){
     return this.httpclient.post<boolean>(this.api+"passwordVerif.php",cred)
