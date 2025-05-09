@@ -18,19 +18,19 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a routerLink="/User/Authenticate/SignIn" class="nav-link" style="margin-right: 10px;" routerLinkActive="active" aria-label="Sign In">
-                        <i class="bi bi-box-arrow-in-right"></i>
-                        <span> Sign In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/User/CreateAccount/SignUp" class="nav-link" routerLinkActive="active" aria-label="Sign Up">
-                        <i class="bi bi-person-plus"></i>
-                        <span> Sign Up</span>
-                    </a>
-                </li>
-            </ul>
+                    <li class="nav-item">
+                        <a routerLink="/User/Authenticate/SignIn" class="nav-link" style="margin-right: 20px;" routerLinkActive="active" aria-label="Sign In">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span> Sign In</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/User/CreateAccount/SignUp" class="nav-link" routerLinkActive="active" aria-label="Sign Up">
+                            <i class="bi bi-person-plus"></i>
+                            <span> Sign Up</span>
+                        </a>
+                    </li>
+                </ul>
           </div>
         </div>
     </nav>
@@ -124,7 +124,7 @@
                     </li>
                 }@else if (role === 'receiver') {
                     <li class="nav-item">
-                        <a routerLink="/Reciever" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" aria-label="Account">
+                        <a routerLink="/app-dashbord-demandeur" class="nav-link" routerLinkActive="active" aria-label="Account">
                             <i class="bi bi-person"></i>
                             <span>Account</span>
                         </a>

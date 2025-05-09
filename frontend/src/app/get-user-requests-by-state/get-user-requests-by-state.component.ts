@@ -41,9 +41,10 @@ export class GetUserRequestsByStateComponent{
 
               this.announcementService.getOneAnnouncement(req.annCode).subscribe({
                 next: (res) => {
-                  console.log("Annonce reçue :", res.data);
-
+                  //console.log("Annonce reçue :", (res.data as Announcement).title);
+                   console.log("response    ........................... "+response.data);
                   this.annonces[req.annCode] = (res.data as Announcement);
+                  console.log("annonce    ........................... "+this.annonces[req.annCode]);
                 },
                 error: () => {
                   console.log("erreur lors du chargement de l'annonce")

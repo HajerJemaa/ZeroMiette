@@ -27,10 +27,7 @@ export class AuthenticateComponent {
   ngOnInit(){
     this.action=this.r.snapshot.paramMap.get("action")!;
     if (this.action=="SignOut"){
-      this.us.getOneUser(this.us.getCurrentUserId()).subscribe({
-        next: (res)=>this.user=res.data as User,
-        error: (err)=>alert(err)
-      });
+      this.SignOut();
     }
   }
 
@@ -72,6 +69,8 @@ export class AuthenticateComponent {
   get password() { return this.signInForm.get('password'); }
 
   SignOut(){
-    this.as.signOut();
+    if(confirm("Are you sure you wanna sign Out??")){
+      this.as.signOut();
+    }
   }
 }
