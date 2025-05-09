@@ -12,7 +12,7 @@ import { UpdateRequestComponent} from '../update-request/update-request.componen
   templateUrl: './get-user-requests-by-state.component.html',
   styleUrl: './get-user-requests-by-state.component.css'
 })
-export class GetUserRequestsByStateComponent{
+export class GetUserRequestsByStateComponent implements OnInit {
   requests: Request[] = [];
   userId!: number;
   errorMessage: string = '';
