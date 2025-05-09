@@ -18,6 +18,8 @@ export class GetUserRequestsByStateComponent{
   errorMessage: string = '';
   annonces: { [key: string]: Announcement } = {};
   isvisible: { [annCode: string]: boolean | null } = {};
+  selectedState!: string;
+  editMode: { [key: string]: boolean } = {}; // pour suivre les requêtes en modification
 
   constructor(
     private requestService: RequestService,
@@ -27,6 +29,8 @@ export class GetUserRequestsByStateComponent{
     this.userId=this.usersService.getCurrentUserId();
   }
   getUserRequestsByState(state: string): void {
+      this.selectedState = state;        
+
     this.errorMessage='';
     this.requestService.getUserRequestsByState(this.userId, state).subscribe({
       next: (response) => {
@@ -65,6 +69,7 @@ export class GetUserRequestsByStateComponent{
     this.requestService.deleteRequest(this.userId, annCode).subscribe({
     next: (res) => {
       console.log('Demande supprimée', res.data);
+      this.getUserRequestsByState(this.selectedState)
 
     },
     error: (err) => {
@@ -72,4 +77,22 @@ export class GetUserRequestsByStateComponent{
     }
     })
 }
+updateRequest(req: any) {
+  const data = {
+    description: req.description,
+    quantity: req.quantity
+  };
+
+  this.requestService.updateRequest(req.annCode, this.userId, data).subscribe({
+    next: (res) => {
+      console.log('Mise à jour réussie:', res.message);
+      this.editMode[req.annCode] = false;
+      this.getUserRequestsByState(req.state);
+    },
+    error: () => {
+      console.error('Erreur de mise à jour');
+    }
+  });
+}
+
 }
