@@ -16,6 +16,7 @@ fileUrl!:SafeResourceUrl;
 loading:boolean = true;
 proofError:boolean = false;
 
+
 constructor (public us:UsersService,private route:ActivatedRoute,private r:Router,private trustUrl: DomSanitizer){}
 
   ngOnInit(): void {
@@ -83,12 +84,14 @@ constructor (public us:UsersService,private route:ActivatedRoute,private r:Route
             alert("failed to "+act+" user "+this.user!.first_name+" "+this.user!.last_name+"!!");
           }
         },
-        error:(err)=> alert("Api ERROR:"+err+"!!")
+        error:(err)=> alert(err)
       });
     }
   }
 
   redir(){
-    this.r.navigate([`/Administrator/ProcessAccount/getAllUsers/${this.user?.state}`]);
+    this.r.navigate([`/Administrator/ProcessAccount/getAllUsers/${this.user?.state}`]).then(() => {
+      window.location.reload();
+    });
   }
 }

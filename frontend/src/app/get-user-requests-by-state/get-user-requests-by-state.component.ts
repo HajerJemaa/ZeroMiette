@@ -4,11 +4,15 @@ import { Request } from '../model/request';
 import { UsersService } from '../services/users.service';
 import { AnnouncementService } from '../services/announcement.service';
 import { Announcement } from '../model/announcement';
-import { UpdateRequestComponent} from '../update-request/update-request.component'
+import { UpdateRequestComponent } from '../update-request/update-request.component'
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-get-user-requests-by-state',
-  imports: [UpdateRequestComponent],
+  imports: [],
   templateUrl: './get-user-requests-by-state.component.html',
   styleUrl: './get-user-requests-by-state.component.css'
 })
@@ -90,12 +94,12 @@ cancelUpdate() {
 submitUpdate() {
   if (!this.selectedRequest) return;
 
-  this.requestService.updateRequest(
-    this.selectedRequest.annCode,
-    this.userId,
-    this.selectedRequest.description,
-    this.selectedRequest.quantity
-  ).subscribe({
+  this.requestService.updateRequest({
+    annCode: this.selectedRequest.annCode,
+    userId: this.userId,
+    description: this.selectedRequest.description,
+    quantity: this.selectedRequest.quantity
+  }).subscribe({
     next: () => {
       this.selectedRequest = null;
       this.getUserRequestsByState('pending'); // ou l’état actif

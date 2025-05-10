@@ -1,9 +1,11 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RequestService } from '../services/request.service';
 
 @Component({
+  imports: [ReactiveFormsModule],
   selector: 'app-update-request',
   templateUrl: './update-request.component.html',
 })
@@ -13,7 +15,7 @@ export class UpdateRequestComponent {
   @Output() updateDone = new EventEmitter<void>();
   @Output() cancelUpdate = new EventEmitter<void>();
 
-  form: FormGroup;
+  form:FormGroup;
 
   constructor(private fb: FormBuilder, private requestService: RequestService) {
     this.form = this.fb.group({

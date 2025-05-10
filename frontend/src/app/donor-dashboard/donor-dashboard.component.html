@@ -215,9 +215,9 @@
                 @if (pendingRequests.length > 0) {
                   @for (request of pendingRequests; track request.userId) {
                     <div class="request-card">
-                      <img [src]="userDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                      <img [src]="userDetails[request.userId].profile_pic || '/assets/default-profile.jpg'" alt="Profile">
                       <div class="request-info">
-                        <strong>{{ userDetails[request.userId]?.username || 'Loading...' }}</strong>
+                        <strong>{{ userDetails[request.userId].username || 'Loading...' }}</strong>
                         <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
                         <div class="status">Pending</div>
                       </div>
@@ -235,11 +235,11 @@
                 @if (acceptedRequests.length > 0) {
                   @for (request of acceptedRequests; track request.userId) {
                     <div class="request-card">
-                      <img [src]="userDetails[request.userId]?.profile_pic || '/assets/default-profile.jpg'" alt="Profile">
+                      <img [src]="userDetails[request.userId].profile_pic || '/assets/default-profile.jpg'" alt="Profile">
                       <div class="request-info">
-                        <strong>{{ userDetails[request.userId]?.username || 'Loading...' }}</strong>
+                        <strong>{{ userDetails[request.userId].username || 'Loading...' }}</strong>
                         <small class="text-muted">{{ request.dateC | date:'yyyy-MM-dd' }}</small>
-                        <p><strong>Contact:</strong> {{ userDetails[request.userId]?.email || 'No email' }} | {{ userDetails[request.userId]?.number || 'No phone' }}</p>
+                        <p><strong>Contact:</strong> {{ userDetails[request.userId].email || 'No email' }} | {{ userDetails[request.userId].number || 'No phone' }}</p>
                         <div class="status">Accepted</div>
                       </div>
                     </div>
